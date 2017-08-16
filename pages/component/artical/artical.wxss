@@ -1,0 +1,47 @@
+
+.main{
+    width: 100%;
+    height: 100%;
+    color: #383838;
+    background-color: #fff;
+}
+.artical-category{
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.artical-category view{
+    width: 240rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    background-color: #f6f6f6;
+    display: inline-block;
+    margin-right: 10rpx;
+    margin-left: 10rpx;
+    text-align: center;
+    border-radius: 5px;
+}
+.artical-category view.active{
+    color: #fff;
+    background-color: #41b327;
+}
+.artical-ul{margin-top:40rpx;}
+.artical-li{
+    padding:10rpx 40rpx;
+    display: flex;
+    flex-direction: column;
+}
+.artical-li-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+

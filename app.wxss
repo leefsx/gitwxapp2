@@ -8,6 +8,7 @@ page {
   line-height: 1.6;
   color: #383838;
   overflow-x: hidden;
+  font-family: Microsoft YaHei;
 }
 /* lib */
 .border-color{border-color:#898989;} 
@@ -21,6 +22,11 @@ page {
 .color2{ color: #898989;}
 .bor_color{border-color: #c71f3b }
 .bg_color{background-color: #c71f3b;color:#fff;}
+
+.color5{ color: #41b327;}
+.bor_color5{border-color: #41b327 }
+.bg_color5{background-color: #41b327;color:#fff;}
+
 .small_font{font-size: 26rpx;}
 .medium_font{
   font-size: 28rpx;
@@ -41,6 +47,7 @@ page {
 .border_bottom2{
   border-bottom: 20rpx solid #e9e9e9;
 }
+.gap{margin-right: 10rpx;}
 /*.smallImg{
   width:100%;
   height:370rpx;

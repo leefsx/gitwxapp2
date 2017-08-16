@@ -1,0 +1,26 @@
+<import src="../../common/nav.wxml" />
+<view class="main">  
+    <template is="nav" data="{{config}}" /> 
+    <image src="../../../image/mb2-1.jpg" mode="widthFix" style="width:100%;"></image>
+    <view class="form-box">
+        <form bindsubmit="formSubmit">
+            <view class="medium_font">
+                <view>我的姓名：</view>
+                <input value="{{message.name}}" placeholder="请输入姓名" bindinput="bindName"/>
+            </view>
+            <view class="medium_font">
+                <view>我的电话：</view>
+                <input type="number" value="{{message.phone}}" placeholder="请输入电话号码" bindinput="bindPhone" />
+            </view>
+            <view class="medium_font">
+                <view>我的地址：</view>
+                <input type="number" value="{{message.address}}" placeholder="请输入地址" bindinput="bindAddress" />
+            </view>
+            <view class="medium_font">
+                <view>内容：</view>
+                <textarea style="height:140rpx;" value="{{message.detail}}" placeholder="请输入留言内容" bindinput="bindDetail"/>
+            </view>
+            <button form-type="submit" class="bg_color5 small_font">提交</button>
+        </form>
+    </view>
+</view>

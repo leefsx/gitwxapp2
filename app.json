@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/component/index",
+    "pages/component/online-message/online-message",
+    "pages/component/artical/artical",
+    "pages/component/artical-detail/artical-detail",
     "pages/component/category/category",
     "pages/component/cart/cart",
     "pages/component/user/user",
@@ -24,7 +27,7 @@
   },
   "tabBar": {
     "color": "#b7b7b7",
-    "selectedColor": "#c71f3b",
+    "selectedColor": "#41b327",
     "borderStyle": "#e9e9e9",
     "backgroundColor": "#fff",
     "list": [

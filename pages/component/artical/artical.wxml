@@ -1,0 +1,43 @@
+<!-- <import src="../../common/prompt.wxml"/> -->
+<import src="../../common/nav.wxml" />
+
+<!-- <template is="prompt" data="{{ prompt }}"/> -->
+
+<view class="main">
+    <template is="nav" data="{{config}}" />
+    <scroll-view scroll-x class="artical-category">
+        <view wx:for="{{articalUl}}" data-id="{{index}}" class="{{activeIndex == index ? 'active':''}} medium_font" bindtap="changActive">{{item}}</view>
+    </scroll-view>
+    <view class="artical-ul">
+        <navigator url="../artical-detail/artical-detail?id=" class="artical-li">
+            <view class="artical-li-title">
+                <view>
+                    <text class="color5">[企业简介]</text>
+                    <text class="tooLong" style="max-width:360rpx;display:inline-block;vertical-align:top;">[帮助]</text>
+                </view>
+                <text class="color2 small_font">2017-8-16</text>
+            </view>
+            <view class="color2 small_font tooLong">xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基...</view>
+        </navigator>
+        <navigator url="../artical-detail/artical-detail?id=" class="artical-li">
+            <view class="artical-li-title">
+                <view>
+                    <text class="color5">[企业简介]</text>
+                    <text class="tooLong" style="max-width:360rpx;display:inline-block;vertical-align:top;">[帮助]</text>
+                </view>
+                <text class="color2 small_font">2017-8-16</text>
+            </view>
+            <view class="color2 small_font tooLong">xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基...</view>
+        </navigator>
+        <navigator url="../artical-detail/artical-detail?id=" class="artical-li">
+            <view class="artical-li-title">
+                <view>
+                    <text class="color5">[企业简介]</text>
+                    <text class="tooLong" style="max-width:360rpx;display:inline-block;vertical-align:top;">[帮助]</text>
+                </view>
+                <text class="color2 small_font">2017-8-16</text>
+            </view>
+            <view class="color2 small_font tooLong">xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基xx果园 ​成立于2009年，是一家基...</view>
+        </navigator>
+    </view>
+</view>
