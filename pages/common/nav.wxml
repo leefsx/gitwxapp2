@@ -1,0 +1,16 @@
+<template name="nav">
+    <view class="topbar color">
+      <view class="topbar-title">
+        <image mode="aspectFit" src="{{config.logo}}"></image>
+        <text>{{config.website_name}}</text>
+      </view>
+      
+      <view class="top-tele">
+        <image mode="aspectFit" src="{{config.hotline_logo}}"></image>
+        <view>
+          <text>免费服务热线</text>
+          <text class="medium_font">{{config.hotline_no}}</text>
+        </view>
+      </view>
+    </view>
+</template>

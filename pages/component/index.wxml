@@ -1,0 +1,38 @@
+<import src="../common/nav.wxml" />
+<import src="../common/productList.wxml" />
+<view class="main">
+  <template is="nav" data="{{config}}" />
+  <view class="index-top">
+    <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image mode="widthFix" src="{{item}}" data-id="{{index_autoplay_imgurl[index]['category_id']}}" bindtap="tocategory" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="recom">
+    <view class="title"><text class="color">TOP</text>{{config.index_middle_title}}</view>
+    <view class="recom-top">
+      <navigator wx:for="{{index_middle_img}}" url="details/details?id={{index_middle_imgurl[index]['detail_id']}}">
+        <image mode="aspectFill" src="{{item}}"></image>
+      </navigator>
+    </view>
+  </view>
+
+
+  <view class="product-display">
+    <view class="product-display-title">
+      <view class="title">{{config.product_title}}</view>
+    </view>
+    <view class="product-display-ul">
+      <template is="product_list" data="{{products}}" />
+      <view class="load_more medium_font" bindtap="load_more">加载更多</view>
+    </view>
+  </view>
+
+  
+ </view>
+ <view class="copyright small_font">
+   @{{config.copyright}}
+ </view>

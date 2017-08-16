@@ -1,0 +1,42 @@
+<!--<import src="../../common/nav.wxml" />-->
+<import src="../../common/prompt.wxml" />
+<!--<import src="../../common/productList2.wxml" />-->
+<view class="main">
+  <!--<template is="nav" data="{{config}}" />-->
+  <!--<view class="categroy-content">
+    <view class="categroy-content-list {{curIndex == index ? 'on' : ''}}" wx:for="{{category}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchTab">
+      <view class="navigator-text">{{item.name}}</view>
+      <view class="navigator-arrow"></view>
+    </view>
+  </view>-->
+
+
+  <view class="categroy-left">
+    <scroll-view scroll-y  style="height:{{deviceHeight+'px'}}" scroll-with-animation>
+      <view class="medium_font scroll-view-left-item {{curIndex === index ? 'on' : ''}}" wx:for="{{category}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchTab">{{item.name}}</view>
+    </scroll-view>
+  </view>
+
+  <view class="categroy-right"  >
+    <scroll-view scroll-y  style="height:{{deviceHeight+'px'}}" scroll-with-animation  bindscrolltolower="reachBottom" scroll-top="{{scrollTop}}">
+      <navigator wx:for="{{products}}" wx:key="{{index}}" url="../details/details?id={{item.id}}" class="scroll-view-right-item border_bottom">
+        <image mode="aspectFill" class="right-item-img" src="{{item.doc_image}}"/>
+        <view class="right-item-view">
+          <text class="right-item-view-title medium_font color">{{item.title}}</text>
+          <text class="right-item-view-title small_font color2">￥{{item.mark_price}}</text>
+          <text class="right-item-view-title medium_font color">￥{{item.price}}</text>
+          <text class="right-item-view-title small_font">{{item.intro}}</text>
+        </view>
+      </navigator>
+      <template is="prompt" data="{{prompt}}"></template>
+    </scroll-view>
+    
+  </view>
+
+  <!--<view class="categroy-bottom">
+    <view class="good-all">
+      <template is="product_list2" data="{{products}}" />
+    </view>
+    <template is="prompt" data="{{prompt}}"></template>
+  </view>-->
+</view>

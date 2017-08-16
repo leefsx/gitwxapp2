@@ -1,0 +1,94 @@
+.main{
+  background-color: #ededed;
+  overflow-x: hidden;
+}
+.confirm-box{
+    background-color: #fff;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
+
+.delivery-top{
+  position:relative;
+  height:90rpx;
+  line-height: 90rpx;
+  text-align:center;
+  padding-right:38rpx;
+}
+
+.delivery-middle{
+  height: 200rpx;
+}
+.delivery_addr-no-tex{
+  display: block;
+  line-height: 200rpx;
+  text-align: center;
+}
+.delivery_addr-no-tex text{
+  font-size: 120rpx;
+  vertical-align: middle;
+}
+.delivery_addr-no-list{
+  position: relative;
+  height: 120rpx;
+  padding: 35rpx 20rpx 35rpx 170rpx;
+}
+.delivery_addr-no-list image {
+    position: absolute;
+    left:25rpx;
+    top:45rpx;
+    width:100rpx;
+    height:100rpx;
+}
+.delivery_addr-no-list view:nth-child(2){
+  padding: 10rpx 0 10rpx 0;
+}
+.confirm-msg{
+  height:90rpx;
+  padding: 20rpx 30rpx;
+}
+
+.orders-list{
+    padding-left: 30rpx;
+}
+.orders-number{
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.orders-detail{
+    position: relative;
+    height: 120rpx;
+    padding: 35rpx 20rpx 35rpx 170rpx;
+}
+.orders-detail image{
+    position: absolute;
+    left: 0;
+    top: 20rpx;
+    width: 150rpx;
+    height: 150rpx;
+}
+.orders-detail view{
+    line-height: 60rpx;
+}
+
+.orders-footer{
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:15rpx 0rpx 15rpx 0;
+}
+.orders-footer .orders-btn{
+    float: right;
+    width: 170rpx;
+    height: 60rpx;
+    line-height:60rpx;
+    border-radius: 6rpx;
+    text-align: center;
+    font-size: 26rpx;
+}
+.order-status-content{
+  width: 100%;
+  height: 200rpx;
+  line-height: 200rpx;
+  padding-left: 40rpx;
+  /*box-sizing: border-box;*/
+}

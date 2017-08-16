@@ -1,0 +1,12 @@
+<template name="product_list">
+    <view class="products">
+      <block wx:for="{{products}}" wx:key="{{index}}">
+        <navigator url="details/details?id={{item.id}}" class="product-nav smallFoodContainer">
+          <image mode="aspectFill" class="product-img smallImg" src="{{item.doc_image}}"/>
+          <text class="product-name color">{{item.title}}</text>
+          <text class="product-dec">{{item.intro}}</text>
+          <text class="product-price bg_color">￥{{item.price}}</text>
+        </navigator>
+      </block>
+    </view>
+</template>

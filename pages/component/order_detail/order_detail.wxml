@@ -1,0 +1,69 @@
+<view class="main">
+  <view class="order-status-content bg_color">
+    <text wx:if="{{order.pay_status==1}}">待付款</text>
+    <text wx:elif="{{order.order_status==5}}">已取消</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">已支付</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==2}}">已发货</text>
+    <text wx:elif="{{order.pay_status==3}}">已退款</text>
+    <text wx:elif="{{order.delivery_status==3}}">已退货</text>
+    <text wx:elif="{{order.order_status==3}}">已完成</text>
+  </view>
+  <view class="delivery-box confirm-box medium_font border_bottom2">
+    <view class="delivery-top border_bottom">
+      <text class="fl">配送地址</text>
+    </view>
+    <view class="delivery-middle">
+      <view class="delivery_addr-no-content">
+        <view class="delivery_addr-no-list">
+            <image src="../../../image/local.jpg" style="width:50px; height:50px;"></image>
+            <view class="addr_name normal_font">收货人：<text class="color">{{address.name}}</text></view>
+            <view class="addr_phone medium_font">电话：{{address.phone}}</view>
+            <view class="addr_detail small_font">地址：{{address.detail}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="orders-list confirm-box medium_font border_bottom2">
+    <view class="orders-number color2 border_bottom">订单编号：{{order.oid}}</view>
+    <navigator wx:for="{{product}}" url="../details/details?id={{item.product_id}}" class="orders-detail border_bottom">
+        <image src="{{item.product_thumb}}"></image>
+        <view class="tooLong">{{item.product_name}}</view>
+        <view class="">￥{{item.price}} x <text class="color2" style="font-size:26rpx;">{{item.amount}}</text></view>
+    </navigator>
+    <view class="orders-footer">
+        <text><text wx:if="{{order.pay_status==2}}">应付：</text><text wx:if="{{order.status==1}}">实付：</text><text class="color">￥{{order.total_amount}}</text></text>
+        <view wx:if="{{order.pay_status==1}}"  class="orders-btn bg_color" data-oid="{{order.oid}}" bindtap="payOrders">付款</view>
+        <navigator url="../details/details?id={{product[0].product_id}}" wx:if="{{order.order_status==3||order.pay_status==2}}" class="orders-btn bg_color">再次购买</navigator>
+    </view>
+  </view>
+
+  
+
+  <view class="confirm-pay confirm-box medium_font border_bottom2" style="border-bottom:none;">
+      <view class="delivery-top border_bottom">
+        <text class="fl">支付方式</text>
+        <view class="picker fr">在线支付</view>
+      </view>
+
+    
+    <view class="delivery-top border_bottom coupon-list" >
+      <text class="fl">优惠券</text>
+      <view wx:if="{{disass.yhjprice}}" class="picker fr small_font"><text class="color medium_font">-￥{{disass.yhjprice}}</text></view>   
+      <view wx:else class="picker fr">未使用</view>     
+    </view>
+
+    <view class="delivery-top border_bottom integral-list">
+      <text class="fl">积分</text>
+      <view class="picker fr small_font"><text class="color medium_font">-￥{{disass.jfprice || '0.00'}}</text></view>      
+    </view>
+  </view>
+
+  <view class="confirm-invoice confirm-box medium_font border_bottom2" style="border-bottom:none;">
+    <view class="delivery-top border_bottom">
+      <text class="fl">可用余额</text>
+      <view class="picker fr small_font"><text class="color medium_font">-￥{{disass.yeprice || '0.00'}}</text></view>
+    </view>
+  </view>
+
+</view>

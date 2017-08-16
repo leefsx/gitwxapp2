@@ -1,0 +1,88 @@
+<view class="main">
+    <view class="header">
+        <view class="header-top">
+          <view class="header-title">
+            <image src="{{userInfo.avatarUrl}}" class="thumb"></image>
+            <text class="nickname">{{userInfo.nickName}}</text>
+          </view>
+          <view class="account_money">
+            <image mode="widthFix" src="../../../image/money.png"></image>
+            <text>￥{{cuserInfo.account_money}}</text>    
+          </view>
+        </view>
+        
+        <view class="header-bottom small_font">
+          <view>
+            <text>5000</text>
+            <text>积分</text>
+          </view>
+          <view>
+            <text>20</text>
+            <text>购物车</text>
+          </view>
+        </view>
+    </view>
+    
+    <view class="orders-box">
+        <view class="orders">
+            <navigator url="../order-list/order-list?activeIndex=0">我的订单</navigator>
+        </view>
+
+        <view class="orders-state">
+        <navigator url="../order-list/order-list?activeIndex=1">
+                <view class="state-image">
+                    <image mode="widthFix" src="../../../image/state-1.png"></image>
+                    <view class="color">1</view>
+                </view>
+                <view class="state-tex">已完成</view>
+            </navigator>
+            <navigator url="../order-list/order-list?activeIndex=2">
+                <view class="state-image">
+                    <image mode="widthFix" src="../../../image/state-2.png"></image>
+                    <view class="color">1</view>
+                </view>
+                <view class="state-tex">待付款</view>
+            </navigator>
+            <navigator url="../order-list/order-list?activeIndex=3">
+                <view class="state-image">
+                    <image mode="widthFix" src="../../../image/state-3.png"></image>
+                    <view class="color">1</view>
+                </view>
+                <view class="state-tex">待发货</view>
+            </navigator>
+            <navigator url="../order-list/order-list?activeIndex=4">
+                <view class="state-image">
+                    <image mode="widthFix" src="../../../image/state-4.png"></image>
+                    <view class="color">1</view>
+                </view>
+                <view class="state-tex">待收货</view>
+            </navigator>
+        </view>
+
+
+
+        <!--<view class="orders">我的订单</view>-->
+        <!--<view class="orders-list" wx:for="{{orders}}" wx:key="index">
+            <view class="orders-number">订单编号：{{item.oid}}</view>
+            <navigator url="../details/details" class="orders-detail">
+                <image src="{{order_pro_rel[item.id][0].picurl}}"></image>
+                <view class="">{{order_pro_rel[item.id][0].product_name}}</view>
+                <view class="">{{item.count}}</view>
+                <text wx:if="{{item.order_status_no==1}}" class="orders-status">待付款</text>
+                <text wx:elif="{{item.order_status_no==2}}" class="orders-status">已支付</text>
+                <text wx:else="{{item.order_status_no==5}}" class="orders-status">订单取消</text>
+            </navigator>
+            <view class="orders-footer">
+                <text><text wx:if="{{item.order_status_no==1||item.pay_status==1}}">应付：</text><text wx:if="{{item.order_status_no==3}}">实付：</text>￥{{item.total_amount}}</text>
+                <view wx:if="{{item.order_status_no==1}}"  class="orders-btn" data-oid="{{item.oid}}" bindtap="payOrders">付款</view>
+                <navigator url="../details/details?id={{order_pro_rel[item.id][0].product_id}}" wx:if="{{item.order_status_no==2||item.pay_status==2}}" class="orders-btn">再次购买</navigator>
+            </view>
+        </view>-->
+    </view>
+    <view class="address-box">
+        <view class="address-manage">
+            <navigator url="../address/address">地址管理</navigator>
+        </view>
+    </view>
+    <view class="esc">退出</view>
+</view>

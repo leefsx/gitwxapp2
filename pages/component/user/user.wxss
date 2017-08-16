@@ -1,0 +1,131 @@
+.header{
+    position: relative;
+    height: 292rpx;
+    box-sizing: border-box;
+}
+.header-top{
+  padding:30rpx 30rpx 30rpx 30rpx;
+}
+.header-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.header .thumb{
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+    margin-right: 30rpx;
+}
+.header .account_money{
+    position: absolute;
+    right: 0rpx;
+    top: 60rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 70rpx;
+    border-top-left-radius: 35rpx;
+    border-bottom-left-radius: 35rpx;
+    padding: 0 30rpx 0 40rpx;
+    background-color: #f39800;
+}
+.header .account_money image{
+  width: 40rpx;
+  display: inline-block;
+  margin-right: 8rpx;
+}
+.header .account_money text{
+  display: inline-block;
+}
+
+.header-bottom{
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  color: #fff;
+  border-top: 1rpx solid #f75772;
+}
+.header-bottom view{
+  padding: 4rpx 0;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.header-bottom view:first-child{
+  border-right: 1rpx solid #f75772;
+}
+
+.address-box{
+    line-height: 90rpx;
+}
+.address-box .address-manage{
+    position: relative;
+    height: 90rpx;
+    padding-left: 40rpx;
+}
+.address-box .address-manage::after{
+    position: absolute;
+    right: 30rpx;
+    top: 34rpx;
+    content: '';
+    width: 16rpx;
+    height: 16rpx;
+    border-top: 4rpx solid #7f7f7f;
+    border-right: 4rpx solid #7f7f7f;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.orders{
+    position: relative;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+}
+.orders-list{
+    padding-left: 30rpx;
+}
+.orders-list:last-child{
+    border-bottom: 0;
+}
+.orders-number{
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.orders-detail{
+    position: relative;
+    height: 120rpx;
+    padding: 35rpx 20rpx 35rpx 170rpx;
+}
+.orders-detail image{
+    position: absolute;
+    left: 0;
+    top: 20rpx;
+    width: 150rpx;
+    height: 150rpx;
+}
+.orders-detail view{
+    line-height: 60rpx;
+}
+.orders-detail .orders-status{
+    position: absolute;
+    right: 20rpx;
+    top: 42rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+}
+.orders-footer{
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:15rpx 30rpx 15rpx 0;
+}
+.orders-footer .orders-btn{
+    float: right;
+    width: 170rpx;
+    height: 60rpx;
+    line-height:60rpx;
+    border-radius: 6rpx;
+    text-align: center;
+}
