@@ -1,17 +1,23 @@
-<!--<import src="../../common/nav.wxml" />-->
+<import src="../../common/nav.wxml" />
+<import src="../../common/productList.wxml" />
 <import src="../../common/prompt.wxml" />
-<!--<import src="../../common/productList2.wxml" />-->
+
 <view class="main">
-  <!--<template is="nav" data="{{config}}" />-->
-  <!--<view class="categroy-content">
-    <view class="categroy-content-list {{curIndex == index ? 'on' : ''}}" wx:for="{{category}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchTab">
-      <view class="navigator-text">{{item.name}}</view>
-      <view class="navigator-arrow"></view>
+  <template is="nav" data="{{config}}" />
+
+  <view class="product-display">
+    <view class="product-display-title bg_color">
+        <view class="title small_font"><text>日常办公</text></view>
     </view>
-  </view>-->
+    <view class="product-display-ul">
+      <template is="product_list" data="{{products}}" />
+      <template is="prompt" data="{{prompt}}"></template>
+    </view>
+  </view>
+  
 
 
-  <view class="categroy-left">
+  <!-- <view class="categroy-left">
     <scroll-view scroll-y  style="height:{{deviceHeight+'px'}}" scroll-with-animation>
       <view class="medium_font scroll-view-left-item {{curIndex === index ? 'on' : ''}}" wx:for="{{category}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchTab">{{item.name}}</view>
     </scroll-view>
@@ -31,12 +37,5 @@
       <template is="prompt" data="{{prompt}}"></template>
     </scroll-view>
     
-  </view>
-
-  <!--<view class="categroy-bottom">
-    <view class="good-all">
-      <template is="product_list2" data="{{products}}" />
-    </view>
-    <template is="prompt" data="{{prompt}}"></template>
-  </view>-->
+  </view> -->
 </view>

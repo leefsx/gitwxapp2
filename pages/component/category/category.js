@@ -29,21 +29,10 @@ Page({
       hidden:true,
     },
     config: [],
-    // scrollHeight: 800
     deviceHeight:'',
     loading: false
   },
-  // onLoad: function () {  
-  //     var that = this;  
-  //     wx.getSystemInfo({  
-  //         success: function (res) {  
-  //             console.info(res.windowHeight);  
-  //             that.setData({  
-  //                 scrollHeight: res.windowHeight-88  
-  //             });  
-  //         }  
-  //     });  
-  // },  
+ 
   onShow(){
     var that = this
     wx.getSystemInfo({
@@ -71,6 +60,27 @@ Page({
     //}
     
   },
+  // onShow: function () {
+  //   this.getProductsFromServer(6, 1),
+  //     this.setData({
+  //       imgUrls: config.index_autoplay_img,
+  //       index_middle_img: config.index_middle_img,
+  //       index_middle2_img: config.index_middle2_img,
+  //       config: {
+  //         'website_name': config.website_name,
+  //         'logo': config.logo,
+  //         'hotline_logo': config.hotline_logo,
+  //         'hotline_no': config.hotline_no,
+  //         'copyright': config.copyright,
+  //         'product_title': config.product_title,
+  //         'index_middle_title': config.index_middle_title,
+  //         'logourl': config.logourl
+  //       },
+  //       index_autoplay_imgurl: config.index_autoplay_imgurl,
+  //       index_middle_imgurl: config.index_middle_imgurl
+  //     })
+    
+  // },
   switchTab(e) {
     var that = this
     var cateid = e.currentTarget.dataset.id;
@@ -149,6 +159,7 @@ Page({
           var resdata = res.data.data
           if (page > 1 && resdata.length > 0) {
             var this_products = that.data.products
+            console.log(this_products)
             this_products = this_products.concat(resdata)
           }else{
             var this_products = resdata
@@ -176,6 +187,13 @@ Page({
     }
   },
   reachBottom() {
+    console.log(110)
+    if (!this.data.loading) {
+      this.load_more()
+    }
+  },
+  onReachBottom: function(){
+    console.log(120)
     if (!this.data.loading) {
       this.load_more()
     }

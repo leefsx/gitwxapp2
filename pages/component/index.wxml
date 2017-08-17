@@ -1,6 +1,8 @@
 <import src="../common/nav.wxml" />
+<import src="../common/bar.wxml" />
 <import src="../common/productList.wxml" />
 <view class="main">
+  <template is="bar" data="{{category_info}}" />
   <template is="nav" data="{{config}}" />
   <view class="index-top">
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
@@ -11,19 +13,40 @@
       </block>
     </swiper>
   </view>
-  <view class="recom">
+  <view class="sub_bar">
+    <navigator url="details/details">
+      <image src="../../../image/mb2-7.png"/>
+    </navigator>
+    <navigator url="details/details">
+      <image src="../../../image/mb2-8.png"/>
+    </navigator>
+    <navigator url="details/details">
+      <image src="../../../image/mb2-9.png"/>
+    </navigator>
+  </view>
+  <!-- <view class="recom">
     <view class="title"><text class="color">TOP</text>{{config.index_middle_title}}</view>
     <view class="recom-top">
       <navigator wx:for="{{index_middle_img}}" url="details/details?id={{index_middle_imgurl[index]['detail_id']}}">
         <image mode="aspectFill" src="{{item}}"></image>
       </navigator>
     </view>
-  </view>
+  </view> -->
 
 
   <view class="product-display">
-    <view class="product-display-title">
-      <view class="title">{{config.product_title}}</view>
+    <view class="product-display-title bg_color">
+      <view class="title small_font"><text>1F</text><text>日常办公</text></view>
+    </view>
+    <view class="product-display-ul">
+      <template is="product_list" data="{{products}}" />
+      <view class="load_more medium_font" bindtap="load_more">加载更多</view>
+    </view>
+  </view>
+
+  <view class="product-display">
+    <view class="product-display-title bg_color3">
+        <view class="title small_font"><text>1F</text><text>日常办公</text></view>
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{products}}" />

@@ -4,6 +4,11 @@ var WxParse = require('../../common/wxParse.js');
 var app = getApp();
 Page({
   data: {
+    category_info:{
+      category:['苹果','水蜜桃','橙子','西瓜'],
+      isShowBar:false
+    },
+    
     imgUrls: [],
     products:[],
     goodsXX: [],
@@ -18,7 +23,17 @@ Page({
     config: []
   },
   onLoad() {
-    
+
+  },
+  showBar(){
+    this.setData({
+      "category_info.isShowBar":true
+    })
+  },
+  hideBar(){
+    this.setData({
+      "category_info.isShowBar":false
+    })
   },
   onShow: function () {
     this.getProductsFromServer(6, 1),

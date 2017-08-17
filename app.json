@@ -22,7 +22,7 @@
     "navigationBarTextStyle": "#ffffff",
     "navigationBarTitleText": "美橙微营销",
     "navigationBarBackgroundColor": "#313131",
-    "backgroundColor": "#eeeeee",
+    "backgroundColor": "#fff",
     "enablePullDownRefresh": true
   },
   "tabBar": {
