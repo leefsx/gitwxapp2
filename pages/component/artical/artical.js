@@ -1,5 +1,7 @@
 
 var config = require('../../../common/config.js');
+var comm = require('../../../common/common.js');
+var app = getApp();
 Page({
     data: {
         activeIndex: 0,
@@ -9,7 +11,8 @@ Page({
             title: '您还没有相关的订单',
             text: '可以去看看有哪些想买的',
         },
-        articalUl:["企业服务","售后服务","配送说明","购物指南"]
+        articalUl:[],
+        article: []
        
     },
     onShow: function () {
@@ -25,7 +28,7 @@ Page({
               'logourl': config.logourl
             },
           })
-        
+          this.getArticlesFromServer(10,1)
       },
     onLoad(options) {
         if (options.activeIndex) {
@@ -40,5 +43,29 @@ Page({
         this.setData({
             activeIndex: id
         })
+        this.getArticlesFromServer(10, 1)
+    },
+    getArticlesFromServer(list_num, page) {
+      var that = this
+      var article_category = that.data.activeIndex
+      app.request({
+        url: comm.parseToURL('article', 'list'),
+        data: {
+          list_num: list_num,
+          page: page,
+          article_category: article_category
+        },
+        success: function (res) {
+          if (res.data.result == 'OK') {
+            console.log(res.data.data)
+            that.setData({
+              article: res.data.data,
+              articalUl: res.data.category
+            })
+          } else {
+
+          }
+        }
+      })
     }
 })
