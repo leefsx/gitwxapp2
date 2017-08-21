@@ -1,6 +1,8 @@
 <import src="../../common/nav.wxml" />
+<import src="../../common/bar.wxml" />
 <view class="main">
   <template is="nav" data="{{config}}"/>
+  <template is="bar" data="{{category_info}}" />
   <view class="food-detail-xq">
     <swiper indicator-dots="true" autoplay="true">
       <swiper-item wx:for="{{detail_data.feature_img}}">

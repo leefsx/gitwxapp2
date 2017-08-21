@@ -4,10 +4,15 @@ var config = require('../../../common/config.js');
 
 
 var comm = require('../../../common/common.js');
+var bar = require('../../common/bar.js');
 var app = getApp();
 
 Page({
     data: {
+        category_info: {
+          category: ['苹果', '水蜜桃', '橙子', '西瓜'],
+          isShowBar: false
+        },
         activeIndex: 0,
         config:[],
         prompt: {
@@ -49,7 +54,7 @@ Page({
             }
           })
         
-
+          bar.getCategory(this)
           this.getArticlesFromServer(10,1)
       },
     onLoad(options) {
@@ -59,6 +64,15 @@ Page({
                 activeIndex: options.activeIndex
             })
         }
+    },
+    barSwitchTab(e){
+      bar.barSwitchTab(e,this)
+    },
+    showBar() {
+      bar.showBar(this)
+    },
+    hideBar() {
+      bar.hideBar(this)
     },
     changActive(e){
         const id = parseInt(e.currentTarget.dataset.id);

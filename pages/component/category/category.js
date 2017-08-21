@@ -1,9 +1,16 @@
 var config = require('../../../common/config.js');
+var bar = require('../../common/bar.js');
+
 var app = getApp()
 Page({
   data: {
+    category_info: {
+      category: ['苹果', '水蜜桃', '橙子', '西瓜'],
+      isShowBar: false
+    },
     products:[],
     category: [],
+    category_name:"所有种类",
     website_name: '',
     scrollTop: 0,
     goods: [
@@ -32,7 +39,12 @@ Page({
     deviceHeight:'',
     loading: false
   },
- 
+  showBar(){
+    bar.showBar(this)
+  },
+  hideBar() {
+    bar.hideBar(this)
+  },
   onShow(){
     var that = this
     wx.getSystemInfo({
@@ -45,18 +57,24 @@ Page({
       }
     })
     var product_category = app.globalData.cateid || 0
+    var category_name = app.globalData.catename || "所有种类"
     app.globalData.cateid = 0
+    app.globalData.catename = "所有种类"
     this.setData({
       config: {
         'website_name': config.website_name,
-        'logo': config.logo
+        'logo': config.logo,
+        
       },
       product_category: product_category,
-      curIndex: ''
+      curIndex: '',
+      category_name: category_name
     })
+    
     //if (this.data.products.length<1){
       this.getProductsFromServer(6, 1)
       wx.stopPullDownRefresh()
+      bar.getCategory(this)
     //}
     
   },
@@ -81,13 +99,14 @@ Page({
   //     })
     
   // },
-  switchTab(e) {
+  barSwitchTab(e) {
     var that = this
     var cateid = e.currentTarget.dataset.id;
+    var category_name = e.currentTarget.dataset.name;
     var curIndex = e.currentTarget.dataset.index;
     that.setData({
       curIndex: curIndex,
-      scrollTop: 0
+      category_name:category_name
     })
     app.request({
       url: app.domain + '/api/product/list',
@@ -105,7 +124,8 @@ Page({
           products: resdata,
           product_category: cateid,
           curIndex: curIndex,
-          'prompt.hidden': resdata.length
+          'prompt.hidden': resdata.length,
+          'category_info.isShowBar':false
         })
       },
       fail: function () {
@@ -118,6 +138,43 @@ Page({
    
     
   },
+  // switchTab(e) {
+  //   var that = this
+  //   var cateid = e.currentTarget.dataset.id;
+  //   var curIndex = e.currentTarget.dataset.index;
+  //   that.setData({
+  //     curIndex: curIndex,
+  //     scrollTop: 0
+  //   })
+  //   app.request({
+  //     url: app.domain + '/api/product/list',
+  //     data: {
+  //       list_num: 6,
+  //       product_category: cateid
+  //     },
+  //     method: 'GET',
+  //     success: function (res) {
+  //       var resdata = []
+  //       if (res.data.result == 'OK') {
+  //         resdata = res.data.data
+  //       }
+  //       that.setData({
+  //         products: resdata,
+  //         product_category: cateid,
+  //         curIndex: curIndex,
+  //         'prompt.hidden': resdata.length
+  //       })
+  //     },
+  //     fail: function () {
+  //       console.log('fail');
+  //     },
+  //     complete: function () {
+  //       console.log('complete!');
+  //     }
+  //   })
+
+
+  // },
   onPullDownRefresh() {
     this.getProductsFromServer(6, 1)
     wx.stopPullDownRefresh()
@@ -128,24 +185,24 @@ Page({
     that.setData({
       loading: true
     })
-    app.request({
-      url: app.domain + '/api/product/catelist',
-      data: {
+    // app.request({
+    //   url: app.domain + '/api/product/catelist',
+    //   data: {
         
-      },
-      method: 'GET',
-      success: function (res) {
-        if (res.data.result == 'OK') {
-          that.setData({
-            category: res.data.data
-          })
-        } else {
-          wx.showToast({
-            title: '请求失败'
-          })
-        }
-      }
-    })
+    //   },
+    //   method: 'GET',
+    //   success: function (res) {
+    //     if (res.data.result == 'OK') {
+    //       that.setData({
+    //         category: res.data.data
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: '请求失败'
+    //       })
+    //     }
+    //   }
+    // })
     app.request({
       url: app.domain + '/api/product/list',
       data: {
@@ -155,8 +212,10 @@ Page({
       },
       method: 'GET',
       success: function (res) {
+        // console.log(res.data.result)
         if (res.data.result == 'OK') {
           var resdata = res.data.data
+          console.log(resdata)
           if (page > 1 && resdata.length > 0) {
             var this_products = that.data.products
             console.log(this_products)
@@ -167,8 +226,14 @@ Page({
           that.setData({
             products: this_products,
             website_name: config.website_name,
+            'prompt.hidden':resdata.length,
             list_page: page,
             loading: false
+          })
+        } else {
+          that.setData({
+            products: [],
+            'prompt.hidden':false
           })
         }
       },
