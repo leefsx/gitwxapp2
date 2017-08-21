@@ -1,21 +1,16 @@
 {
   "pages": [
     "pages/component/index",
-    "pages/component/online-message/online-message",
     "pages/component/artical/artical",
     "pages/component/artical-detail/artical-detail",
     "pages/component/category/category",
     "pages/component/cart/cart",
     "pages/component/user/user",
-    "pages/component/user_new/user_new",
     "pages/component/address/address",
-    "pages/component/address-edit/address-edit",
     "pages/component/address-list/address-list",
-    "pages/component/address-confirm/address-confirm",
-    "pages/component/order-list/order-list",
     "pages/component/order_detail/order_detail",
-    "pages/component/details/details",
     "pages/component/order_confirm/order_confirm",
+    "pages/component/details/details",
     "pages/component/login/login"
   ],
   "window": {

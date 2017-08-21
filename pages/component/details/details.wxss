@@ -118,33 +118,7 @@
   padding: 20rpx 20rpx;
 }
 
-/*.foot-dec_detail>text{
-  font-size: 28rpx;
-  color: #999;
-  font-family: tahoma, arial, 微软雅黑, sans-serif;
-  font-style: italic;
-}*/
-/*
-.dec_detail-all{margin-left: 80rpx;}*/
 
-/*.dec_detail{
-  color: #666666;
-  position: relative;
-  font-size: 26rpx;
-  display: block;
-}
-.dec_detail:before{
-  content: " ";
-  display: inline-block;
-  height: 10rpx;
-  width: 10rpx;
-  background-color: #666;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  margin-top: -5rpx;
-  left: -20rpx;
-}*/
 .good-rating{
     background: #EDEDED;
 }
@@ -166,9 +140,7 @@
   height:25px;
   line-height: 25px;
 }
-/*.good-rating-detail view text.fr{
-  color:#848689;
-}*/
+
 .good-rating-last{
     display: block;
     text-align: right;
@@ -288,9 +260,7 @@
   background-color: #f39800;
   line-height: 100rpx;
 }
-/*.detail-foot view:hover{
-  background-color: #913a12
-}*/
+
 .details{
   padding-left: 30rpx;
   box-sizing: border-box;

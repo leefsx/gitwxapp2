@@ -52,12 +52,7 @@ function barSwitchTab(e, _this){
     app.globalData.cateid = cateid
     app.globalData.catename = catename
     wx.switchTab({
-      url: '/pages/component/category/category',
-      // success: function (e) {  
-      //   var page = getCurrentPages().pop();  
-      //   if (page == undefined || page == null) return;  
-      //   page.onShow();  
-      // } 
+      url: '/pages/component/category/category', 
     })
     that.setData({
       'category_info.isShowBar': false
