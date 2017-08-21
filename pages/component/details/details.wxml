@@ -6,7 +6,7 @@
   <view class="food-detail-xq">
     <swiper indicator-dots="true" autoplay="true">
       <swiper-item wx:for="{{detail_data.feature_img}}">
-        <image src="{{item}}" mode="aspectFill" />
+        <image src="{{item}}" mode="aspectFit" />
       </swiper-item>
     </swiper>
     <view class="food-content">
