@@ -63,12 +63,12 @@ Page({
     this.setData({
       config: {
         'website_name': config.website_name,
-        'logo': config.logo,
-        
+        'logo': config.logo, 
       },
       product_category: product_category,
       curIndex: '',
-      category_name: category_name
+      category_name: category_name,
+      products: []
     })
     
     //if (this.data.products.length<1){
@@ -135,8 +135,7 @@ Page({
         console.log('complete!');
       }
     })
-   
-    
+      
   },
   // switchTab(e) {
   //   var that = this
@@ -230,9 +229,15 @@ Page({
             list_page: page,
             loading: false
           })
-        } else {
+        } 
+        // else {
+        //   that.setData({
+        //     products: [],
+        //     'prompt.hidden':false
+        //   })
+        // }
+        if (that.data.products.length==0){
           that.setData({
-            products: [],
             'prompt.hidden':false
           })
         }
