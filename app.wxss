@@ -327,7 +327,12 @@ page {
   border-bottom: none;
 }
 
-
+.help-port{
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  border-top: 1rpx solid #e9e9e9;
+}
 
 
 

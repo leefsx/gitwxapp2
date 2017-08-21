@@ -91,6 +91,7 @@ App({
     userInfo: null,
     APISESSID: null,
     carts: [],
-    cuser: []
+    cuser: [],
+    barTocartID:null,
   }
 })

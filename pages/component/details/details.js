@@ -2,9 +2,14 @@
 var WxParse = require('../../../common/wxParse.js');
 var comm = require('../../../common/common.js');
 var config = require('../../../common/config.js');
+var bar = require('../../common/bar.js');
 var app = getApp();
 Page({
   data: {
+    category_info: {
+      category: ['苹果', '水蜜桃', '橙子', '西瓜'],
+      isShowBar: false
+    },
     product_id: '',
     detail_data: [],
     detail_desc: '',
@@ -45,6 +50,18 @@ Page({
     wx.switchTab({
       url: '../index',
     })
+  },
+  onShow(){
+    bar.getCategory(this)
+  },
+  barSwitchTab(e){
+    bar.barSwitchTab(e,this)
+  },
+  showBar() {
+    bar.showBar(this)
+  },
+  hideBar() {
+    bar.hideBar(this)
   },
   switchDetState(e){
     let propertys = this.data.propertys;

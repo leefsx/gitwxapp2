@@ -1,6 +1,7 @@
 var comm = require('../../common/common.js');
 var config = require('../../common/config.js');
 var WxParse = require('../../common/wxParse.js');
+var bar = require('../common/bar.js');
 var app = getApp();
 Page({
   data: {
@@ -25,15 +26,14 @@ Page({
   onLoad() {
 
   },
-  showBar(){
-    this.setData({
-      "category_info.isShowBar":true
-    })
+  barSwitchTab(e) {
+    bar.barSwitchTab(e, this)
   },
-  hideBar(){
-    this.setData({
-      "category_info.isShowBar":false
-    })
+  showBar() {
+    bar.showBar(this)
+  },
+  hideBar() {
+    bar.hideBar(this)
   },
   onShow: function () {
     this.getProductsFromServer(6, 1),
@@ -54,6 +54,7 @@ Page({
         index_autoplay_imgurl: config.index_autoplay_imgurl,
         index_middle_imgurl: config.index_middle_imgurl
       })
+    bar.getCategory(this)
     
   },
   toCategory(){

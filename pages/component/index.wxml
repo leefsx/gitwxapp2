@@ -62,6 +62,7 @@
 
   
  </view>
+ <navigator url="artical/artical" class="help-port small_font">帮助中心</navigator>
  <view class="copyright small_font">
    @{{config.copyright}}
  </view>

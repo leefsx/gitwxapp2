@@ -72,6 +72,8 @@ function isRightSlide(e, _this) {
 }
 
 
+
+
 module.exports = {
     Promise: Promise,
     Gesture: {
