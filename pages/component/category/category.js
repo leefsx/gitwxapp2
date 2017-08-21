@@ -160,7 +160,7 @@ Page({
         if (that.data.products.length==0){
           that.setData({
             'prompt.hidden':false
-          })*/
+          })
         }
       },
       fail: function () {
