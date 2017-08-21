@@ -10,15 +10,13 @@ var app = getApp();
 Page({
     data: {
         category_info: {
-          category: ['苹果', '水蜜桃', '橙子', '西瓜'],
+          category: [],
           isShowBar: false
         },
         activeIndex: 0,
         config:[],
-        prompt: {
-            hidden: !0,
-            title: '您还没有相关的订单',
-            text: '可以去看看有哪些想买的',
+        prompt:{
+          hidden:true,
         },
         scrollLeft:0,
         scrollNum:0,
@@ -187,10 +185,11 @@ Page({
         },
         success: function (res) {
           if (res.data.result == 'OK') {
-            console.log(res.data.data)
+            console.log(res.data.category)
             that.setData({
               article: res.data.data,
-              articalUl: res.data.category
+              articalUl: res.data.category,
+              'prompt.hidden' : res.data.data.length
             })
           } else {
 

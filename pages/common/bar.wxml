@@ -5,5 +5,4 @@
             {{item.name}}
         </view>
     </view>
-
 </template>

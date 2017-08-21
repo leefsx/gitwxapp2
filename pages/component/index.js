@@ -6,10 +6,9 @@ var app = getApp();
 Page({
   data: {
     category_info:{
-      category:['苹果','水蜜桃','橙子','西瓜'],
+      category:[],
       isShowBar:false
     },
-    
     imgUrls: [],
     products:[],
     goodsXX: [],

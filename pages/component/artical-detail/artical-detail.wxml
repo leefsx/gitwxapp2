@@ -1,8 +1,10 @@
 <import src="../../common/nav.wxml" />
+<import src="../../common/bar.wxml" />
 
 
 <view class="main">
     <template is="nav" data="{{config}}" />
+    <template is="bar" data="{{category_info}}" />
     <view class="artical-detail">
         <view class="artical-detail-title">
             <view>{{article.title}}</view>

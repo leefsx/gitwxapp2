@@ -1,8 +1,8 @@
-<!-- <import src="../../common/prompt.wxml"/> -->
+<import src="../../common/prompt.wxml"/>
 <import src="../../common/nav.wxml" />
 <import src="../../common/bar.wxml" />
 
-<!-- <template is="prompt" data="{{ prompt }}"/> -->
+
 
 <view class="main">
     <template is="nav" data="{{config}}" />
@@ -14,11 +14,6 @@
         </scroll-view>
         <view class="category-arrow" bindtap="arrowPlus"><image src="/image/mb2-11.png"/></view>
     </view> 
-
-     <!-- <scroll-view scroll-x class="artical-category">
-        <view wx:for="{{articalUl}}" data-id="{{item.id}}" class="{{activeIndex == item.id ? 'active':''}} medium_font" bindtap="changActive">{{item.name}}</view>
-    </scroll-view>  -->
-
     <view class="artical-ul">
         <navigator wx:for="{{article}}" url="../artical-detail/artical-detail?id={{item.id}}" class="artical-li">
             <view class="artical-li-title">
@@ -30,6 +25,6 @@
             </view>
             <view class="color2 small_font tooLong">{{item.content}}</view>
         </navigator>
-        
+        <template is="prompt" data="{{prompt}}"></template>
     </view>
 </view>

@@ -5,7 +5,7 @@ var app = getApp()
 Page({
   data: {
     category_info: {
-      category: ['苹果', '水蜜桃', '橙子', '西瓜'],
+      category: [],
       isShowBar: false
     },
     products:[],
@@ -63,8 +63,7 @@ Page({
     this.setData({
       config: {
         'website_name': config.website_name,
-        'logo': config.logo,
-        
+        'logo': config.logo, 
       },
       product_category: product_category,
       curIndex: '',
@@ -79,27 +78,7 @@ Page({
     //}
     
   },
-  // onShow: function () {
-  //   this.getProductsFromServer(6, 1),
-  //     this.setData({
-  //       imgUrls: config.index_autoplay_img,
-  //       index_middle_img: config.index_middle_img,
-  //       index_middle2_img: config.index_middle2_img,
-  //       config: {
-  //         'website_name': config.website_name,
-  //         'logo': config.logo,
-  //         'hotline_logo': config.hotline_logo,
-  //         'hotline_no': config.hotline_no,
-  //         'copyright': config.copyright,
-  //         'product_title': config.product_title,
-  //         'index_middle_title': config.index_middle_title,
-  //         'logourl': config.logourl
-  //       },
-  //       index_autoplay_imgurl: config.index_autoplay_imgurl,
-  //       index_middle_imgurl: config.index_middle_imgurl
-  //     })
-    
-  // },
+  
   barSwitchTab(e) {
     var that = this
     var cateid = e.currentTarget.dataset.id;
@@ -136,46 +115,9 @@ Page({
         console.log('complete!');
       }
     })
-   
-    
+      
   },
-  // switchTab(e) {
-  //   var that = this
-  //   var cateid = e.currentTarget.dataset.id;
-  //   var curIndex = e.currentTarget.dataset.index;
-  //   that.setData({
-  //     curIndex: curIndex,
-  //     scrollTop: 0
-  //   })
-  //   app.request({
-  //     url: app.domain + '/api/product/list',
-  //     data: {
-  //       list_num: 6,
-  //       product_category: cateid
-  //     },
-  //     method: 'GET',
-  //     success: function (res) {
-  //       var resdata = []
-  //       if (res.data.result == 'OK') {
-  //         resdata = res.data.data
-  //       }
-  //       that.setData({
-  //         products: resdata,
-  //         product_category: cateid,
-  //         curIndex: curIndex,
-  //         'prompt.hidden': resdata.length
-  //       })
-  //     },
-  //     fail: function () {
-  //       console.log('fail');
-  //     },
-  //     complete: function () {
-  //       console.log('complete!');
-  //     }
-  //   })
-
-
-  // },
+  
   onPullDownRefresh() {
     this.getProductsFromServer(6, 1)
     wx.stopPullDownRefresh()
@@ -186,24 +128,6 @@ Page({
     that.setData({
       loading: true
     })
-    // app.request({
-    //   url: app.domain + '/api/product/catelist',
-    //   data: {
-        
-    //   },
-    //   method: 'GET',
-    //   success: function (res) {
-    //     if (res.data.result == 'OK') {
-    //       that.setData({
-    //         category: res.data.data
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: '请求失败'
-    //       })
-    //     }
-    //   }
-    // })
     app.request({
       url: app.domain + '/api/product/list',
       data: {
@@ -231,10 +155,10 @@ Page({
             list_page: page,
             loading: false
           })
-        } else {
-          /*
+
+        } 
+        if (that.data.products.length==0){
           that.setData({
-            products: [],
             'prompt.hidden':false
           })*/
         }

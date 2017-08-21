@@ -1,20 +1,30 @@
 var config = require('../../../common/config.js');
 var comm = require('../../../common/common.js');
 var WxParse = require('../../../common/wxParse.js');
+var bar = require('../../common/bar.js');
 var app = getApp()
 Page({
     data: {
         config:[],
-        prompt: {
-            hidden: !0,
-            title: '您还没有相关的订单',
-            text: '可以去看看有哪些想买的',
-        },
         articalUl:["企业服务","售后服务","配送说明","购物指南"],
-        article: []
+        article: [],
+        category_info: {
+          category: [],
+          isShowBar: false
+        }
     
     },
     onShow: function () {
+      bar.getCategory(this)
+    },
+    barSwitchTab(e){
+      bar.barSwitchTab(e,this)
+    },
+    showBar() {
+      bar.showBar(this)
+    },
+    hideBar() {
+      bar.hideBar(this)
     },
     onLoad(opt){
       var that = this

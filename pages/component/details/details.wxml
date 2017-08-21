@@ -6,7 +6,7 @@
   <view class="food-detail-xq">
     <swiper indicator-dots="true" autoplay="true">
       <swiper-item wx:for="{{detail_data.feature_img}}" wx:key="{{item}}">
-        <image src="{{item}}" mode="aspectFill" />
+        <image src="{{item}}" mode="aspectFit" />
       </swiper-item>
     </swiper>
     <view class="food-content">
@@ -120,78 +120,6 @@
           </view>
         </view>
     </view>
-     <!-- <view class="good-content">
-      <swiper duration="{{duration}}" bindchange="currentChange" current="{{curIndex}}" style="height:800px;">
-        <swiper-item class="good-info">
-          <image src="{{detail_data.feature_img}}" class="food-image bigImg" mode="aspectFit" />
-          <view class="food-content">
-            <text class="food-name">{{detail_data.name}}</text>
-            <text class="food-price">价格：<text>{{detail_data.price}}</text></text>
-            <text class="food-old_price">市场价：<text>{{detail_data.mark_price}}</text></text>
-          </view>
-          <view class="food-xq" bindtap="changState">
-            <text>产品规格</text>
-            <view class="navigator-arrow"></view>
-          </view>
-          <view class="food-para">
-            <view class="food-dec">
-              <text>商品信息</text>
-              <scroll-view scroll-y class="details">
-                <import src="../../../common/wxParse.wxml" />
-                <template is="wxParse" data="{{wxParseData:detail_desc.nodes}}" />
-              </scroll-view>
-            </view>
-            <view class="foot-dec_detail">
-              <text>产品参数</text>
-              <view class="dec_detail-all">
-                <text wx:for="{{food.dec_detail}}" class="dec_detail">{{index}}:{{item}}</text>
-              </view>
-            </view>
-          </view>
-        </swiper-item>
-        <swiper-item class="good-rating">
-          <view class="good-rating-content">
-            <text class="good-rating-list">暂无评价信息</text>
-            <text class="good-rating-last">总共<text>0</text>条记录</text>
-          </view>
-        </swiper-item>
-        <swiper-item class="good-rec">
-          <view class="good-rec-content">
-            <view class="table">
-              <view class="tr bg-w">
-                <view class="th">购买人</view>
-                <view class="th">数量</view>
-                <view class="th ">属性</view>
-                <view class="th ">购买时间</view>
-              </view>
-              <block wx:for="{{}}" wx:key="{{code}}">
-                <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-                  <view class="td">{{item.code}}</view>
-                  <view class="td">{{item.text}}</view>
-                  <view class="td">{{item.type}}</view>
-                </view>
-                <view class="tr" wx:else>
-                  <view class="td">{{item.code}}</view>
-                  <view class="td">{{item.text}}</view>
-                  <view class="td">{{item.type}}</view>
-                </view>
-              </block>
-            </view>
-            <text class="good-rating-last">总共<text>0</text>条记录</text>
-          </view>
-        </swiper-item>
-        <swiper-item class="good-ans">
-          <view class="good-ans-content good-rating-content">
-            <view class="good-ans-list">
-              <text class="good-ans-jl">总共<text>0</text>条记录</text>
-              <text class="good-ans-tw">我要提问</text>
-            </view>
-            <text class="good-rating-list">暂无评价信息</text>
-
-          </view>
-        </swiper-item>
-      </swiper>
-    </view>  -->
     <view class="detail_tj">
       <text class="detail_tj-list" bindtap="prevnext" data-id="{{prevnext.prev.id}}">上一个：
         <text wx:if="{{prevnext.prev.id}}">{{prevnext.prev.title}}</text>

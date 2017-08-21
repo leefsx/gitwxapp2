@@ -2,7 +2,7 @@
     <view class="products">
       <block wx:for="{{product1||product2||product3||product4||products}}" wx:key="{{index}}">
         <navigator url="/pages/component/details/details?id={{item.id}}" class="product-nav smallFoodContainer">
-          <image mode="aspectFill" class="product-img smallImg" src="{{item.doc_image}}"/>
+          <image mode="aspectFit" class="product-img smallImg" src="{{item.doc_image}}"/>
           <text class="product-name color">{{item.title}}</text>
           <text class="product-dec product-mark_price">市场价：{{item.mark_price}}</text>
           <text class="product-price bg_color">￥{{item.price}}</text>
