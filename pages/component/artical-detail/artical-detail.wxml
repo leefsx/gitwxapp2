@@ -5,17 +5,15 @@
     <template is="nav" data="{{config}}" />
     <view class="artical-detail">
         <view class="artical-detail-title">
-            <view>企业简介</view>
-            <view class="small_font color2">来源:<text class="gap">企业简介</text>  发布时间:<text class="gap">2017-01-02 23:14</text>   <text>89</text>次浏览 </view>
+            <view>{{article.title}}</view>
+            <view class="small_font color2">来源:<text class="gap">{{article.source}}</text>  发布时间:<text class="gap">{{article.publish_time}}</text>   <text>{{article.v_num}}</text>次浏览 </view>
         </view>
         <view class="artical-detail-dec medium_font">
-            xx果园 ​成立于2009年，是一家基于互联网技术的生鲜服务提供商。
+            {{article.intro}}
         </view>
         <view class="artical-detail-main medium_font">
-            xx果园 成立于2009年，是一家基于互联网技术的生鲜服务提供商。初心时希望让所有人，轻松愉快的相拥到全球优质的生鲜商品。
-            用认真严苛的态度，对待每一个环节，不断改进，提升用户体验。
-            xx果园 成立于2009年，是一家基于互联网技术的生鲜服务提供商。初心时希望让所有人，轻松愉快的相拥到全球优质的生鲜商品。
-            用认真严苛的态度，对待每一个环节，不断改进，提升用户体验。
+            <import src="../../../common/wxParse.wxml" />
+            <template is="wxParse" data="{{wxParseData:content.nodes}}" />
         </view>
     </view>
 </view>
