@@ -3,7 +3,7 @@
       <view class="topbar-title">
         <!-- <image mode="aspectFit" src="{{config.logo}}"></image> -->
         <image mode="aspectFit" src="/image/mb2-5.png"></image>
-        <text>{{config.website_name}}</text>
+        <text>{{config.logo_title}}</text>
       </view>
       <view class="topbar-img bg_color5" bindtap="showBar">
         <image src="/image/mb2-4.png"/>

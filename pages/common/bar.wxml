@@ -2,7 +2,7 @@
     <view class="mask" bindtap="hideBar" wx:if="{{category_info.isShowBar}}"></view>
     <view class="bar-all  medium_font" wx:if="{{category_info.isShowBar}}">
         <view class="bg_color5" wx:for="{{category_info.category}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchTab">
-            {{item}}
+            {{item.name}}
         </view>
     </view>
 

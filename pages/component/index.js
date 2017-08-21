@@ -36,23 +36,19 @@ Page({
     })
   },
   onShow: function () {
-    this.getProductsFromServer(6, 1),
-      this.setData({
+    var that = this
+    that.getProductsFromServer(6, 1)
+    comm.getprocate({
+      success: function(res){
+        that.setData({
+          "category_info.category": res
+        })
+      }
+    })
+    that.setData({
         imgUrls: config.index_autoplay_img,
-        index_middle_img: config.index_middle_img,
-        index_middle2_img: config.index_middle2_img,
-        config: {
-          'website_name': config.website_name,
-          'logo': config.logo,
-          'hotline_logo': config.hotline_logo,
-          'hotline_no': config.hotline_no,
-          'copyright': config.copyright,
-          'product_title': config.product_title,
-          'index_middle_title': config.index_middle_title,
-          'logourl': config.logourl
-        },
-        index_autoplay_imgurl: config.index_autoplay_imgurl,
-        index_middle_imgurl: config.index_middle_imgurl
+        config: config,
+        index_autoplay_imgurl: config.index_autoplay_imgurl
       })
     
   },

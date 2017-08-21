@@ -100,6 +100,17 @@ function pay(param) {
     }
   })
 }
+function getprocate(obj){
+  app.request({
+    url: this.parseToURL('product','catelist'),
+    data: {},
+    success: function(res){
+      if(res.data.result == 'OK'){
+        typeof obj.success == "function" && obj.success(res.data.data)
+      }
+    }
+  })
+}
 module.exports.parseToURL = parseToURL
 module.exports.get_cuser = get_cuser
 module.exports.get_now = get_now
@@ -107,3 +118,4 @@ module.exports.randomString = randomString
 module.exports.getXMLNodeValue = getXMLNodeValue
 module.exports.createTimeStamp = createTimeStamp
 module.exports.pay = pay
+module.exports.getprocate = getprocate
