@@ -68,7 +68,8 @@ Page({
       },
       product_category: product_category,
       curIndex: '',
-      category_name: category_name
+      category_name: category_name,
+      products: []
     })
     
     //if (this.data.products.length<1){
@@ -231,10 +232,11 @@ Page({
             loading: false
           })
         } else {
+          /*
           that.setData({
             products: [],
             'prompt.hidden':false
-          })
+          })*/
         }
       },
       fail: function () {
