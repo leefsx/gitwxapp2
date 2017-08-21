@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/component/artical/artical",
     "pages/component/index",
     "pages/component/online-message/online-message",
-    "pages/component/artical/artical",
     "pages/component/artical-detail/artical-detail",
     "pages/component/category/category",
     "pages/component/cart/cart",

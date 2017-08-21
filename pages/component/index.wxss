@@ -16,7 +16,7 @@
 .main{text-align: center;}
 swiper {
     width: 100%;
-    height: 500rpx;
+    height: 475rpx;
     margin: 0 auto 20rpx auto;
 }
 swiper-item image {

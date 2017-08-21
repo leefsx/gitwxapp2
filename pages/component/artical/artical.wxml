@@ -5,9 +5,13 @@
 
 <view class="main">
     <template is="nav" data="{{config}}" />
-    <scroll-view scroll-x class="artical-category">
-        <view wx:for="{{articalUl}}" data-id="{{index}}" class="{{activeIndex == index ? 'active':''}} medium_font" bindtap="changActive">{{item}}</view>
-    </scroll-view>
+    <view class="artical-category">
+        <view class="category-arrow" bindtap="arrowMinus"><image src="/image/mb2-10.png"/></view>
+        <scroll-view scroll-x scroll-with-animation bindscroll="scroll" scroll-left="{{scrollLeft}}" bindtouchstart="oTs" bindtouchend="oTe">
+            <view wx:for="{{articalUl}}" data-id="{{index}}" class="{{activeIndex == index ? 'active':''}} medium_font" bindtap="changActive">{{item}}</view>
+        </scroll-view>
+        <view class="category-arrow" bindtap="arrowPlus"><image src="/image/mb2-11.png"/></view>
+    </view>
     <view class="artical-ul">
         <navigator url="../artical-detail/artical-detail?id=" class="artical-li">
             <view class="artical-li-title">

@@ -10,17 +10,23 @@
         <swiper-item>
           <image mode="widthFix" src="{{item}}" data-id="{{index_autoplay_imgurl[index]['category_id']}}" bindtap="tocategory" class="slide-image" />
         </swiper-item>
-      </block>
+      </block> 
+      <!-- <swiper-item>
+          <image mode="widthFix" src="/image/mb2-99.jpg" bindtap="tocategory" class="slide-image" />
+      </swiper-item>
+      <swiper-item>
+          <image mode="widthFix" src="/image/mb2-100.jpg" bindtap="tocategory" class="slide-image" />
+      </swiper-item> -->
     </swiper>
   </view>
   <view class="sub_bar">
     <navigator url="details/details">
       <image src="../../../image/mb2-7.png"/>
     </navigator>
-    <navigator url="details/details">
+    <navigator url="artical-detail/artical-detail">
       <image src="../../../image/mb2-8.png"/>
     </navigator>
-    <navigator url="details/details">
+    <navigator url="artical/artical">
       <image src="../../../image/mb2-9.png"/>
     </navigator>
   </view>
@@ -40,7 +46,7 @@
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{products}}" />
-      <view class="load_more medium_font" bindtap="load_more">加载更多</view>
+      <!-- <view class="load_more medium_font" bindtap="load_more">加载更多</view> -->
     </view>
   </view>
 
@@ -50,7 +56,7 @@
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{products}}" />
-      <view class="load_more medium_font" bindtap="load_more">加载更多</view>
+      <!-- <view class="load_more medium_font" bindtap="load_more">加载更多</view> -->
     </view>
   </view>
 
