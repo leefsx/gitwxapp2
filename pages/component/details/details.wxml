@@ -5,7 +5,7 @@
   <template is="bar" data="{{category_info}}" />
   <view class="food-detail-xq">
     <swiper indicator-dots="true" autoplay="true">
-      <swiper-item wx:for="{{detail_data.feature_img}}">
+      <swiper-item wx:for="{{detail_data.feature_img}}" wx:key="{{item}}">
         <image src="{{item}}" mode="aspectFit" />
       </swiper-item>
     </swiper>
@@ -48,7 +48,7 @@
             <!-- <view class="foot-dec_detail">
               <text>产品参数</text>
               <view class="dec_detail-all">
-                <text wx:for="{{food.dec_detail}}" class="dec_detail">{{index}}:{{item}}</text>
+                <text wx:for="{{food.dec_detail}}" wx:key="{{item}}" class="dec_detail">{{index}}:{{item}}</text>
               </view>
             </view> -->
           </view>
@@ -56,14 +56,14 @@
         <view class="good-rating" wx:if = "{{curIndex==1? true : false}}" bindtouchstart="oTs" bindtouchend="oTe">
           <view class="good-rating-content medium_font">
           <view class="good-rating-list" wx:if="{{tradeRate.length>0}}">
-            <view class="good-rating-detail border_bottom)" wx:for="{{tradeRate}}">
+            <view class="good-rating-detail border_bottom)" wx:for="{{tradeRate}}" wx:key="{{item}}">
               <view>
                 <text class="fl">{{item.usernick}}</text>
                 <text class="fr color2">{{item.created}}</text>
               </view>
               <text style="display:block;">{{item.content}}</text>
             </view>
-            <view class="good-rating-detail border_bottom" wx:for="{{tradeRate}}">
+            <view class="good-rating-detail border_bottom" wx:for="{{tradeRate}}" wx:key="{{item}}">
               <view style="height:25px;">
                 <text class="fl">{{item.usernick}}</text>
                 <text class="fr color2">{{item.created}}</text>
@@ -106,7 +106,7 @@
         <view class="good-rating" wx:if = "{{curIndex==3? true : false}}" bindtouchstart="oTs" bindtouchend="oTe">
           <view class="good-rating-content medium_font">
           <view class="good-rating-list" wx:if="{{productMessage.length>0}}">
-            <view class="good-rating-detail border_bottom" wx:for="{{productMessage}}">
+            <view class="good-rating-detail border_bottom" wx:for="{{productMessage}}" wx:key="{{item}}">
               <view>
                 <text class="fl">{{item.goumairen}}</text>
                 <text class="fr color2">{{item.created}}</text>
@@ -158,12 +158,12 @@
           不可选class为disable -->
           <scroll-view scroll-y style="height: 250px;">
              <view class="detail-cart-property">
-              <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id">
+              <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id" wx:key="{{item}}">
                 
                 <view class="property-list-name">{{item.name}}</view>
                 <view class="property-list-li">
                   
-                  <text wx:for="{{item.details}}" data-pid="{{item.id}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" wx:for-item="detail" bindtap="switchDetState" class="{{detail.detail_state}}">{{detail.detail_name}}</text>
+                  <text wx:for="{{item.details}}" wx:key="{{item}}" data-pid="{{item.id}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" wx:for-item="detail" bindtap="switchDetState" class="{{detail.detail_state}}">{{detail.detail_name}}</text>
                   
                 </view>
               </view>

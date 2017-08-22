@@ -155,6 +155,7 @@ Page({
             list_page: page,
             loading: false
           })
+
         } 
         if (that.data.products.length==0){
           that.setData({

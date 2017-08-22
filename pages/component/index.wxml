@@ -8,45 +8,54 @@
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
-          <image mode="widthFix" src="{{item}}" data-id="{{index_autoplay_imgurl[index]['category_id']}}" bindtap="tocategory" class="slide-image" />
+          <image mode="widthFix" src="{{item}}" data-index="{{index}}" bindtap="tocategory" class="slide-image" />
         </swiper-item>
       </block> 
     </swiper>
   </view>
   <view class="sub_bar">
-    <navigator url="details/details">
-      <image src="{{config.pagenav_img[0]}}"/>
-    </navigator>
-    <navigator url="artical-detail/artical-detail">
-      <image src="{{config.pagenav_img[1]}}"/>
-    </navigator>
-    <navigator url="artical/artical">
-      <image src="{{config.pagenav_img[2]}}"/>
+    <navigator wx:for="{{config.pagenav_img}}" wx:key="{{item}}" data-index="{{index}}" url="">
+      <image src="{{item}}"/>
     </navigator>
   </view>
-
-  <view class="product-display">
-    <view class="product-display-title bg_color" style="background-color:#EEE9E9;">
-      <view class="title small_font"><text>1F</text><text>日常办公</text></view>
+  <view class="product-display" wx:if="{{config.dailyoffice_display=='true'}}">
+    <view class="product-display-title bg_color" style="color:{{config.dailyoffice_color}};background-color:{{config.dailyoffice_bgcolor}};">
+      <view class="title small_font"><text>{{config.dailyoffice_title}}</text></view>
     </view>
     <view class="product-display-ul">
-      <template is="product_list" data="{{products}}" />
+      <template is="product_list" data="{{product1}}" />
     </view>
   </view>
 
-  <view class="product-display">
-    <view class="product-display-title bg_color3">
-        <view class="title small_font"><text>1F</text><text>日常办公</text></view>
+  <view class="product-display" wx:if="{{config.writingtools_display=='true'}}">
+    <view class="product-display-title bg_color3" style="color:{{config.writingtools_color}};background-color:{{config.writingtools_bgcolor}};">
+        <view class="title small_font"><text>{{config.writingtools_title}}</text></view>
     </view>
     <view class="product-display-ul">
-      <template is="product_list" data="{{products}}" />
-      <!-- <view class="load_more medium_font" bindtap="load_more">加载更多</view> -->
+      <template is="product_list" data="{{product2}}" />
     </view>
   </view>
 
-  
+  <view class="product-display" wx:if="{{config.paperin_display=='true'}}">
+    <view class="product-display-title bg_color3" style="color:{{config.paperin_color}};background-color:{{config.paperin_bgcolor}};">
+        <view class="title small_font"><text>{{config.paperin_title}}</text></view>
+    </view>
+    <view class="product-display-ul">
+      <template is="product_list" data="{{product3}}" />
+    </view>
+  </view>
+
+  <view class="product-display" wx:if="{{config.learningsupply_display=='true'}}">
+    <view class="product-display-title bg_color3" style="color:{{config.learningsupply_color}};background-color:{{config.learningsupply_bgcolor}};">
+        <view class="title small_font"><text>{{config.learningsupply_title}}</text></view>
+    </view>
+    <view class="product-display-ul">
+      <template is="product_list" data="{{product4}}" />
+    </view>
+  </view>
+
  </view>
- <navigator url="artical/artical" class="help-port small_font">帮助中心</navigator>
+ <navigator url="artical/artical" class="help-port small_font">{{config.navarticle_title}}</navigator>
  <view class="copyright small_font">
    @{{config.copyright}}
  </view>

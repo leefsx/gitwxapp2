@@ -20,9 +20,28 @@ Page({
     list_page: 1,
     index_middle_img: [],
     index_middle2_img: '',
-    config: []
+    config: [],
+    product1:[]
   },
   onLoad() {
+    var that = this
+    var param = {
+      type: 'all',
+      list_num: 16
+    }
+    that.getFloorProduct({
+      data: param,
+      success: function (res) {
+        if (res) {
+          that.setData({
+            'product1': res.slice(0, 4),
+            'product2': res.slice(4, 8),
+            'product3': res.slice(8, 12),
+            'product4': res.slice(12, 16)
+          })
+        }
+      }
+    })
 
   },
   barSwitchTab(e) {
@@ -36,7 +55,6 @@ Page({
   },
   onShow: function () {
     var that = this
-    that.getProductsFromServer(6, 1)
     comm.getprocate({
       success: function(res){
         that.setData({
@@ -50,6 +68,9 @@ Page({
         index_autoplay_imgurl: config.index_autoplay_imgurl
       })
     bar.getCategory(this)
+    setTimeout(function(){
+      that.getSectionPro()
+    },50)
     
   },
   toCategory(){
@@ -114,18 +135,112 @@ Page({
     })
   },
   tocategory(opt){
-    var cateid = opt.target.dataset.id
-    if (cateid){
-      app.globalData.cateid = cateid
+    var cindex = opt.target.dataset.index
+    var imgdata = config.index_autoplay_imgurl
+    if (imgdata[cindex]['category_id']){
+      app.globalData.cateid = imgdata[cindex]['category_id']
+      app.globalData.catename = 
       wx.switchTab({
         url: 'category/category'
       })
+    } else if (imgdata[cindex]['detail_id']){
+      wx.navigateTo({
+        url: 'details/details?id=' + imgdata[cindex]['detail_id'],
+      })
+
     }
+    
   },
   onShareAppMessage: function () {
     return {
       title: config.website_name,
       path: 'pages/component/index'
+    }
+  },
+  getFloorProduct: function (obj){
+    var that = this
+    var data = obj.data
+    if (data.type == 'all'){
+      var ids = ''
+      var list_num = data.list_num
+    }else{
+      if (data.ids) {
+        var ids = data.ids
+        var ids_arr = ids.split(',')
+        var list_num = ids_arr.length
+      }else{
+        return false
+      }
+    }
+    
+    app.request({
+      url: app.domain + '/api/product/list',
+      data: {
+        ids: ids,
+        list_num: list_num
+      },
+      success: function(res){
+        if (res.data.result == 'OK') {
+          typeof obj.success == "function" && obj.success(res.data.data)
+        }else{
+          typeof obj.success == "function" && obj.success(false)
+        }
+      }
+    })
+  },
+  getSectionPro(){
+    var that = this
+    if (config.dailyoffice_display == 'true' && config.dailyoffice_datasource) {
+      var datasource = { ids: config.dailyoffice_datasource }
+      this.getFloorProduct({
+        data: datasource,
+        success: function (res) {
+          if (res) {
+            that.setData({
+              product1: res
+            })
+          }
+        }
+      })
+    }
+    if (config.writingtools_display == 'true' && config.writingtools_datasource) {
+      var datasource = { ids: config.writingtools_datasource }
+      this.getFloorProduct({
+        data: datasource,
+        success: function (res) {
+          if (res) {
+            that.setData({
+              product2: res
+            })
+          }
+        }
+      })
+    }
+    if (config.paperin_display == 'true' && config.paperin_datasource) {
+      var datasource = { ids: config.paperin_datasource }
+      this.getFloorProduct({
+        data: datasource,
+        success: function (res) {
+          if (res) {
+            that.setData({
+              product3: res
+            })
+          }
+        }
+      })
+    }
+    if (config.learningsupply_display == 'true' && config.learningsupply_datasource) {
+      var datasource = { ids: config.learningsupply_datasource }
+      this.getFloorProduct({
+        data: datasource,
+        success: function (res) {
+          if (res) {
+            that.setData({
+              product4: res
+            })
+          }
+        }
+      })
     }
   }
 
