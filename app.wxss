@@ -80,22 +80,39 @@ page {
   justify-content:space-between;
   align-items: center;
 }
+.topbar-title{
+  display: flex;
+  align-items: center;
+}
 .topbar-title image {
   width: 100rpx;
   height: 80rpx;
   vertical-align: top;
   line-height: 80rpx;
 }
-.topbar text {
+.topbar-title view{
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  text-align: left;
+  margin-left: 15rpx;
+}
+.topbar-title view text:first-child{
+  font-size: 40rpx;
+}
+.topbar-title view text{
+  max-width: 480rpx;
+}
+/* .topbar text {
   display: block;
   margin-left: 10rpx;
-}
-.topbar-title>text{
+} */
+/* .topbar-title>text{
   display: inline-block;
   font-size: 42rpx;
   line-height: 80rpx;
   color: #282828;
-}
+} */
 .topbar-img{
   width: 87rpx;
   height: 86rpx;

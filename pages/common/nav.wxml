@@ -1,8 +1,11 @@
 <template name="nav">
-    <view class="topbar color">
+    <view class="topbar">
       <view class="topbar-title">
         <image mode="aspectFit" src="{{config.logo}}"></image>
-        <text>{{config.logo_title}}</text>
+        <view>
+          <text class="tooLong">{{config.logo_title}}</text>
+          <text wx:if="{{}}" class="color2 small_font tooLong"></text>
+        </view>
       </view>
       <view class="topbar-img bg_color5" bindtap="showBar">
         <image src="/image/mb2-4.png"/>
