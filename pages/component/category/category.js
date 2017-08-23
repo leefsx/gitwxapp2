@@ -61,10 +61,7 @@ Page({
     app.globalData.cateid = 0
     app.globalData.catename = "所有种类"
     this.setData({
-      config: {
-        'website_name': config.website_name,
-        'logo': config.logo, 
-      },
+      config: config,
       product_category: product_category,
       curIndex: '',
       category_name: category_name,

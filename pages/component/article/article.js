@@ -28,22 +28,11 @@ Page({
           let li_width = this.data.li_width
           let that= this
           this.setData({
-            config: {
-              'website_name': config.website_name,
-              'logo': config.logo,
-              'hotline_logo': config.hotline_logo,
-              'hotline_no': config.hotline_no,
-              'copyright': config.copyright,
-              'product_title': config.product_title,
-              'index_middle_title': config.index_middle_title,
-              'logourl': config.logourl
-            },
+            config: config,
           })
           wx.getSystemInfo({
             success: function (res) {
-              console.log(res.windowWidth + 'px')
               li_width = res.windowWidth/750*210
-              console.log(li_width)
               that.setData({
                 li_width:li_width,
                 deviceWidth: res.windowWidth,
@@ -56,10 +45,13 @@ Page({
           this.getArticlesFromServer(10,1)
       },
     onLoad(options) {
-        if (options.activeIndex) {
+      var aid = ''
+      if (options.id) aid = options.id
+      else if (options.activeIndex) aid = options.activeIndex
+        if (aid) {
             var that = this;
             that.setData({
-                activeIndex: options.activeIndex
+                activeIndex: aid
             })
         }
     },
@@ -92,15 +84,12 @@ Page({
                 scrollLeft: 0
             })
         }
-        console.log(this.data.scrollLeft+"d")
     },
     
     arrowPlus(e){
         const li_width = this.data.li_width
         let ul_length = this.data.articalUl.length
         let scrollLeft = this.data.scrollLeft;
-        // let scrollNum = this.data.scrollNum;
-        console.log(ul_length)
         scrollLeft += li_width
         if (scrollLeft >= (li_width * (ul_length-3))){
           this.setData({
@@ -111,7 +100,6 @@ Page({
             scrollLeft: scrollLeft
           })
         }
-        console.log(this.data.scrollLeft + "a")
     },
     oTs: function (e) {
       var m = this;
@@ -185,7 +173,6 @@ Page({
         },
         success: function (res) {
           if (res.data.result == 'OK') {
-            console.log(res.data.category)
             that.setData({
               article: res.data.data,
               articalUl: res.data.category,

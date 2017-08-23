@@ -1,10 +1,10 @@
 <template name="nav">
     <view class="topbar">
       <view class="topbar-title">
-        <image mode="aspectFit" src="{{config.logo}}"></image>
+        <image mode="aspectFit" src="{{config.logo}}" data-index="0" data-type="logourl" bindtap="tocategory"></image>
         <view>
           <text class="tooLong">{{config.logo_title}}</text>
-          <text wx:if="{{}}" class="color2 small_font tooLong"></text>
+          <text wx:if="{{config.logo_subtitle.length > 0}}" class="color2 small_font tooLong">{{config.logo_subtitle}}</text>
         </view>
       </view>
       <view class="topbar-img bg_color5" bindtap="showBar">
