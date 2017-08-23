@@ -26,6 +26,10 @@ Page({
     },
     onShow(){
       var that = this
+      wx.setStorage({
+        key: 'address',
+        data: ''
+      })
       App.request({
         url: comm.parseToURL('user', 'getarea'),
         data: {},

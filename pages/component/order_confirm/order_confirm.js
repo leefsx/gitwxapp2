@@ -448,10 +448,16 @@ Page({
     wx.getStorage({
       key: 'address',
       success: function (res) {
-        self.setData({
-          delivery_addr: true,
-          address: res.data
-        })
+        if (res.data) {
+          self.setData({
+            delivery_addr: true,
+            address: res.data
+          })
+        } else {
+          self.setData({
+            delivery_addr: false
+          })
+        }
       }
     })
   },
