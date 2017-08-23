@@ -37,7 +37,6 @@ Page({
           if (res.data.result == 'OK') {
             var content = res.data.data.content;
             res.data.data.content = ''
-            console.log(content)
             WxParse.wxParse('content', 'html', content, that, 0);
             that.setData({
               article: res.data.data
@@ -50,16 +49,7 @@ Page({
         }
       })
       that.setData({
-        config: {
-          'website_name': config.website_name,
-          'logo': config.logo,
-          'hotline_logo': config.hotline_logo,
-          'hotline_no': config.hotline_no,
-          'copyright': config.copyright,
-          'product_title': config.product_title,
-          'index_middle_title': config.index_middle_title,
-          'logourl': config.logourl
-        },
+        config: config,
       })
 
     }

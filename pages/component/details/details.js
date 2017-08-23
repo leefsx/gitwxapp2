@@ -260,12 +260,7 @@ Page({
       var that = this;
       that.setData({
         carts: app.globalData.carts,
-        config: {
-          'website_name': config.website_name,
-          'logo': config.logo,
-          'hotline_logo': config.hotline_logo,
-          'hotline_no': config.hotline_no
-        }
+        config: config
       })
       app.request({
         url: app.domain + '/api/product/detail',
@@ -353,7 +348,7 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: config.website_name +' '+ this.data.detail_data['name'],
+      title: config.logo_title +' '+ this.data.detail_data['name'],
       path: 'pages/component/details/details?id=' + this.data.product_id
     }
   }

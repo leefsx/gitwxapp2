@@ -34,10 +34,10 @@ Page({
       success: function (res) {
         if (res) {
           that.setData({
-            'product1': res.slice(0, 4),
-            'product2': res.slice(4, 8),
-            'product3': res.slice(8, 12),
-            'product4': res.slice(12, 16)
+            product1: res.slice(0, 3),
+            product2: res.slice(3, 7),
+            product3: res.slice(7, 11),
+            product4: res.slice(11, 15)
           })
         }
       }
@@ -55,13 +55,6 @@ Page({
   },
   onShow: function () {
     var that = this
-    comm.getprocate({
-      success: function(res){
-        that.setData({
-          "category_info.category": res
-        })
-      }
-    })
     that.setData({
         imgUrls: config.index_autoplay_img,
         config: config,
@@ -135,17 +128,37 @@ Page({
     })
   },
   tocategory(opt){
-    var cindex = opt.target.dataset.index
-    var imgdata = config.index_autoplay_imgurl
-    if (imgdata[cindex]['category_id']){
+    var cindex = opt.currentTarget.dataset.index
+    var type = opt.currentTarget.dataset.type
+    var imgdata = []
+    if (type == 'index_autoplay_imgurl') {
+      imgdata = config.index_autoplay_imgurl
+    } else if (type == 'pagenav_imgurl') {
+      imgdata = config.pagenav_imgurl
+    } else if (type == 'logourl') {
+      imgdata[0] = config.logourl
+    } else if (type == 'navarticle_url') {
+      imgdata[0] = config.navarticle_urlurl
+    }
+    if (typeof(imgdata[cindex]['category_id'])!='undefined'){
       app.globalData.cateid = imgdata[cindex]['category_id']
-      app.globalData.catename = 
+      //app.globalData.catename = 
       wx.switchTab({
         url: 'category/category'
       })
-    } else if (imgdata[cindex]['detail_id']){
+    } else if (typeof(imgdata[cindex]['detail_id'])!='undefined'){
       wx.navigateTo({
         url: 'details/details?id=' + imgdata[cindex]['detail_id'],
+      })
+
+    } else if (typeof(imgdata[cindex]['article_cid'])!='undefined') {
+      wx.navigateTo({
+        url: 'article/article?id=' + imgdata[cindex]['article_cid'],
+      })
+
+    } else if (typeof(imgdata[cindex]['article_did'])!='undefined') {
+      wx.navigateTo({
+        url: 'article-detail/article-detail?id=' + imgdata[cindex]['article_did'],
       })
 
     }
@@ -153,7 +166,7 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: config.website_name,
+      title: config.logo_title,
       path: 'pages/component/index'
     }
   },

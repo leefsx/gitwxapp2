@@ -8,15 +8,15 @@
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
-          <image mode="widthFix" src="{{item}}" data-index="{{index}}" bindtap="tocategory" class="slide-image" />
+          <image mode="widthFix" src="{{item}}" data-type="index_autoplay_imgurl" data-index="{{index}}" bindtap="tocategory" class="slide-image" />
         </swiper-item>
       </block> 
     </swiper>
   </view>
   <view class="sub_bar">
-    <navigator wx:for="{{config.pagenav_img}}" wx:key="{{item}}" data-index="{{index}}" url="">
+    <view wx:for="{{config.pagenav_img}}" wx:key="{{item}}" data-index="{{index}}" data-type="pagenav_imgurl" bindtap="tocategory">
       <image src="{{item}}"/>
-    </navigator>
+    </view>
   </view>
   <view class="product-display" wx:if="{{config.dailyoffice_display=='true'}}">
     <view class="product-display-title bg_color" style="color:{{config.dailyoffice_color}};background-color:{{config.dailyoffice_bgcolor}};">
@@ -55,7 +55,7 @@
   </view>
 
  </view>
- <navigator url="artical/artical" class="help-port small_font">{{config.navarticle_title}}</navigator>
+ <view class="help-port small_font" data-index="0" data-type="navarticle_url" bindtap="tocategory">{{config.navarticle_title}}</view>
  <view class="copyright small_font">
    @{{config.copyright}}
  </view>
