@@ -51,7 +51,7 @@ Page({
       success: function(res) {
         that.setData({
             deviceWidth: res.windowWidth, 
-            deviceHeight: res.windowHeight, 
+            deviceHeight: res.screenHeight, 
         })
       }
     })
@@ -72,6 +72,7 @@ Page({
       wx.stopPullDownRefresh()
       bar.getCategory(this)
     //}
+    bar.hideBar(this)
     
   },
   
@@ -171,6 +172,12 @@ Page({
     }
   },
   reachBottom() {
+    if (!this.data.loading) {
+      this.load_more()
+    }
+  },
+  lower(){
+    console.log(110)
     if (!this.data.loading) {
       this.load_more()
     }

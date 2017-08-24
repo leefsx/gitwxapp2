@@ -22,8 +22,7 @@ Page({
         scrollNum:0,
         li_width:0,
         articalUl:[],
-        article: [],
-        intoView:""    
+        article: []   
     },
     onShow: function () {
           let li_width = this.data.li_width
@@ -44,6 +43,7 @@ Page({
         
           bar.getCategory(this)
           this.getArticlesFromServer(10,1)
+          bar.hideBar(this)
       },
     onLoad(options) {
       var aid = ''
@@ -53,10 +53,9 @@ Page({
             var that = this;
             that.setData({
                 activeIndex: aid,
-                intoView:'a'+aid
+                // intoView:'a'+aid
             })
         }
-        console.log(this.data.intoView)
     },
     barSwitchTab(e){
       bar.barSwitchTab(e,this)

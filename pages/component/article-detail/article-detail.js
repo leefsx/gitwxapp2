@@ -32,6 +32,7 @@ Page({
           })
         }
       })
+      bar.hideBar(this)
     },
     barSwitchTab(e){
       bar.barSwitchTab(e,this)

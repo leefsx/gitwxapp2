@@ -1,20 +1,22 @@
 <import src="../../common/nav.wxml" />
-<import src="../../common/productList.wxml" />
+<import src="../../common/productList2.wxml" />
 <import src="../../common/prompt.wxml" />
 <import src="../../common/bar.wxml" />
 
 
 <view class="main">
-  <template is="bar" data="{{category_info}}" />
-  <template is="nav" data="{{config}}" />
+  <scroll-view scroll-y style="height: {{deviceHeight+'px'}};" bindscrolltolower="lower">
+    <template is="bar" data="{{category_info}}" />
+    <template is="nav" data="{{config}}" />
 
-  <view class="product-display">
-    <view class="product-display-title bg_color5">
-        <view class="title"><text>{{category_name}}</text></view>
+    <view class="product-display">
+      <view class="product-display-title bg_color5">
+          <view class="title"><text>{{category_name}}</text></view>
+      </view>
+      <view class="product-display-ul">
+        <template is="product_list2" data="{{products}}" />
+        <template is="prompt" data="{{prompt}}"></template>
+      </view>
     </view>
-    <view class="product-display-ul">
-      <template is="product_list" data="{{products}}" />
-      <template is="prompt" data="{{prompt}}"></template>
-    </view>
-  </view>
+  </scroll-view>
 </view>

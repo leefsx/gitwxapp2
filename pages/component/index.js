@@ -64,6 +64,7 @@ Page({
     setTimeout(function(){
       that.getSectionPro()
     },50)
+    bar.hideBar(this)
     
   },
   toCategory(){
