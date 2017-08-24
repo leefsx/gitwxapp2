@@ -1,5 +1,5 @@
 <import src="../../common/nav.wxml" />
-<import src="../../common/productList.wxml" />
+<import src="../../common/productList2.wxml" />
 <import src="../../common/prompt.wxml" />
 <import src="../../common/bar.wxml" />
 
@@ -14,7 +14,7 @@
           <view class="title"><text>{{category_name}}</text></view>
       </view>
       <view class="product-display-ul">
-        <template is="product_list" data="{{products}}" />
+        <template is="product_list2" data="{{products}}" />
         <template is="prompt" data="{{prompt}}"></template>
       </view>
     </view>
