@@ -18,10 +18,10 @@ page {
 .tc{
   text-align: center;
 }
-.color{ color: #d3241f;}
+.color{ color: #c71f3b;}
 .color2{ color: #898989;}
-.bor_color{border-color: #d3241f }
-.bg_color{background-color: #d3241f;color:#fff;}
+.bor_color{border-color: #c71f3b; }
+.bg_color{background-color: #c71f3b;color:#fff;}
 .bg_color3{background-color:#f1910f;color:#fff;}
 .color5{ color: #41b327;}
 .bor_color5{border-color: #41b327 }

@@ -65,8 +65,8 @@
   border-right: none;
 }
 .goods-tab-nav.on{
-  border-top: 6rpx solid #41b327;
-  color: #41b327;
+  border-top: 6rpx solid #c71f3b;
+  color: #c71f3b;
 }
 .good-content,.good-content swiper,.good-info{
   width: 100%;

@@ -52,7 +52,7 @@ Page({
         console.log(res.windowWidth + 'px')
         that.setData({
             deviceWidth: res.windowWidth, 
-            deviceHeight: res.windowHeight, 
+            deviceHeight: res.screenHeight, 
         })
       }
     })
@@ -175,6 +175,12 @@ Page({
     }
   },
   reachBottom() {
+    console.log(110)
+    if (!this.data.loading) {
+      this.load_more()
+    }
+  },
+  lower(){
     console.log(110)
     if (!this.data.loading) {
       this.load_more()
