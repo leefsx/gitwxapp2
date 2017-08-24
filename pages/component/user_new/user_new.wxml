@@ -29,31 +29,31 @@
         </view>
 
         <view class="orders-state">
-        <navigator url="../order-list/order-list?activeIndex=1">
+        <navigator url="../order-list/order-list?activeIndex=hadpay">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-1.png"></image>
-                    <view class="color">1</view>
+                    <view class="color">{{order_num_state.hadpay_num}}</view>
                 </view>
                 <view class="state-tex">已完成</view>
             </navigator>
-            <navigator url="../order-list/order-list?activeIndex=2">
+            <navigator url="../order-list/order-list?activeIndex=nopay">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-2.png"></image>
-                    <view class="color">1</view>
+                    <view class="color">{{order_num_state.nopay_num}}</view>
                 </view>
                 <view class="state-tex">待付款</view>
             </navigator>
-            <navigator url="../order-list/order-list?activeIndex=3">
+            <navigator url="../order-list/order-list?activeIndex=delivery">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-3.png"></image>
-                    <view class="color">1</view>
+                    <view class="color">{{order_num_state.delivery_num}}</view>
                 </view>
                 <view class="state-tex">待发货</view>
             </navigator>
-            <navigator url="../order-list/order-list?activeIndex=4">
+            <navigator url="../order-list/order-list?activeIndex=getit">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-4.png"></image>
-                    <view class="color">1</view>
+                    <view class="color">{{order_num_state.getit_num}}</view>
                 </view>
                 <view class="state-tex">待收货</view>
             </navigator>

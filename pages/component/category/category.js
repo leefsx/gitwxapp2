@@ -49,7 +49,6 @@ Page({
     var that = this
     wx.getSystemInfo({
       success: function(res) {
-        console.log(res.windowWidth + 'px')
         that.setData({
             deviceWidth: res.windowWidth, 
             deviceHeight: res.windowHeight, 
@@ -134,13 +133,10 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        // console.log(res.data.result)
         if (res.data.result == 'OK') {
           var resdata = res.data.data
-          console.log(resdata)
           if (page > 1 && resdata.length > 0) {
             var this_products = that.data.products
-            console.log(this_products)
             this_products = this_products.concat(resdata)
           }else{
             var this_products = resdata
@@ -175,13 +171,11 @@ Page({
     }
   },
   reachBottom() {
-    console.log(110)
     if (!this.data.loading) {
       this.load_more()
     }
   },
   onReachBottom: function(){
-    console.log(120)
     if (!this.data.loading) {
       this.load_more()
     }

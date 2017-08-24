@@ -56,9 +56,8 @@ Page({
               success: function (res) {
                 if (res.data.result == 'OK') {
                   self.setData({
-                    orders: res.data.data || [],
-                    order_pro_rel: res.data.order_pro_rel,
-                    cartleng: app.globalData.carts.length
+                    cartleng: app.globalData.carts.length,
+                    order_num_state: res.data.order_num_state
                   })
                 }
               }
