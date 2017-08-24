@@ -1,0 +1,71 @@
+<import src="../../common/prompt.wxml"/>
+
+<template is="prompt" data="{{ prompt }}"/>
+
+<view class="main">
+    <view class="my-list">我的订单</view>
+    <view class="my-list-nav medium_font">
+        <view bindtap="changActive" data-id="0" class="{{activeIndex == 0 ? 'active':''}}">全部</view>
+        <view bindtap="changActive" data-id="1" class="{{activeIndex == 1 ? 'active':''}}">已完成</view>
+        <view bindtap="changActive" data-id="2" class="{{activeIndex == 2 ? 'active':''}}">待付款</view>
+        <view bindtap="changActive" data-id="3" class="{{activeIndex == 3 ? 'active':''}}">待发货</view>
+        <view bindtap="changActive" data-id="4" class="{{activeIndex == 4 ? 'active':''}}">待收货</view>
+    </view>
+
+    <view class="orders-box">
+        <view class="orders-list" wx:for="{{orders}}" wx:key="index">
+            <view class="orders-number color2">订单编号：{{item.number}}</view>
+            <navigator url="../order_detail/order_detail" class="orders-detail">
+                <image src="{{item.url}}"></image>
+                <view class="">{{item.name}}</view>
+                <view class="">{{item.count}}</view>
+                <text wx:if="{{item.status==0}}" class="orders-status">待付款</text>
+                <text wx:elif="{{item.status==1}}" class="orders-status">已支付</text>
+                <text wx:else="{{item.status==1}}" class="orders-status">订单取消</text>
+            </navigator>
+            <view class="orders-footer">
+                <text><text wx:if="{{item.status==0||item.status==2}}">应付：</text><text wx:if="{{item.status==1}}">实付：</text><text class="color">￥{{item.money}}</text></text>
+                <view wx:if="{{item.status==0}}"  class="orders-btn" bindtap="payOrders">付款</view>
+                <view wx:if="{{item.status==1||item.status==2}}" class="orders-btn" bindtap="buyAgain">再次购买</view>
+            </view>
+        </view>
+    </view>
+    <!--<view class="orders-box">
+        <view class="orders-list" wx:for="{{orders}}" wx:key="index">
+            <view class="orders-number">订单编号：{{item.oid}}</view>
+            <navigator url="../details/details" class="orders-detail">
+                <image src="{{order_pro_rel[item.id][0].picurl}}"></image>
+                <view class="">{{order_pro_rel[item.id][0].product_name}}</view>
+                <view class="">{{item.count}}</view>
+                <text wx:if="{{item.order_status_no==1}}" class="orders-status">待付款</text>
+                <text wx:elif="{{item.order_status_no==2}}" class="orders-status">已支付</text>
+                <text wx:else="{{item.order_status_no==5}}" class="orders-status">订单取消</text>
+            </navigator>
+            <view class="orders-footer">
+                <text><text wx:if="{{item.order_status_no==1||item.pay_status==1}}">应付：</text><text wx:if="{{item.order_status_no==3}}">实付：</text>￥{{item.total_amount}}</text>
+                <view wx:if="{{item.order_status_no==1}}"  class="orders-btn" data-oid="{{item.oid}}" bindtap="payOrders">付款</view>
+                <navigator url="../details/details?id={{order_pro_rel[item.id][0].product_id}}" wx:if="{{item.order_status_no==2||item.pay_status==2}}" class="orders-btn">再次购买</navigator>
+            </view>
+        </view>
+    </view>-->
+    <!--<view class="scroll-list">
+        <view class="weui-form-preview" wx:if="{{ !!order.paginate.total }}" wx:for="{{ order.items }}" wx:key="" bindtap="navigateTo" data-id="{{ item._id }}">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">订单总价</view>
+                    <view class="weui-form-preview__value_in-hd">¥ {{ item.totalAmount }}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item" wx:for="{{ item.items }}" wx:key="">
+                    <view class="weui-form-preview__label">{{ item.goods.name }}</view>
+                    <view class="weui-form-preview__value">x{{ item.meta.total }} ¥ {{ item.meta.totalAmount }}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">联系商家</navigator>
+                <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">再来一单</navigator>
+            </view>
+        </view>
+    </view>-->
+</view>
