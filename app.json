@@ -36,7 +36,7 @@
         "pagePath": "pages/component/category/category",
         "iconPath": "image/22.png",
         "selectedIconPath": "image/21.png",
-        "text": "分类"
+        "text": "商品"
       },
       {
         "pagePath": "pages/component/cart/cart",

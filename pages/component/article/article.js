@@ -1,6 +1,6 @@
 
 var config = require('../../../common/config.js');
-
+var art_bar = require('../../common/article_bar.js');
 
 
 var comm = require('../../../common/common.js');
@@ -22,7 +22,8 @@ Page({
         scrollNum:0,
         li_width:0,
         articalUl:[],
-        article: []      
+        article: [],
+        intoView:""    
     },
     onShow: function () {
           let li_width = this.data.li_width
@@ -51,9 +52,11 @@ Page({
         if (aid) {
             var that = this;
             that.setData({
-                activeIndex: aid
+                activeIndex: aid,
+                intoView:'a'+aid
             })
         }
+        console.log(this.data.intoView)
     },
     barSwitchTab(e){
       bar.barSwitchTab(e,this)
@@ -73,93 +76,17 @@ Page({
 
     },
     arrowMinus(){
-        const li_width = this.data.li_width
-        let scrollLeft = this.data.scrollLeft
-        if (scrollLeft > li_width){
-            this.setData({
-              scrollLeft: scrollLeft - li_width
-            })
-        } else {
-            this.setData({
-                scrollLeft: 0
-            })
-        }
+        art_bar.arrowMinus(this)
     },
     
-    arrowPlus(e){
-        const li_width = this.data.li_width
-        let ul_length = this.data.articalUl.length
-        let scrollLeft = this.data.scrollLeft;
-        scrollLeft += li_width
-        if (scrollLeft >= (li_width * (ul_length-3))){
-          this.setData({
-            scrollLeft: (li_width * (ul_length - 3))
-          })
-        } else {
-          this.setData({
-            scrollLeft: scrollLeft
-          })
-        }
+    arrowPlus(){
+      art_bar.arrowPlus(this)
     },
     oTs: function (e) {
-      var m = this;
-      m._x = e.touches[0].clientX;
+      art_bar.oTs(e,this)
     },
     oTe: function (e) {
-      const li_width = this.data.li_width
-      let ul_length = this.data.articalUl.length
-      let scrollLeft = this.data.scrollLeft;
-      var m = this;
-      m._new_x = e.changedTouches[0].clientX;
-      if (m._new_x - m._x < (li_width+20) && m._new_x - m._x > 20){
-        scrollLeft -= li_width
-        if (scrollLeft<0){
-          this.setData({
-            scrollLeft: 0
-          })
-        } else{
-          this.setData({
-            scrollLeft: scrollLeft
-          })
-        }
-      } else if (m._new_x - m._x > (li_width+20) ){
-        scrollLeft -= (2 * li_width)
-        if (scrollLeft < 0) {
-          this.setData({
-            scrollLeft: 0
-          })
-        } else {
-          this.setData({
-            scrollLeft: scrollLeft
-          })
-        }
-      } else if (m._new_x - m._x < 20 && m._new_x - m._x > -20){
-        this.setData({
-          scrollLeft : scrollLeft
-        })
-      } else if (m._new_x - m._x < -20 && m._new_x - m._x > -(li_width+20)) {
-        scrollLeft += li_width
-        if (scrollLeft >= (li_width * (ul_length - 3))) {
-          this.setData({
-            scrollLeft: (li_width * (ul_length - 3))
-          })
-        } else {
-          this.setData({
-            scrollLeft: scrollLeft
-          })
-        }
-      } else if (m._new_x - m._x < -(li_width+20)) {
-        scrollLeft += 2 * li_width
-        if (scrollLeft >= (li_width * (ul_length - 3))) {
-          this.setData({
-            scrollLeft: (li_width * (ul_length - 3))
-          })
-        } else {
-          this.setData({
-            scrollLeft: scrollLeft
-          })
-        }
-      }
+      art_bar.oTe(e,this)
     },
     getArticlesFromServer(list_num, page) {
       var that = this

@@ -10,7 +10,7 @@ Page({
     },
     products:[],
     category: [],
-    category_name:"所有种类",
+    category_name:"所有商品",
     website_name: '',
     scrollTop: 0,
     goods: [
@@ -57,9 +57,9 @@ Page({
       }
     })
     var product_category = app.globalData.cateid || 0
-    var category_name = app.globalData.catename || "所有种类"
+    var category_name = app.globalData.catename || "所有商品"
     app.globalData.cateid = 0
-    app.globalData.catename = "所有种类"
+    app.globalData.catename = "所有商品"
     this.setData({
       config: config,
       product_category: product_category,

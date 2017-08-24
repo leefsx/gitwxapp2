@@ -20,7 +20,7 @@
   </view>
   <view class="product-display" wx:if="{{config.dailyoffice_display=='true'}}">
     <view class="product-display-title bg_color" style="color:{{config.dailyoffice_color}};background-color:{{config.dailyoffice_bgcolor}};">
-      <view class="title small_font"><text>{{config.dailyoffice_title}}</text></view>
+      <view class="title"><text>{{config.dailyoffice_title}}</text></view>
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{product1}}" />
@@ -29,7 +29,7 @@
 
   <view class="product-display" wx:if="{{config.writingtools_display=='true'}}">
     <view class="product-display-title bg_color3" style="color:{{config.writingtools_color}};background-color:{{config.writingtools_bgcolor}};">
-        <view class="title small_font"><text>{{config.writingtools_title}}</text></view>
+        <view class="title"><text>{{config.writingtools_title}}</text></view>
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{product2}}" />
@@ -38,7 +38,7 @@
 
   <view class="product-display" wx:if="{{config.paperin_display=='true'}}">
     <view class="product-display-title bg_color3" style="color:{{config.paperin_color}};background-color:{{config.paperin_bgcolor}};">
-        <view class="title small_font"><text>{{config.paperin_title}}</text></view>
+        <view class="title"><text>{{config.paperin_title}}</text></view>
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{product3}}" />
@@ -47,7 +47,7 @@
 
   <view class="product-display" wx:if="{{config.learningsupply_display=='true'}}">
     <view class="product-display-title bg_color3" style="color:{{config.learningsupply_color}};background-color:{{config.learningsupply_bgcolor}};">
-        <view class="title small_font"><text>{{config.learningsupply_title}}</text></view>
+        <view class="title"><text>{{config.learningsupply_title}}</text></view>
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{product4}}" />
