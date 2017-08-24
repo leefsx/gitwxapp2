@@ -9,8 +9,8 @@
   <template is="nav" data="{{config}}" />
 
   <view class="product-display">
-    <view class="product-display-title bg_color">
-        <view class="title small_font"><text>{{category_name}}</text></view>
+    <view class="product-display-title bg_color5">
+        <view class="title"><text>{{category_name}}</text></view>
     </view>
     <view class="product-display-ul">
       <template is="product_list" data="{{products}}" />

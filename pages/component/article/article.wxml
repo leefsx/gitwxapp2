@@ -1,19 +1,14 @@
 <import src="../../common/prompt.wxml"/>
 <import src="../../common/nav.wxml" />
 <import src="../../common/bar.wxml" />
+<import src="../../common/article_bar.wxml" />
 
 
 
 <view class="main">
     <template is="nav" data="{{config}}" />
     <template is="bar" data="{{category_info}}" />
-     <view class="artical-category">
-        <view class="category-arrow" bindtap="arrowMinus"><image src="/image/mb2-10.png"></image></view>
-        <scroll-view scroll-x scroll-with-animation bindscroll="scroll" scroll-left="{{scrollLeft}}" bindtouchstart="oTs" bindtouchend="oTe">
-              <view wx:for="{{articalUl}}" data-id="{{item.id}}" class="{{activeIndex == item.id ? 'active':''}} medium_font" bindtap="changActive">{{item.name}}</view>
-        </scroll-view>
-        <view class="category-arrow" bindtap="arrowPlus"><image src="/image/mb2-11.png"></image></view>
-    </view> 
+    <template is="article_bar" data="{{scrollLeft,activeIndex,articalUl,intoView}}" />
     <view class="artical-ul">
         <navigator wx:for="{{article}}" url="../article-detail/article-detail?id={{item.id}}" class="artical-li">
             <view class="artical-li-title">

@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/component/index",
-    "pages/component/artical/artical",
-    "pages/component/artical-detail/artical-detail",
+    "pages/component/article/article",
+    "pages/component/article-detail/article-detail",
     "pages/component/category/category",
     "pages/component/cart/cart",
     "pages/component/user/user",
@@ -36,7 +36,7 @@
         "pagePath": "pages/component/category/category",
         "iconPath": "image/22.png",
         "selectedIconPath": "image/21.png",
-        "text": "分类"
+        "text": "商品"
       },
       {
         "pagePath": "pages/component/cart/cart",

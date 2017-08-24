@@ -1,4 +1,4 @@
-
+@import '/pages/common/article_bar.wxss';
 .main{
     width: 100%;
     height: 100%;
