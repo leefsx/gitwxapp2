@@ -7,8 +7,6 @@ Page({
         order: {},
         prompt: {
             hidden: !0,
-            title: '您还没有相关的订单',
-            text: '可以去看看有哪些想买的',
         },
         orders: [],
         order_pro_rel: []
@@ -19,10 +17,7 @@ Page({
             that.setData({
                 activeIndex: options.activeIndex
             })
-            var type = 'all'
-            if (options.activeIndex && options.activeIndex != '0'){
-              type = options.activeIndex
-            }
+            var type = options.activeIndex
             app.request({
               url: comm.parseToURL('user', 'order_list'),
               method: 'GET',
@@ -30,6 +25,7 @@ Page({
               success: function (res) {
                 if (res.data.result == 'OK') {
                   that.setData({
+                    "prompt.hidden": !!res.data.data,
                     orders: res.data.data || [],
                     order_pro_rel: res.data.order_pro_rel
                   })
@@ -40,20 +36,11 @@ Page({
     },
     changActive(e){
         var that = this
-        const id = parseInt(e.currentTarget.dataset.id);
+        const id = e.currentTarget.dataset.id;
         that.setData({
             activeIndex: id
         })
-        var type = 'all'
-        if (id == '1'){
-          type = 'hadpay'
-        } else if (id == '2') {
-          type = 'nopay'
-        } else if (id == '3') {
-          type = 'delivery'
-        } else if (id == '4') {
-          type = 'getit'
-        }
+        var type = id
         app.request({
           url: comm.parseToURL('user', 'order_list'),
           method: 'GET',
@@ -61,6 +48,7 @@ Page({
           success: function (res) {
             if (res.data.result == 'OK') {
               that.setData({
+                "prompt.hidden": !!res.data.data,
                 orders: res.data.data || [],
                 order_pro_rel: res.data.order_pro_rel
               })
