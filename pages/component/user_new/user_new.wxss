@@ -141,19 +141,20 @@
     margin:0 auto;
 }
 .state-image image{
-    width: 100rpx;
+    width: 80rpx;
 }
 .state-image view{
-    position: absolute;
-    right: -3rpx;
-    top: 5rpx;
-    width: 35rpx;
-    height: 35rpx;
-    border: 1rpx solid #c71f3b;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 35rpx;
-    background-color: #fff;
+    position:absolute;
+    right:6rpx;
+    top:0rpx;
+    width:25rpx;
+    height:25rpx;
+    border:1rpx solid #c71f3b;
+    border-radius:50%;
+    text-align:center;
+    line-height:25rpx;
+    background-color:#fff;
+    font-size:22rpx;
 }
 .orders-state .state-tex{
     margin-top:-9rpx;
