@@ -43,6 +43,7 @@ Page({
         
           bar.getCategory(this)
           this.getArticlesFromServer(10,1)
+          bar.hideBar(this)
       },
     onLoad(options) {
       var aid = ''

@@ -53,6 +53,7 @@ Page({
   },
   onShow(){
     bar.getCategory(this)
+    bar.hideBar(this)
   },
   barSwitchTab(e){
     bar.barSwitchTab(e,this)

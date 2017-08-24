@@ -73,6 +73,7 @@ Page({
       wx.stopPullDownRefresh()
       bar.getCategory(this)
     //}
+    bar.hideBar(this)
     
   },
   
