@@ -30,7 +30,7 @@
         </view>
       </view>
       <view wx:else class="delivery_addr-no-content" bindtap="addAddr">
-        <text>+</text>
+        <text class="delivery_addr-no-plus">+</text>
         <text class="delivery_addr-no-tex">添加收货人信息</text>
       </view>
     </view>

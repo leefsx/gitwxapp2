@@ -71,7 +71,7 @@
   align-items: center;
   /* line-height: 200rpx; */
 }
-.delivery_addr-no-content text:first-child{
+.delivery_addr-no-content .delivery_addr-no-plus{
   font-size: 120rpx;
   margin-left: 190rpx;
 }
