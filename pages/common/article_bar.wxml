@@ -2,7 +2,7 @@
     <view class="artical-category">
         <view class="category-arrow" bindtap="arrowMinus"><image src="/image/mb2-10.png"></image></view>
         <scroll-view scroll-x scroll-with-animation scroll-left="{{scrollLeft}}" scroll-into-view="{{intoView}}" bindtouchstart="oTs" bindtouchend="oTe">
-              <view wx:for="{{articalUl}}" id="{{'a'+item.id}}" data-id="{{item.id}}"  class="{{activeIndex == item.id ? 'active':''}} medium_font" bindtap="changActive">{{item.name}}</view>
+              <view wx:for="{{articalUl}}" id="{{'a'+item.id}}" data-id="{{item.id}}"  class="{{activeIndex == item.id ? 'active':''}} medium_font" bindtap="changActive" style="background-color:{{config.artcategory_bgcolor}};color:{{config.artcategory_color}};">{{item.name}}</view>
         </scroll-view>
         <view class="category-arrow" bindtap="arrowPlus"><image src="/image/mb2-11.png"></image></view>
     </view>

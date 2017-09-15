@@ -7,7 +7,7 @@
           <text wx:if="{{config.logo_subtitle.length > 0}}" class="color2 small_font tooLong">{{config.logo_subtitle}}</text>
         </view>
       </view>
-      <view class="topbar-img bg_color5" bindtap="showBar">
+      <view class="topbar-img bg_color5" style="background-color:{{config.navbutton_color}};" bindtap="showBar">
         <image src="/image/mb2-4.png"/>
       </view>
     </view>

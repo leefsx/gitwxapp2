@@ -8,7 +8,7 @@
 <view class="main">
     <template is="nav" data="{{config}}" />
     <template is="bar" data="{{category_info}}" />
-    <template is="article_bar" data="{{scrollLeft,activeIndex,articalUl}}" />
+    <template is="article_bar" data="{{scrollLeft,activeIndex,articalUl,config}}" />
     <view class="artical-ul">
         <navigator wx:for="{{article}}" url="../article-detail/article-detail?id={{item.id}}" class="artical-li">
             <view class="artical-li-title">
@@ -18,7 +18,7 @@
                 </view>
                 <text class="color2 small_font">{{item.publish_time}}</text>
             </view>
-            <view class="color2 small_font tooLong">{{item.content}}</view>
+            <view class="color2 small_font tooLong" style="color:{{config.artlist_color}};">{{item.content}}</view>
         </navigator>
         <template is="prompt" data="{{prompt}}"></template>
     </view>

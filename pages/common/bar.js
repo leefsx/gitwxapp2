@@ -1,4 +1,5 @@
 var app = getApp()
+var config = require('../../common/config.js');
 
 function showBar(_this) {
 
@@ -33,7 +34,9 @@ function getCategory(_this){
       success: function (res) {
         if (res.data.result == 'OK') {
           that.setData({
-            "category_info.category": res.data.data
+            "category_info.category": res.data.data,
+            "category_info.navcolumn_color": config.navcolumn_color,
+            "category_info.navfont_color": config.navfont_color
           })
         } else {
           wx.showToast({
