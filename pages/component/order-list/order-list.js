@@ -56,6 +56,23 @@ Page({
           }
         })
     },
+    deleteOrderList(e) {
+      const id = e.currentTarget.dataset.id;
+      let that = this
+      wx.showModal({
+        title: '温馨提示：',
+        content: '是否确认删除该订单',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            // 确认逻辑
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            // 不做任何操作
+          }
+        }
+      }) 
+    },
     payOrders(opt) {
       wx.showToast({
         title: '请求中...',

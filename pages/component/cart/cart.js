@@ -149,20 +149,32 @@ Page({
   deleteList(e) {
     const index = e.currentTarget.dataset.index;
     let foods = this.data.foods;
-    foods.splice(index,1);
-    this.setData({
-      foods: foods
-    });
-    app.globalData.carts = foods
-    if(!foods.length){
-      this.setData({
-        hasList: false,
-        'prompt.hidden': false
-      });
-    }else{
-      this.isSelectAll();
-      this.getTotalPrice();
-    }
+    let that = this
+    wx.showModal({
+      title: '温馨提示：',
+      content: '是否确认删除该商品',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          foods.splice(index, 1);
+          that.setData({
+            foods: foods
+          });
+          app.globalData.carts = foods
+          if (!foods.length) {
+            that.setData({
+              hasList: false,
+              'prompt.hidden': false
+            });
+          } else {
+            that.isSelectAll();
+            that.getTotalPrice();
+          }
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    }) 
   },
 
   /**

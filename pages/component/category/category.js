@@ -262,6 +262,7 @@ Page({
     this.setData({
       currentState: (!this.data.currentState)
     })
+    initCart()
   },
   addCount() {
 
