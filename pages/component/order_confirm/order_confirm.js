@@ -393,7 +393,10 @@ Page({
           var ujfdata = res.data.ujfdata
           var perdata = res.data.perdata
           if (perdata.limit_type == '2') {
-            ujfdata.account_points = total_price * perdata.limit_val / 100 * (perdata.redeem_credits / perdata.redeem_money)
+            var limit_point = total_price * perdata.limit_val / 100 * (perdata.redeem_credits / perdata.redeem_money)
+            if (limit_point < ujfdata.account_points) {
+              ujfdata.account_points = limit_point;
+            }
           } else {
             if (parseInt(ujfdata.account_points) > parseInt(perdata.limit_val)) {
               ujfdata.account_points = perdata.limit_val

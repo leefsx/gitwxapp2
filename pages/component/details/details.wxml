@@ -9,8 +9,8 @@
         <image src="{{item}}" mode="aspectFit" />
       </swiper-item>
     </swiper>
-    <view class="food-content">
-      <text class="food-name">{{detail_data.name}}</text>
+    <view class="food-content" style="background-color:{{config.prdlist_bgcolor}};">
+      <text class="food-name" style="color:{{config.prdlist_color}};">{{detail_data.name}}</text>
       <text class="food-price color small_font">价格：<text>{{detail_data.price}}</text></text>
       <text class="food-old_price color2 small_font">市场价：<text>{{detail_data.mark_price}}</text></text>
     </view>
