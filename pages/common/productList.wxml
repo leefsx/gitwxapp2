@@ -6,6 +6,7 @@
           <text class="product-name color">{{item.title}}</text>
           <text class="product-dec product-mark_price small_font">市场价：{{item.mark_price}}</text>
           <text class="product-price bg_color">￥{{item.price}}</text>
+          <view class="gocart">+</view>
         </navigator>
       </block>
     </view>

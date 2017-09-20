@@ -34,4 +34,7 @@
         <image class="icon" src="../../../image/iconfont-plus-circle.png" />
         <text>新增地址</text>
     </view>
+    <view class="contact-btn">
+      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
+    </view>
 </view>

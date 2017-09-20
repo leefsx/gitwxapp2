@@ -279,13 +279,13 @@
     left: 0;
     z-index: 14;
     bottom: 0;
-    height: 816rpx; 
+    /* height: 816rpx;  */
     animation: action 1s;
     animation-fill-mode: forwards; 
 }
   @keyframes action{
   0%{bottom:-816rpx;}
-  100%{bottom:0rpx;}
+  100%{bottom:100rpx;}
 }
 .detail-cart-box{
   padding: 20rpx 20rpx 40rpx 20rpx;

@@ -22,4 +22,7 @@
         </navigator>
         <template is="prompt" data="{{prompt}}"></template>
     </view>
+    <view class="contact-btn">
+      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
+    </view>
 </view>

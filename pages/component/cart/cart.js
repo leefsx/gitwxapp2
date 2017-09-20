@@ -28,6 +28,7 @@ Page({
     })
   },
   onShow() {
+    // page.refrash(); 
     var openid = wx.getStorageSync('openid');
     this.setData({
       foods: app.globalData.carts,
@@ -265,6 +266,11 @@ Page({
   onPullDownRefresh: function () {
     this.onShow()
     wx.stopPullDownRefresh()
+  },
+  onHide(){
+    wx.hideLoading({
+      title: '请求中',
+      mask: true
+    })
   }
-
 })

@@ -137,11 +137,14 @@ Page({
     var skulist = that.data.skulist
     var attr_data = that.data.attr_data;
     var hadInCart = false
+    
     if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0){
+      console.log('m')
       that.setData({
         currentState: (!that.data.currentState)
       })
     }else{
+      console.log('n')
       wx.showLoading({
         title: '请求中',
         mask: true

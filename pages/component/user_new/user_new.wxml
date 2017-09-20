@@ -64,4 +64,7 @@
             <navigator url="../address-list/address-list">地址管理</navigator>
         </view>
     </view>
+    <view class="contact-btn">
+      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
+    </view>
 </view>

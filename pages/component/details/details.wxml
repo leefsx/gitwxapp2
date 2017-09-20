@@ -156,7 +156,7 @@
           <!-- 可选无class
           选中class为active
           不可选class为disable -->
-          <scroll-view scroll-y style="height: 250px;">
+          <scroll-view scroll-y style="max-height: 250px;">
              <view class="detail-cart-property">
               <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id" wx:key="{{item}}">
                 
@@ -179,5 +179,8 @@
         </view>
       </view>
     </view>
+  </view>
+  <view class="contact-btn">
+    <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
   </view>
 </view>

@@ -6,6 +6,9 @@
           <text class="product-name color">{{item.title}}</text>
           <text class="color">￥{{item.price}}</text>
           <text class="product-dec product-mark_price small_font">市场价：{{item.mark_price}}</text>
+          <view class="directAddCart" data-id="{{item.id}}" catchtap="directAddCart">
+            <image src="/image/shop-cart.png"></image>
+          </view>
         </navigator>
       </block>
     </view>

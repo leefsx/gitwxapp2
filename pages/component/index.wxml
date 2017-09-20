@@ -59,3 +59,6 @@
  <view class="copyright small_font">
    @{{config.copyright}}
  </view>
+ <view class="contact-btn">
+   <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
+ </view>
