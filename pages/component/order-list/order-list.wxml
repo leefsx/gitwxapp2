@@ -15,7 +15,10 @@
     <view class="orders-box">
         <template is="prompt" data="{{ prompt }}"/>
         <view class="orders-list" wx:for="{{orders}}" wx:key="index">
-            <view class="orders-number color2">订单编号：{{item.oid}}</view>
+            <view class="orders-number color2">
+              <text>订单编号：{{item.oid}}</text>
+              <image src="/image/iconfont-cancel.png"></image>
+            </view>
             <navigator url="../order_detail/order_detail?oid={{item.oid}}" class="orders-detail">
                 <image src="{{order_pro_rel[item.id][0].picurl}}"></image>
                 <view class="">{{order_pro_rel[item.id][0].product_name}}</view>
