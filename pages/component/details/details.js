@@ -106,11 +106,15 @@ Page({
     
     let food = this.data.food;
     let num = food.num;
-    const count = food.total_count;
-    if (num >= count) {
-      return false;
-    }
+    let detail_data = this.data.detail_data
+    const count = detail_data.num;
     num = num + 1;
+    if (num > count) {
+      num = count;
+      wx.showToast({
+        title: '数量超出范围~'
+      })
+    }
     food.num = num;
     this.setData({
       food: food
@@ -137,28 +141,83 @@ Page({
     var skulist = that.data.skulist
     var attr_data = that.data.attr_data;
     var hadInCart = false
+    var propertys = this.data.propertys;
     
-    if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0){
+    // if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0){
+    //   console.log('m')
+    //   that.setData({
+    //     currentState: (!that.data.currentState)
+    //   })
+    // }else{
+    //   console.log('n')
+    //   wx.showLoading({
+    //     title: '请求中',
+    //     mask: true
+    //   })
+    //   if (cart_index > 0) {
+    //     for (var i = 0; i < cart_index; i++) {
+
+    //       if (carts[i].cid == detail_data.id) {
+    //         carts[i].sum = detail_data.price;
+    //         carts[i].price = detail_data.price;
+    //         carts[i].num += that.data.food.num;
+    //         carts[i].skuid = detail_data.skuid || 0;
+    //         hadInCart = true
+    //       }
+    //     }
+
+    //   }
+    //   if (hadInCart == false) {
+    //     var send_data = {
+    //       cid: detail_data.id,
+    //       title: detail_data.name,
+    //       image: detail_data.feature_img[0],
+    //       num: that.data.food.num,
+    //       price: detail_data.price,
+    //       sum: detail_data.price,
+    //       selected: true,
+    //       max_kc: detail_data.num,
+    //       skuid: detail_data.skuid || 0
+    //     }
+    //     carts.push(send_data)
+    //   }
+    //   app.globalData.carts = carts
+    //   wx.switchTab({
+    //     url: '../cart/cart',
+    //   })
+    // }
+
+
+    if (skulist && Object.keys(skulist).length > 0 && attr_data.length < propertys.length) {
       console.log('m')
       that.setData({
         currentState: (!that.data.currentState)
       })
-    }else{
+    } else {
       console.log('n')
       wx.showLoading({
         title: '请求中',
         mask: true
       })
       if (cart_index > 0) {
+        // if ()
         for (var i = 0; i < cart_index; i++) {
-
-          if (carts[i].cid == detail_data.id) {
-            carts[i].sum = detail_data.price;
-            carts[i].price = detail_data.price;
+          if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid){
             carts[i].num += that.data.food.num;
-            carts[i].skuid = detail_data.skuid || 0;
             hadInCart = true
+          } else if (!detail_data.skuid && carts[i].cid == detail_data.id) {
+            carts[i].num += that.data.food.num;
+            hadInCart = true
+            // carts[i].skuid = 0;
           }
+          // if (carts[i].cid == detail_data.id && carts[i].sum == detail_data.price && carts[i].price == detail_data.price && carts[i].skuid == detail_data.skuid) {
+          // if (carts[i].cid == detail_data.id) {
+          //   carts[i].sum = detail_data.price;
+          //   carts[i].price = detail_data.price;
+          //   carts[i].num += that.data.food.num;
+          //   carts[i].skuid = detail_data.skuid || 0;
+          //   hadInCart = true
+          // }
         }
 
       }
@@ -276,7 +335,7 @@ Page({
         success: function (res) {
           var detail = res.data.data.description;
           WxParse.wxParse('detail_desc', 'html', detail, that, 0);
-          
+          console.log(res)
           that.setData({
             detail_data: res.data.data,
             product_id: options.id,
@@ -297,7 +356,7 @@ Page({
           wx.hideLoading()
         }
       })
-
+      console.log(that.data.carts)
     } else {
       wx.navigateBack()
     }
