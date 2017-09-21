@@ -124,6 +124,7 @@ Page({
         var skulist = res.data.skulist
         var attr_data = that.data.attr_data;
         var hadInCart = false
+        var propertys = res.data.newsku;
         if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0) {
           console.log('m')
           that.setData({
@@ -135,14 +136,25 @@ Page({
             title: '请求中',
             mask: true
           })
+          // if (cart_index > 0) {
+          //   for (var i = 0; i < cart_index; i++) {
+
+          //     if (carts[i].cid == detail_data.id) {
+          //       carts[i].sum = detail_data.price;
+          //       carts[i].price = detail_data.price;
+          //       carts[i].num += that.data.food.num;
+          //       carts[i].skuid = detail_data.skuid || 0;
+          //       hadInCart = true
+          //     }
+          //   }
+          // }
           if (cart_index > 0) {
             for (var i = 0; i < cart_index; i++) {
-
-              if (carts[i].cid == detail_data.id) {
-                carts[i].sum = detail_data.price;
-                carts[i].price = detail_data.price;
+              if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid) {
                 carts[i].num += that.data.food.num;
-                carts[i].skuid = detail_data.skuid || 0;
+                hadInCart = true
+              } else if (!detail_data.skuid && carts[i].cid == detail_data.id) {
+                carts[i].num += that.data.food.num;
                 hadInCart = true
               }
             }
@@ -168,7 +180,7 @@ Page({
 
           that.initCart()
         }
-        console.log(that.data.skulist)
+        // console.log(that.data.skulist)
       },
       fail: function () {
         console.log('fail');
@@ -186,44 +198,49 @@ Page({
     var skulist = that.data.skulist
     var attr_data = that.data.attr_data;
     var hadInCart = false
-    wx.showLoading({
-      title: '请求中',
-      mask: true
-    })
-    if (cart_index > 0) {
-      for (var i = 0; i < cart_index; i++) {
-        if (carts[i].cid == detail_data.id) {
-          carts[i].sum = detail_data.price;
-          carts[i].price = detail_data.price;
-          carts[i].num += that.data.food.num;
-          carts[i].skuid = detail_data.skuid || 0;
-          hadInCart = true
+    var propertys = that.data.propertys
+    if (attr_data.length < propertys.length) {
+      wx.showToast({
+        title: '请选择商品属性'
+      })
+    } else {
+      wx.showLoading({
+        title: '请求中',
+        mask: true
+      })
+      if (cart_index > 0) {
+        for (var i = 0; i < cart_index; i++) {
+          if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid) {
+            carts[i].num += that.data.food.num;
+            hadInCart = true
+          } else if (!detail_data.skuid && carts[i].cid == detail_data.id) {
+            carts[i].num += that.data.food.num;
+            hadInCart = true
+          }
         }
       }
-    }
-    if (hadInCart == false) {
-      var send_data = {
-        cid: detail_data.id,
-        title: detail_data.name,
-        image: detail_data.feature_img[0],
-        num: that.data.food.num,
-        price: detail_data.price,
-        sum: detail_data.price,
-        selected: true,
-        max_kc: detail_data.num,
-        skuid: detail_data.skuid || 0
+      if (hadInCart == false) {
+        var send_data = {
+          cid: detail_data.id,
+          title: detail_data.name,
+          image: detail_data.feature_img[0],
+          num: that.data.food.num,
+          price: detail_data.price,
+          sum: detail_data.price,
+          selected: true,
+          max_kc: detail_data.num,
+          skuid: detail_data.skuid || 0
+        }
+        carts.push(send_data)
       }
-      carts.push(send_data)
-    }
 
-    app.globalData.carts = carts
-    wx.showToast({
-      title: '添加成功'
-    })
-    // that.setData({
-    //   currentState: (!this.data.currentState)
-    // })
-    that.initCart()
+      app.globalData.carts = carts
+      wx.showToast({
+        title: '添加成功'
+      })
+      that.initCart()
+    }
+    
   },
   switchDetState(e) {
     let propertys = this.data.propertys;
@@ -262,17 +279,21 @@ Page({
     this.setData({
       currentState: (!this.data.currentState)
     })
-    initCart()
+    this.initCart()
   },
   addCount() {
 
     let food = this.data.food;
     let num = food.num;
-    const count = food.total_count;
-    if (num >= count) {
-      return false;
-    }
+    let detail_data = this.data.detail_data
+    const count = detail_data.num;
     num = num + 1;
+    if (num > count) {
+      num = count;
+      wx.showToast({
+        title: '数量超出范围~'
+      })
+    }
     food.num = num;
     this.setData({
       food: food
@@ -307,6 +328,7 @@ Page({
     app.globalData.cateid = 0
     app.globalData.catename = "所有商品"
     this.setData({
+      carts: app.globalData.carts,
       config: config,
       product_category: product_category,
       curIndex: '',
