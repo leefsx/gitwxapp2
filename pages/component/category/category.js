@@ -92,7 +92,7 @@ Page({
         "dec_detail": {
         }
       },
-      attr_data: [],
+      attr_data: []
     }) 
   },
   directAddCart(e) {
@@ -125,7 +125,17 @@ Page({
         var attr_data = that.data.attr_data;
         var hadInCart = false
         var propertys = res.data.newsku;
-        if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0) {
+        // var isFull = true
+        // var currentState = this.data.currentState
+        // for (var i = 0; i < attr_data.length; i++) {
+        //   console.log(1)
+        //   if (attr_data[i] == '' || attr_data[i] == undefined || attr_data.length < propertys.length) {
+        //     isFull = false
+        //     break
+        //   }
+        //   isFull = true
+        // }
+        if (skulist && Object.keys(skulist).length > 0 ) {
           console.log('m')
           that.setData({
             currentState: (!that.data.currentState)
@@ -199,7 +209,22 @@ Page({
     var attr_data = that.data.attr_data;
     var hadInCart = false
     var propertys = that.data.propertys
-    if (attr_data.length < propertys.length) {
+    var isFull = true
+    var food = that.data.food
+    var num = parseInt(food.num)
+    if (attr_data.length == 0) {
+      isFull = false
+    } else {
+      for (var i = 0; i < attr_data.length; i++) {
+        console.log(1)
+        if (attr_data[i] == '' || attr_data[i] == undefined || attr_data.length < propertys.length) {
+          isFull = false
+          break
+        }
+        isFull = true
+      }
+    }
+    if (!isFull) {
       wx.showToast({
         title: '请选择商品属性'
       })
@@ -209,12 +234,16 @@ Page({
         mask: true
       })
       if (cart_index > 0) {
+        // var cartNum = 0
         for (var i = 0; i < cart_index; i++) {
           if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid) {
-            carts[i].num += that.data.food.num;
+            console.log(carts[i].num)
+            var cartNum = parseInt(carts[i].num)
+            carts[i].num = cartNum += num;
             hadInCart = true
           } else if (!detail_data.skuid && carts[i].cid == detail_data.id) {
-            carts[i].num += that.data.food.num;
+            var cartNum = parseInt(carts[i].num)
+            carts[i].num = cartNum += num;
             hadInCart = true
           }
         }
@@ -251,6 +280,7 @@ Page({
     var attr_data = this.data.attr_data;
     var skulist = this.data.skulist
     var detail_data = this.data.detail_data
+    var isFull = true
     if (propertys[id].details[idx].detail_state != "disable" && propertys[id].details[idx].detail_state != "active") {
       propertys[id].details.forEach(function (e) {
         if (e.detail_state == "active") {
@@ -261,7 +291,15 @@ Page({
     }
 
     attr_data[id] = pid + ':' + did
-    if (attr_data.length > 0 && attr_data.length == propertys.length) {
+    for (var i = 0; i < attr_data.length; i++) {
+      console.log(1)
+      if (attr_data[i] == '' || attr_data[i] == undefined) {
+        isFull = false
+        break
+      }
+      isFull = true
+    }
+    if (attr_data.length > 0 && attr_data.length == propertys.length && isFull) {
       var attr_str = attr_data.join(';')
       var skuid = skulist[attr_str]
 
@@ -286,10 +324,11 @@ Page({
     let food = this.data.food;
     let num = food.num;
     let detail_data = this.data.detail_data
-    const count = detail_data.num;
+    const count = parseInt(detail_data.num);
+    console.log(count)
     num = num + 1;
     if (num > count) {
-      num = count;
+      num = parseInt(count);
       wx.showToast({
         title: '数量超出范围~'
       })

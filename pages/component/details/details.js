@@ -73,6 +73,7 @@ Page({
     var attr_data = this.data.attr_data;
     var skulist = this.data.skulist
     var detail_data = this.data.detail_data
+    var isFull = true
     if (propertys[id].details[idx].detail_state != "disable" && propertys[id].details[idx].detail_state != "active") {
       propertys[id].details.forEach(function (e) {
         if (e.detail_state == "active") {
@@ -81,15 +82,33 @@ Page({
       })
       propertys[id].details[idx].detail_state = "active"
     }
-    
-    attr_data[id] = pid+':'+did
-    if (attr_data.length > 0 && attr_data.length == propertys.length){
+    attr_data[id] = pid + ':' + did
+    console.log(attr_data)
+    for (var i = 0; i < attr_data.length ;i++ ){
+      console.log(1)
+      if (attr_data[i] == '' || attr_data[i] == undefined){
+         isFull = false
+         break
+      }
+      isFull = true
+    }
+    console.log(2)
+    console.log(isFull)
+
+
+    if (attr_data.length > 0 && attr_data.length == propertys.length && isFull){
       var attr_str = attr_data.join(';')
       var skuid = skulist[attr_str]
       
-      detail_data.price = skuid.price
-      detail_data.num = skuid.quantity
-      detail_data.skuid = skuid.id
+      // if (skuid) {
+        // console.log(detail_data.price)
+        console.log(attr_str)
+        detail_data.price = skuid.price
+        detail_data.num = skuid.quantity
+        detail_data.skuid = skuid.id
+        // console.log(detail_data.price)
+      // }
+      
     }
     this.setData({
       propertys: propertys,
@@ -142,6 +161,10 @@ Page({
     var attr_data = that.data.attr_data;
     var hadInCart = false
     var propertys = this.data.propertys;
+    var isFull = true
+    var currentState = this.data.currentState
+    var food = that.data.food
+    var num = parseInt(food.num)
     
     // if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0){
     //   console.log('m')
@@ -186,13 +209,37 @@ Page({
     //     url: '../cart/cart',
     //   })
     // }
+    console.log(attr_data)
+    if(attr_data.length == 0){
+      isFull = false
+    } else {
+      for (var i = 0; i < attr_data.length; i++) {
+        console.log(1)
+        if (attr_data[i] == '' || attr_data[i] == undefined || attr_data.length < propertys.length) {
+          isFull = false
+          break
+        }
+        isFull = true
+      }
+    }
+    // if (skulist && Object.keys(skulist).length > 0 && attr_data.length < propertys.length ) {
+    if (skulist && Object.keys(skulist).length > 0 && !isFull ) {
+    // if (skulist && Object.keys(skulist).length > 0 && !isFull ) {
+      // if (attr_data.length == 0 ){
+        if (currentState) {
+          wx.showToast({
+            title: '请选择商品属性'
+          })
+        } else {
+          that.setData({
+            currentState: (!that.data.currentState)
+          })
+        }
+      // } else {
 
-
-    if (skulist && Object.keys(skulist).length > 0 && attr_data.length < propertys.length) {
-      console.log('m')
-      that.setData({
-        currentState: (!that.data.currentState)
-      })
+      // }
+     
+      
     } else {
       console.log('n')
       wx.showLoading({
@@ -202,13 +249,15 @@ Page({
       if (cart_index > 0) {
         // if ()
         for (var i = 0; i < cart_index; i++) {
-          if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid){
-            carts[i].num += that.data.food.num;
+          if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid) {
+            console.log(carts[i].num)
+            var cartNum = parseInt(carts[i].num)
+            carts[i].num = cartNum += num;
             hadInCart = true
           } else if (!detail_data.skuid && carts[i].cid == detail_data.id) {
-            carts[i].num += that.data.food.num;
+            var cartNum = parseInt(carts[i].num)
+            carts[i].num = cartNum += num;
             hadInCart = true
-            // carts[i].skuid = 0;
           }
           // if (carts[i].cid == detail_data.id && carts[i].sum == detail_data.price && carts[i].price == detail_data.price && carts[i].skuid == detail_data.skuid) {
           // if (carts[i].cid == detail_data.id) {
