@@ -51,3 +51,14 @@
   -webkit-tap-highlight-color:transparent;
   overflow:hidden;
 }
+.backHome{
+  text-align: center;
+}
+.backHome image{
+  width:34rpx;
+  height:34rpx;
+  vertical-align:middle;
+}
+.backHome text{
+  color:#bfbfbf;
+}
