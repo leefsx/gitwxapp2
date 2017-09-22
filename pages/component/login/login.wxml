@@ -13,6 +13,10 @@
       <navigator data-c_e_id="wx_navigator44bab4ab" url = "" bindtap="auto_registered">
           <text data-c_e_id="wx_text403f7ded">微信帐号自动注册</text>
       </navigator>
+      <view class="backHome" bindtap="backHome">
+        <image src="/image/backHome.png"></image>
+        <text>返回首页</text>
+      </view>
     </view>
   </view>
   <view class="contact-btn">

@@ -26,6 +26,11 @@ Page({
       userPassword: e.detail.value
     })
   },
+  backHome(){
+    wx.switchTab({
+      url:'/pages/component/index'
+    })
+  },
   logIn: function () {
     var that = this
     var openid = wx.getStorageSync('openid');
