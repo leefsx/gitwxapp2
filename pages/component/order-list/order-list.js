@@ -58,14 +58,31 @@ Page({
     },
     deleteOrderList(e) {
       const id = e.currentTarget.dataset.id;
+      const index = e.currentTarget.dataset.index;
       let that = this
       wx.showModal({
         title: '温馨提示：',
         content: '是否确认删除该订单',
         success: function (res) {
           if (res.confirm) {
-            console.log('用户点击确定')
-            // 确认逻辑
+            app.request({
+              url: comm.parseToURL('order', 'remove'),
+              method: 'GET',
+              data: { oid: id },
+              success: function (res) {
+                if (res.data.result == 'OK') {
+                  var orders = that.data.orders
+                  orders.splice(index,1)
+                  that.setData({
+                    orders: orders
+                  })
+                }else{
+                  wx.showToast({
+                    title: '删除失败'
+                  })
+                }
+              }
+            })
           } else if (res.cancel) {
             console.log('用户点击取消')
             // 不做任何操作

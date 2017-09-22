@@ -17,7 +17,7 @@
         <view class="orders-list" wx:for="{{orders}}" wx:key="index">
             <view class="orders-number color2">
               <text>订单编号：{{item.oid}}</text>
-              <image src="/image/iconfont-cancel.png" data-id="{{item.oid}}" bindtap='deleteOrderList'></image>
+              <image src="/image/iconfont-cancel.png" data-id="{{item.oid}}" data-index="{{index}}" bindtap='deleteOrderList'></image>
             </view>
             <navigator url="../order_detail/order_detail?oid={{item.oid}}" class="orders-detail">
                 <image src="{{order_pro_rel[item.id][0].picurl}}"></image>
