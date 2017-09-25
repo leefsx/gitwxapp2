@@ -1,0 +1,15 @@
+<view class="main">
+  <view class="ratings-top confirm-box medium_font border_bottom2">
+    <image src="/image/mb2-2.png"></image>
+    <view>
+      <image src="{{item}}" wx:for="{{wjxNum}}" data-index="{{index}}" bindtap="selectStar"></image>
+    </view>
+  </view>
+
+  <view class="ratings-bottom confirm-box medium_font border_bottom2">
+    <textarea auto-height placeholder="宝贝满足你的期待吗？说说他的优点和美中不足的地方吧。" />
+  </view>
+  <view class="ratings-btn">
+    <button class="bg_color">提交</button>
+  </view>
+</view>

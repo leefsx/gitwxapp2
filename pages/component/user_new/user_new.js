@@ -54,6 +54,8 @@ Page({
               method: 'GET',
               data: [],
               success: function (res) {
+                console.log(res.data)
+                console.log(res.data.order_num_state)
                 if (res.data.result == 'OK') {
                   self.setData({
                     cartleng: app.globalData.carts.length,

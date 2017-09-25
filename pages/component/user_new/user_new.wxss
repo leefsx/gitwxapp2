@@ -110,6 +110,7 @@
     border-bottom: 1rpx solid #e9e9e9;
     /*text-align: center;*/
     padding-left: 40rpx;
+    padding-right: 58rpx;
 }
 .orders::after{
     position: absolute;
@@ -122,6 +123,10 @@
     border-right: 4rpx solid #7f7f7f;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+.orders navigator{
+  display: flex;
+  justify-content: space-between;
 }
 .orders-state{
     height: 150rpx;

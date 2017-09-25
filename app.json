@@ -13,6 +13,8 @@
     "pages/component/order-list/order-list",
     "pages/component/order_confirm/order_confirm",
     "pages/component/details/details",
+    "pages/component/view-logistics/view-logistics",
+    "pages/component/ratings/ratings",
     "pages/component/login/login"
   ],
   "window": {

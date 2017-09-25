@@ -1,12 +1,21 @@
 <view class="main">
   <view class="order-status-content bg_color">
-    <text wx:if="{{order.pay_status==1}}">待付款</text>
+    <!-- <text wx:if="{{order.pay_status==1}}">待付款</text>
     <text wx:elif="{{order.order_status==5}}">已取消</text>
     <text wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">已支付</text>
     <text wx:elif="{{order.pay_status==2 && order.delivery_status==2}}">已发货</text>
     <text wx:elif="{{order.pay_status==3}}">已退款</text>
     <text wx:elif="{{order.delivery_status==3}}">已退货</text>
-    <text wx:elif="{{order.order_status==3}}">已完成</text>
+    <text wx:elif="{{order.order_status==3}}">已完成</text> -->
+    <text wx:if="{{order.pay_status==1}}">待付款</text>
+    <text wx:elif="{{order.pay_status==5}}">已取消</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">待发货</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status!=3}}">待收货</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status==3}}">待评价</text>
+    <text wx:elif="">已完成</text>
+
+    <text wx:elif="{{order.pay_status==3}}">已退款</text>
+    <text wx:elif="{{order.delivery_status==3}}">已退货</text> 
   </view>
   <view class="delivery-box confirm-box medium_font border_bottom2">
     <view class="delivery-top border_bottom">
@@ -32,9 +41,30 @@
         <view class="">￥{{item.price}} x <text class="color2" style="font-size:26rpx;">{{item.amount}}</text></view>
     </navigator>
     <view class="orders-footer">
-        <text><text wx:if="{{order.pay_status==2}}">应付：</text><text wx:if="{{order.status==1}}">实付：</text><text class="color">￥{{order.total_amount}}</text></text>
-        <view wx:if="{{order.pay_status==1}}"  class="orders-btn bg_color" data-oid="{{order.oid}}" bindtap="payOrders">付款</view>
-        <navigator url="../details/details?id={{product[0].product_id}}" wx:if="{{order.order_status==3||order.pay_status==2}}" class="orders-btn bg_color">再次购买</navigator>
+        <view style="text-align:right;"><text>金额：</text><text class="color">￥{{order.total_amount}}</text></view>
+        <view  class="color2" style="text-align:right;">(<text>含运费：</text><text>￥10</text>)</view>
+        
+        <view class="orders-btns" wx:if="{{order.pay_status==1}}">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="cancelOrders">取消订单</view>
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="payOrders">付款</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="remind">提醒发货</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.pay_status==5}}">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="deleteOrderList">删除订单</view>
+        </view>
+        
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status!=3}}">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="confirmOrders">确认收货</view>
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="viewLogistics">查看物流</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status==3}}">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="rating">评价</view>
+        </view>
+        <view class="orders-btns" wx:elif="">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="buyAgain">再次购买</view>
+        </view>
     </view>
   </view>
 

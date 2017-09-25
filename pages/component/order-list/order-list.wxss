@@ -95,16 +95,22 @@
     color: #c71f3b;
 }
 .orders-footer{
-    height: 60rpx;
-    line-height: 60rpx;
+    /* height: 60rpx;
+    line-height: 60rpx; */
     color: #2f2f2f;
     padding:15rpx 0 15rpx 0;
 }
+.orders-btns{
+  text-align: right;
+  margin-top: 20rpx;
+}
 .orders-footer .orders-btn{
-    float: right;
-    width: 170rpx;
-    height: 60rpx;
-    line-height:60rpx;
+    /* float: right; */
+    display: inline-block;
+    margin-left: 10rpx;
+    width: 200rpx;
+    height: 80rpx;
+    line-height:80rpx;
     border-radius: 6rpx;
     background: #c71f3b;
     color: #fff;

@@ -24,6 +24,7 @@ Page({
               data: { type: type },
               success: function (res) {
                 if (res.data.result == 'OK') {
+                  console.log(res.data)
                   that.setData({
                     "prompt.hidden": !!res.data.data,
                     orders: res.data.data || [],
@@ -33,6 +34,91 @@ Page({
               }
             })
         }
+    },
+    // 取消订单
+    cancelOrders(e){
+      const oid = e.currentTarget.dataset.oid;
+      let that = this
+      wx.showModal({
+        title: '温馨提示：',
+        content: '是否确认取消该订单',
+        success: function (res) {
+          if (res.confirm) {
+            // 确认操作
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            // 不做任何操作
+          }
+        }
+      })
+    },
+    // 确认订单
+    confirmOrders(e){
+      const oid = e.currentTarget.dataset.oid;
+      let that = this
+      wx.showModal({
+        title: '温馨提示：',
+        content: '是否确认收货',
+        success: function (res) {
+          if (res.confirm) {
+            // 确认操作
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            // 不做任何操作
+          }
+        }
+      })
+    },
+    // 提醒卖家发货
+    remind(e){
+      const oid = e.currentTarget.dataset.oid;
+      let that = this 
+      // 提醒发货操作
+      wx.showToast({
+        title: '已提醒卖家及时发货'
+      })
+    },
+    buyAgain(e) {
+      var oid = oid = e.currentTarget.dataset.oid;
+      if (oid) {
+        wx.navigateTo({
+          url: '../details/details?oid=' + oid,
+        })
+      } else {
+        wx.showToast({
+          title: '请求失败',
+          icon: 'loading',
+          duration: 5000
+        })
+      }
+    },
+    viewLogistics(e){
+      var oid = oid = e.currentTarget.dataset.oid;
+      if (oid) {
+        wx.navigateTo({
+          url: '../view-logistics/view-logistics?oid=' + oid,
+        })
+      } else {
+        wx.showToast({
+          title: '请求失败',
+          icon: 'loading',
+          duration: 5000
+        })
+      }
+    },
+    rating(e) {
+      var oid = oid = e.currentTarget.dataset.oid;
+      if (oid) {
+        wx.navigateTo({
+          url: '../ratings/ratings?oid=' + oid,
+        })
+      } else {
+        wx.showToast({
+          title: '请求失败',
+          icon: 'loading',
+          duration: 5000
+        })
+      }
     },
     changActive(e){
         var that = this
@@ -56,6 +142,7 @@ Page({
           }
         })
     },
+    
     deleteOrderList(e) {
       const id = e.currentTarget.dataset.id;
       const index = e.currentTarget.dataset.index;
@@ -108,6 +195,6 @@ Page({
           duration: 5000
         })
       }
-
     }
+    
 })

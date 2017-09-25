@@ -25,17 +25,20 @@
     
     <view class="orders-box">
         <view class="orders">
-            <navigator url="../order-list/order-list?activeIndex=all">我的订单</navigator>
+            <navigator url="../order-list/order-list?activeIndex=all">
+              <text>我的订单</text>
+              <text class="small_font">查看全部</text>
+            </navigator>
         </view>
 
         <view class="orders-state">
-        <navigator url="../order-list/order-list?activeIndex=hadpay">
+            <!-- <navigator url="../order-list/order-list?activeIndex=hadpay">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-1.png"></image>
                     <view class="color">{{order_num_state.hadpay_num}}</view>
                 </view>
                 <view class="state-tex">已完成</view>
-            </navigator>
+            </navigator> -->
             <navigator url="../order-list/order-list?activeIndex=nopay">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-2.png"></image>
@@ -56,6 +59,13 @@
                     <view class="color">{{order_num_state.getit_num}}</view>
                 </view>
                 <view class="state-tex">待收货</view>
+            </navigator>
+            <navigator url="../order-list/order-list?activeIndex=rating">
+                <view class="state-image">
+                    <image mode="widthFix" src="../../../image/state-5.png"></image>
+                    <view class="color">{{order_num_state.getit_num}}</view>
+                </view>
+                <view class="state-tex">待评价</view>
             </navigator>
         </view>
     </view>

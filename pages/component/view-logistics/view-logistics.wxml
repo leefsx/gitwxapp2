@@ -1,0 +1,15 @@
+<view class="main">
+  <view class="logistics-top confirm-box medium_font border_bottom2">
+    <image src="/image/mb2-2.png"></image>
+    <view>
+      <view class="normal_font"><text>物流状态：</text><text>已签收</text></view>
+      <view><text>承运来源：</text><text>圆通快递</text></view>
+      <view><text>运单编号：</text><text>xxxxxxx</text></view>
+      <view><text>官方电话：</text><text>15888888888</text></view>
+    </view>
+  </view>
+
+  <view class="logistics-bottom">
+    <view class="logistics-item" wx:for="{{info}}">{{item}}</view>
+  </view>
+</view>
