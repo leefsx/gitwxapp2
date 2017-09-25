@@ -363,6 +363,7 @@ Page({
       }
     })
     var product_category = app.globalData.cateid || 0
+    if (product_category == -1) product_category = 0
     var category_name = app.globalData.catename || "所有商品"
     app.globalData.cateid = 0
     app.globalData.catename = "所有商品"

@@ -38,6 +38,7 @@ Page({
     // 取消订单
     cancelOrders(e){
       const oid = e.currentTarget.dataset.oid;
+      const index = e.currentTarget.dataset.index;
       let that = this
       wx.showModal({
         title: '温馨提示：',
@@ -45,6 +46,20 @@ Page({
         success: function (res) {
           if (res.confirm) {
             // 确认操作
+            app.request({
+              url: comm.parseToURL('order', 'remove'),
+              method: 'GET',
+              data: { oid: oid, otype: 'cancel' },
+              success: function (res) {
+                if (res.data.result == 'OK') {
+                  this.onLoad()
+                } else {
+                  wx.showToast({
+                    title: '取消失败'
+                  })
+                }
+              }
+            })
           } else if (res.cancel) {
             console.log('用户点击取消')
             // 不做任何操作
@@ -74,8 +89,21 @@ Page({
       const oid = e.currentTarget.dataset.oid;
       let that = this 
       // 提醒发货操作
-      wx.showToast({
-        title: '已提醒卖家及时发货'
+      app.request({
+        url: comm.parseToURL('order', 'order_notice'),
+        method: 'GET',
+        data: { oid: oid },
+        success: function (res) {
+          if (res.data.result == 'OK') {
+            wx.showToast({
+              title: '已提醒卖家及时发货'
+            })
+          } else {
+            wx.showToast({
+              title: '请求失败'
+            })
+          }
+        }
       })
     },
     buyAgain(e) {
@@ -144,7 +172,7 @@ Page({
     },
     
     deleteOrderList(e) {
-      const id = e.currentTarget.dataset.id;
+      const oid = e.currentTarget.dataset.oid;
       const index = e.currentTarget.dataset.index;
       let that = this
       wx.showModal({
@@ -155,7 +183,7 @@ Page({
             app.request({
               url: comm.parseToURL('order', 'remove'),
               method: 'GET',
-              data: { oid: id },
+              data: { oid: oid, otype:'remove' },
               success: function (res) {
                 if (res.data.result == 'OK') {
                   var orders = that.data.orders
