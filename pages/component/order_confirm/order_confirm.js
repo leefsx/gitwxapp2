@@ -32,7 +32,7 @@ Page({
       }
     ],
     pay_way_id:1,
-    delivery_mode:["快递物流"],
+    delivery_mode:[],
     delivery_time:["9:00-12:00","12:00-18:00","18:00-22:00"],
     coupon_mode:[{"name":"未使用"}],
     integral_mode:[0],
@@ -71,12 +71,14 @@ Page({
     yhjid: 0,
     yhjprice: 0,
     MessageSwitch: '',
-    TextModification: ''
+    TextModification: '',
+    dis_key: false
   },
   lastPay(){
     var openid = wx.getStorageSync('openid');
     var delivery_addr = this.data.delivery_addr
     var MessageSwitch = this.data.MessageSwitch
+    var dis_key = this.data.dis_key
     if (MessageSwitch=='1'){
       var message = this.data.message
       var TextModification = this.data.TextModification
@@ -87,12 +89,18 @@ Page({
         return false
       }
     }
-    if (!delivery_addr){
+    if (!dis_key){
+      wx.showToast({
+        title: '请先选择配送方式'
+      })
+      return false
+    } else if (dis_key > 1 && !delivery_addr) {
       wx.showToast({
         title: '请先添加收货人信息'
       })
       return false
-    }else{
+    }
+    
       var oid = this.data.oid 
       //var body = config.website_name;
       var total_fee = this.data.total_price;
@@ -115,7 +123,9 @@ Page({
         jfnum: this.data.integral,
         jfprice: this.data.integral_money,
         yhjid: this.data.yhjid,
-        yhjprice: this.data.yhjprice
+        yhjprice: this.data.yhjprice,
+        dis_key: this.data.dis_key,
+        ifee: this.data.ifee
       }
       app.request({
         url: comm.parseToURL('order', 'dopayment'),
@@ -168,13 +178,32 @@ Page({
         })
       }
       
-      
-    }
     
   },
   bindPickerChange(e){
+    var index_mode = e.detail.value
+    var weight = parseFloat(this.data.weight)
+    var disresult = this.data.disresult
+    var curr_dis = disresult[index_mode]
+    var ifee = this.data.ifee || 0
+    var total_price = parseFloat(this.data.total_price) - ifee
+    
+    if (index_mode > 1){
+      if (weight < curr_dis.fweight){
+        ifee = parseFloat(curr_dis.f_fee)
+      }else{
+        ifee = parseFloat(curr_dis.f_fee) + ((weight - parseFloat(curr_dis.f_weight)) / parseFloat(curr_dis.r_weight)) * parseFloat(curr_dis.r_fee)
+      }
+      total_price += ifee
+    }else{
+      ifee = 0
+    }
     this.setData({
-      index_mode: e.detail.value
+      index_mode: index_mode,
+      total_price: total_price.toFixed(2),
+      dis_key: curr_dis.key,
+      delivery_title: curr_dis.title,
+      ifee: ifee.toFixed(2)
     })
   },
   bindDateChange(e) {
@@ -302,7 +331,7 @@ Page({
         duration: 2500
       })
     }
-    
+  
   },
   bindBalanceChange(e) {
     var total_price = this.data.total_price
@@ -374,15 +403,16 @@ Page({
   showOrderInterface() {
     var that = this 
     var total_amount = that.data.total_price
+    var oid = that.data.oid
     app.request({
       url: comm.parseToURL('order', 'showOrderInterface'),
-      data: { total_amount: total_amount },
+      data: { total_amount: total_amount, oid: oid },
       method: 'GET',
       success: function (res) {
         if (res.data.result == 'OK') {
           var usercinfo = res.data.usercinfo
           var total_price = that.data.total_price;
-          
+          var delivery_mode = that.data.delivery_mode
           var couponnum = 0
           var coupon_mode = that.data.coupon_mode
           for (var i = 0; i < usercinfo.length; i++) {
@@ -414,6 +444,12 @@ Page({
           if(res.data.delivery.length == 0){
             delivery_addr = false
           }
+          var disresult = res.data.disresult
+          if (disresult){
+            for (var i = 0; i < disresult.length; i++ ){
+              delivery_mode.push(disresult[i].title)
+            }
+          }
           that.setData({
             coupon: couponnum,
             ujfdata: ujfdata,
@@ -425,7 +461,10 @@ Page({
             MessageSwitch: res.data.MessageSwitch,
             TextModification: res.data.TextModification,
             address: res.data.delivery,
-            delivery_addr: delivery_addr
+            delivery_addr: delivery_addr,
+            delivery_mode: delivery_mode,
+            disresult: disresult,
+            weight: res.data.weight
           })
         }
       }

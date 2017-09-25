@@ -17,16 +17,22 @@
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{delivery_mode}}">
       <view class="delivery-top border_bottom">
         <text class="fl">配送方式</text>
-        <view class="picker fr"><text>{{delivery_mode[index]}}</text><text wx:if="{{index==2}}" class="color">+￥{{delivery_money}}</text></view>
+        <view class="picker fr"><text>{{delivery_mode[index]}}</text><text wx:if="{{delivery_title}}" class="color">{{delivery_title}}+￥{{ifee||0}}</text></view>
       </view>
     </picker>
-    <view class="delivery-middle border_bottom">
+    <view class="delivery-middle border_bottom" wx:if="{{index_mode>0||!dis_key}}">
       <view wx:if="{{delivery_addr}}" bindtap="addAddr" class="delivery_addr-no-content">
         <view class="delivery_addr-no-list">
             <image src="../../../image/local.jpg" style="width:50px; heigh:50px;"></image>
+            <view wx:if="{{index_mode==1}}">
+            <view class="addr_detail small_font">自提地址：{{address_other}}</view>
+            </view>
+            <view wx:elseif="{{dis_key}}">
             <view class="addr_name normal_font">收货人：<text class="color">{{address.reciever_name}}</text></view>
             <view class="addr_phone medium_font">电话：{{address.phone}}</view>
             <view class="addr_detail small_font">地址：{{address.detail}}</view>
+            </view>
+            
         </view>
       </view>
       <view wx:else class="delivery_addr-no-content" bindtap="addAddr">
