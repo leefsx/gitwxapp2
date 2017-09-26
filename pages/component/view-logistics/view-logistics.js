@@ -10,7 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info: 10
+    info: 10,
+    status:'',
+    logisticname: '',
+    logisticno: ''
+
   },
   onLoad: function (options) {
     var oid = options.oid
@@ -19,14 +23,20 @@ Page({
     var that = this
     if(oid){
       app.request({
-        url: comm.parseToURL(),
+        url: comm.parseToURL('order', 'logisticsState'),
         data: {oid: oid},
         success: function(res){
-          if(res.data.result=='OK'){
-            
+          if (res.data.result == 'OK') {
+            that.setData({
+              info: res.data.content,
+              status: res.data.status,
+              logisticname: res.data.logisticname,
+              logisticno: res.data.logisticno
+            })
           }else{
+            var err = res.data.errmsg || '参数错误！'
             wx.showToast({
-              title: '参数错误！',
+              title: err,
               duration: 2500
             })
             // wx.navigateBack({

@@ -91,7 +91,7 @@ Page({
     }
     if (!dis_key){
       wx.showToast({
-        title: '请先选择配送方式'
+        title: '请选择配送方式'
       })
       return false
     } else if (dis_key > 1 && !delivery_addr) {
@@ -127,6 +127,7 @@ Page({
         dis_key: this.data.dis_key,
         ifee: this.data.ifee
       }
+      var that = this
       app.request({
         url: comm.parseToURL('order', 'dopayment'),
         data: {
@@ -136,6 +137,13 @@ Page({
         },
         success: function (res) {
           if (res.data.result == 'OK') {
+            if (!that.data.fr) {
+              app.request({
+                url: comm.parseToURL('order', 'createOrderNotice'),
+                data: { oid: oid },
+                success: function () { }
+              })
+            }
           } else {
             var err = res.data.errmsg || '支付失败'
             wx.showToast({
@@ -373,7 +381,8 @@ Page({
               openid: openid,
               nowtime: now,
               lastPrice: res.data.order.total_amount,
-              carts: res.data.product
+              carts: res.data.product,
+              fr: 'u' //从订单列表付款
             })
           }else{
             wx.showToast({
@@ -464,7 +473,8 @@ Page({
             delivery_addr: delivery_addr,
             delivery_mode: delivery_mode,
             disresult: disresult,
-            weight: res.data.weight
+            weight: res.data.weight,
+            pickupaddrs: res.data.pickupaddrs
           })
         }
       }

@@ -24,7 +24,6 @@ Page({
               data: { type: type },
               success: function (res) {
                 if (res.data.result == 'OK') {
-                  console.log(res.data)
                   that.setData({
                     "prompt.hidden": !!res.data.data,
                     orders: res.data.data || [],
@@ -69,7 +68,9 @@ Page({
     },
     // 确认订单
     confirmOrders(e){
-      const oid = e.currentTarget.dataset.oid;
+      const order_id = e.currentTarget.dataset.oid;
+      const order_index = e.currentTarget.dataset.index;
+      var orders = this.data.orders
       let that = this
       wx.showModal({
         title: '温馨提示：',
@@ -77,6 +78,27 @@ Page({
         success: function (res) {
           if (res.confirm) {
             // 确认操作
+            app.request({
+              url: comm.parseToURL('order', 'orderToGet'),
+              method: 'GET',
+              data: { oid: order_id },
+              success: function (res) {
+                if (res.data.result == 'OK') {
+                  wx.showToast({
+                    title: '确认成功'
+                  })
+                  orders[order_index]['delivery_status_no'] = 4
+                  that.setData({
+                    orders: orders
+                  })
+                } else {
+                  var err = res.data.errmsg || '请求失败'
+                  wx.showToast({
+                    title: err
+                  })
+                }
+              }
+            })
           } else if (res.cancel) {
             console.log('用户点击取消')
             // 不做任何操作
@@ -86,21 +108,22 @@ Page({
     },
     // 提醒卖家发货
     remind(e){
-      const oid = e.currentTarget.dataset.oid;
+      const order_id = e.currentTarget.dataset.oid;
       let that = this 
       // 提醒发货操作
       app.request({
         url: comm.parseToURL('order', 'order_notice'),
         method: 'GET',
-        data: { oid: oid },
+        data: { oid: order_id },
         success: function (res) {
           if (res.data.result == 'OK') {
             wx.showToast({
               title: '已提醒卖家及时发货'
             })
           } else {
+            var err = res.data.errmsg || '请求失败'
             wx.showToast({
-              title: '请求失败'
+              title: err
             })
           }
         }

@@ -39,7 +39,6 @@
           
           <view class="food-para">
             <view class="food-dec">
-              <text>商品信息</text>
               <scroll-view scroll-y class="details">
                 <import src="../../../common/wxParse.wxml" />
                 <template is="wxParse" data="{{wxParseData:detail_desc.nodes}}" />

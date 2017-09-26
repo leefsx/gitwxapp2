@@ -24,10 +24,10 @@
       <view wx:if="{{delivery_addr}}" bindtap="addAddr" class="delivery_addr-no-content">
         <view class="delivery_addr-no-list">
             <image src="../../../image/local.jpg" style="width:50px; heigh:50px;"></image>
-            <view wx:if="{{index_mode==1}}">
-            <view class="addr_detail small_font">自提地址：{{address_other}}</view>
+            <view wx:if="{{dis_key==1}}">
+            <view class="addr_detail small_font">自提地址：<view wx:for="{{pickupaddrs}}" wx:key="index">{{item.address}}</view></view>
             </view>
-            <view wx:elseif="{{dis_key}}">
+            <view wx:elif="{{!dis_key||dis_key>1}}">
             <view class="addr_name normal_font">收货人：<text class="color">{{address.reciever_name}}</text></view>
             <view class="addr_phone medium_font">电话：{{address.phone}}</view>
             <view class="addr_detail small_font">地址：{{address.detail}}</view>
