@@ -56,7 +56,7 @@
             <navigator url="../order-list/order-list?activeIndex=getit">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-4.png"></image>
-                    <view class="color">{{order_num_state.getit_num}}</view>
+                    <view class="color">{{order_num_state.delivery_num}}</view>
                 </view>
                 <view class="state-tex">待收货</view>
             </navigator>

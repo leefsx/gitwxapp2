@@ -24,11 +24,11 @@
                 <image src="{{order_pro_rel[item.id][0].picurl}}"></image>
                 <view class="">{{order_pro_rel[item.id][0].product_name}}</view>
                 <view class="">{{order_pro_rel[item.id][0].amount}}</view>
-                <text wx:if="{{item.order_status_no==1}}" class="orders-status color">待付款</text>
-                <text wx:elif="{{item.order_status_no==5}}" class="orders-status color">已取消</text>
-                <text wx:elif="{{item.order_status_no==2 && item.delivery_status_no==1}}" class="orders-status color">待发货</text>
-                <text wx:elif="{{item.order_status_no==2 && item.delivery_status_no==2 && item.ori_status!=3}}" class="orders-status color">待收货</text>
-                <text wx:elif="{{item.order_status_no==2 && item.delivery_status_no==2 && item.ori_status==3}}" class="orders-status color">待评价</text>
+                <text wx:if="{{item.ori_status==1}}" class="orders-status color">待付款</text>
+                <text wx:elif="{{item.ori_status==5}}" class="orders-status color">已取消</text>
+                <text wx:elif="{{item.ori_status==2 && item.delivery_status_no==1}}" class="orders-status color">待发货</text>
+                <text wx:elif="{{item.ori_status==2 && item.delivery_status_no==2 && item.ori_status!=3}}" class="orders-status color">待收货</text>
+                <text wx:elif="{{item.ori_status==2 && item.delivery_status_no==2 && item.ori_status==3}}" class="orders-status color">待评价</text>
                 <text wx:elif="">已完成</text>
 
                  <text wx:elif="{{item.pay_status==3}}" class="orders-status color">已退款</text>
@@ -43,19 +43,19 @@
                   <view class="orders-btn" data-oid="{{item.oid}}" bindtap="cancelOrders">取消订单</view>
                   <view class="orders-btn" data-oid="{{item.oid}}" bindtap="payOrders">付款</view>
                 </view>
-                <view class="orders-btns" wx:elif="{{item.order_status_no==2 && item.delivery_status_no==1}}">
+                <view class="orders-btns" wx:elif="{{item.ori_status==2 && item.delivery_status_no==1}}">
                   <view class="orders-btn" data-oid="{{item.id}}" bindtap="remind">提醒发货</view>
                 </view>
                 <view class="orders-btns" wx:elif="{{item.ori_status==5}}">
-                  <view class="orders-btn" data-oid="{{item.oid}}" bindtap="deleteOrderList">删除订单</view>
+                  <view class="orders-btn" data-oid="{{item.oid}}" data-index="{{index}}" bindtap="deleteOrderList">删除订单</view>
                 </view>
                 
-                <view class="orders-btns" wx:elif="{{item.order_status_no==2 && item.delivery_status_no==2 && item.ori_status!=3}}">
+                <view class="orders-btns" wx:elif="{{item.ori_status==2 && item.delivery_status_no==2 && item.ori_status!=3}}">
                   <view class="orders-btn" data-oid="{{item.id}}" data-index="{{index}}" bindtap="confirmOrders">确认收货</view>
                   <view class="orders-btn" data-oid="{{item.id}}" bindtap="viewLogistics">查看物流</view>
                 </view>
-                <view class="orders-btns" wx:elif="{{item.order_status_no==2 && item.delivery_status_no==2 && item.ori_status==3}}">
-                  <view class="orders-btn" data-oid="{{item.oid}}" bindtap="rating">评价</view>
+                <view class="orders-btns" wx:elif="{{item.ori_status==2 && item.delivery_status_no==4}}">
+                  <view class="orders-btn" data-oid="{{item.oid}}" bindtap="rating">我的评价</view>
                 </view>
                 <view class="orders-btns" wx:elif="">
                   <view class="orders-btn" data-oid="{{item.oid}}" bindtap="buyAgain">再次购买</view>

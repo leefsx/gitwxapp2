@@ -7,9 +7,11 @@
   </view>
 
   <view class="ratings-bottom confirm-box medium_font border_bottom2">
-    <textarea auto-height placeholder="宝贝满足你的期待吗？说说他的优点和美中不足的地方吧。" />
+    <textarea auto-height wx:if="{{submit}}" placeholder="宝贝满足你的期待吗？说说他的优点和美中不足的地方吧。" bindblur="binkContentConfirm" />
+    <textarea auto-height wx:else value="{{content}}" disabled="true" />
   </view>
   <view class="ratings-btn">
-    <button class="bg_color">提交</button>
+    <button class="bg_color" wx:if="{{submit}}" bindtap='submit'>提交</button>
+    <button class="bg_color" wx:else >已评价</button>
   </view>
 </view>

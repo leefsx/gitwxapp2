@@ -38,6 +38,7 @@ Page({
     cancelOrders(e){
       const oid = e.currentTarget.dataset.oid;
       const index = e.currentTarget.dataset.index;
+      const activeIndex = this.data.activeIndex
       let that = this
       wx.showModal({
         title: '温馨提示：',
@@ -51,7 +52,9 @@ Page({
               data: { oid: oid, otype: 'cancel' },
               success: function (res) {
                 if (res.data.result == 'OK') {
-                  this.onLoad()
+                  wx.redirectTo({
+                    url: '../order-list/order-list?activeIndex=' + activeIndex
+                  })
                 } else {
                   wx.showToast({
                     title: '取消失败'
