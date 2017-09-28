@@ -49,7 +49,7 @@
             <navigator url="../order-list/order-list?activeIndex=delivery">
                 <view class="state-image">
                     <image mode="widthFix" src="../../../image/state-3.png"></image>
-                    <view class="color">{{order_num_state.delivery_num}}</view>
+                    <view class="color">{{order_num_state.hadpay_num}}</view>
                 </view>
                 <view class="state-tex">待发货</view>
             </navigator>
