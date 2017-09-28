@@ -45,7 +45,8 @@ Page({
             that.setData({
               order: order,
               product: product,
-              disass: disass
+              disass: disass,
+              oid: oid
             })
           }else{
             wx.showToast({
@@ -110,6 +111,72 @@ Page({
       })
     }
 
+  },
+  // 取消订单
+  cancelOrders() {
+    var oid = this.data.oid
+    var order = this.data.order
+    let that = this
+    wx.showModal({
+      title: '温馨提示：',
+      content: '是否确认取消该订单',
+      success: function (res) {
+        if (res.confirm) {
+          // 确认操作
+          app.request({
+            url: comm.parseToURL('order', 'remove'),
+            method: 'GET',
+            data: { oid: oid, otype: 'cancel' },
+            success: function (res) {
+              if (res.data.result == 'OK') {
+                order.order_status = 5
+                that.setData({
+                  order: order
+                })
+              } else {
+                wx.showToast({
+                  title: '取消失败'
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+          // 不做任何操作
+        }
+      }
+    })
+  },
+  deleteOrderList() {
+    const oid = this.data.oid
+    let that = this
+    wx.showModal({
+      title: '温馨提示：',
+      content: '是否确认删除该订单',
+      success: function (res) {
+        if (res.confirm) {
+          app.request({
+            url: comm.parseToURL('order', 'remove'),
+            method: 'GET',
+            data: { oid: oid, otype: 'remove' },
+            success: function (res) {
+              if (res.data.result == 'OK') {
+                wx.redirectTo({
+                  url: '../order-list/order-list?activeIndex=all'
+                })
+              } else {
+                wx.showToast({
+                  title: '删除失败'
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+          // 不做任何操作
+        }
+      }
+    })
   }
 })
 
