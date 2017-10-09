@@ -64,6 +64,10 @@ Page({
               
 
             })
+          } else if (app.globalData.hadInLoginPage == true) {
+            wx.switchTab({
+              url: '../index'
+            })
           } else {
             wx.navigateTo({
               url: '../login/login'

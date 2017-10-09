@@ -93,5 +93,6 @@ App({
     carts: [],
     cuser: [],
     barTocartID:null,
+    hadInLoginPage:false
   }
 })

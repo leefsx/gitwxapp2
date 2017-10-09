@@ -83,31 +83,21 @@ Page({
       propertys[id].details[idx].detail_state = "active"
     }
     attr_data[id] = pid + ':' + did
-    console.log(attr_data)
     for (var i = 0; i < attr_data.length ;i++ ){
-      console.log(1)
       if (attr_data[i] == '' || attr_data[i] == undefined){
          isFull = false
          break
       }
       isFull = true
     }
-    console.log(2)
-    console.log(isFull)
 
 
     if (attr_data.length > 0 && attr_data.length == propertys.length && isFull){
       var attr_str = attr_data.join(';')
       var skuid = skulist[attr_str]
-      
-      // if (skuid) {
-        // console.log(detail_data.price)
-        console.log(attr_str)
-        detail_data.price = skuid.price
-        detail_data.num = skuid.quantity
-        detail_data.skuid = skuid.id
-        // console.log(detail_data.price)
-      // }
+      detail_data.price = skuid.price
+      detail_data.num = skuid.quantity
+      detail_data.skuid = skuid.id
       
     }
     this.setData({
@@ -165,7 +155,6 @@ Page({
     var currentState = this.data.currentState
     var food = that.data.food
     var num = parseInt(food.num)
-    console.log(attr_data)
     if(attr_data.length == 0){
       isFull = false
     } else {
@@ -189,7 +178,6 @@ Page({
           })
         }
     } else {
-      console.log('n')
       wx.showLoading({
         title: '请求中',
         mask: true
@@ -303,6 +291,10 @@ Page({
                   var oid = ress.data.oid
                   wx.navigateTo({
                     url: '../order_confirm/order_confirm?t=detail&fr=u&oid=' + oid
+                  })
+                } else if (ress.data.errmsg == '2'){
+                  wx.navigateTo({
+                    url: '../login/login'
                   })
                 } else {
                   wx.showToast({

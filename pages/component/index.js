@@ -55,6 +55,7 @@ Page({
   },
   onShow: function () {
     var that = this
+    app.globalData.hadInLoginPage = false
     that.setData({
         imgUrls: config.index_autoplay_img,
         config: config,
