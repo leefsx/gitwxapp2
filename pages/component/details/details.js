@@ -83,31 +83,21 @@ Page({
       propertys[id].details[idx].detail_state = "active"
     }
     attr_data[id] = pid + ':' + did
-    console.log(attr_data)
     for (var i = 0; i < attr_data.length ;i++ ){
-      console.log(1)
       if (attr_data[i] == '' || attr_data[i] == undefined){
          isFull = false
          break
       }
       isFull = true
     }
-    console.log(2)
-    console.log(isFull)
 
 
     if (attr_data.length > 0 && attr_data.length == propertys.length && isFull){
       var attr_str = attr_data.join(';')
       var skuid = skulist[attr_str]
-      
-      // if (skuid) {
-        // console.log(detail_data.price)
-        console.log(attr_str)
-        detail_data.price = skuid.price
-        detail_data.num = skuid.quantity
-        detail_data.skuid = skuid.id
-        // console.log(detail_data.price)
-      // }
+      detail_data.price = skuid.price
+      detail_data.num = skuid.quantity
+      detail_data.skuid = skuid.id
       
     }
     this.setData({
@@ -166,50 +156,6 @@ Page({
     var food = that.data.food
     var num = parseInt(food.num)
     
-    // if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0){
-    //   console.log('m')
-    //   that.setData({
-    //     currentState: (!that.data.currentState)
-    //   })
-    // }else{
-    //   console.log('n')
-    //   wx.showLoading({
-    //     title: '请求中',
-    //     mask: true
-    //   })
-    //   if (cart_index > 0) {
-    //     for (var i = 0; i < cart_index; i++) {
-
-    //       if (carts[i].cid == detail_data.id) {
-    //         carts[i].sum = detail_data.price;
-    //         carts[i].price = detail_data.price;
-    //         carts[i].num += that.data.food.num;
-    //         carts[i].skuid = detail_data.skuid || 0;
-    //         hadInCart = true
-    //       }
-    //     }
-
-    //   }
-    //   if (hadInCart == false) {
-    //     var send_data = {
-    //       cid: detail_data.id,
-    //       title: detail_data.name,
-    //       image: detail_data.feature_img[0],
-    //       num: that.data.food.num,
-    //       price: detail_data.price,
-    //       sum: detail_data.price,
-    //       selected: true,
-    //       max_kc: detail_data.num,
-    //       skuid: detail_data.skuid || 0
-    //     }
-    //     carts.push(send_data)
-    //   }
-    //   app.globalData.carts = carts
-    //   wx.switchTab({
-    //     url: '../cart/cart',
-    //   })
-    // }
-    console.log(attr_data)
     if(attr_data.length == 0){
       isFull = false
     } else {
@@ -222,10 +168,7 @@ Page({
         isFull = true
       }
     }
-    // if (skulist && Object.keys(skulist).length > 0 && attr_data.length < propertys.length ) {
     if (skulist && Object.keys(skulist).length > 0 && !isFull ) {
-    // if (skulist && Object.keys(skulist).length > 0 && !isFull ) {
-      // if (attr_data.length == 0 ){
         if (currentState) {
           wx.showToast({
             title: '请选择商品属性'
@@ -235,19 +178,14 @@ Page({
             currentState: (!that.data.currentState)
           })
         }
-      // } else {
-
-      // }
      
       
     } else {
-      console.log('n')
       wx.showLoading({
         title: '请求中',
         mask: true
       })
       if (cart_index > 0) {
-        // if ()
         for (var i = 0; i < cart_index; i++) {
           if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid) {
             console.log(carts[i].num)
@@ -259,14 +197,6 @@ Page({
             carts[i].num = cartNum += num;
             hadInCart = true
           }
-          // if (carts[i].cid == detail_data.id && carts[i].sum == detail_data.price && carts[i].price == detail_data.price && carts[i].skuid == detail_data.skuid) {
-          // if (carts[i].cid == detail_data.id) {
-          //   carts[i].sum = detail_data.price;
-          //   carts[i].price = detail_data.price;
-          //   carts[i].num += that.data.food.num;
-          //   carts[i].skuid = detail_data.skuid || 0;
-          //   hadInCart = true
-          // }
         }
 
       }
@@ -342,6 +272,10 @@ Page({
                   wx.navigateTo({
                     url: '../order_confirm/order_confirm?t=detail&fr=u&oid=' + oid
                   })
+                } else if (ress.data.errmsg == '2'){
+                  wx.navigateTo({
+                    url: '../login/login'
+                  })
                 } else {
                   wx.showToast({
                     title: ress.data.errmsg
@@ -353,9 +287,6 @@ Page({
         }
       })
       
-      //wx.switchTab({
-      //  url: '../cart/cart',
-      //})
     }
     
   },
