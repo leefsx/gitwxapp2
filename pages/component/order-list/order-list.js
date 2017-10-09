@@ -24,6 +24,7 @@ Page({
               data: { type: type },
               success: function (res) {
                 if (res.data.result == 'OK') {
+                  console.log(res.data.data)
                   that.setData({
                     "prompt.hidden": !!res.data.data,
                     orders: res.data.data || [],

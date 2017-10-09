@@ -42,25 +42,25 @@
     </navigator>
     <view class="orders-footer">
         <view style="text-align:right;"><text>金额：</text><text class="color">￥{{order.total_amount}}</text></view>
-        <view  class="color2" style="text-align:right;">(<text>含运费：</text><text>￥10</text>)</view>
+        <view  class="color2" style="text-align:right;">(<text>含运费：￥</text><text>{{order.ifee}}</text>)</view>
         
         <view class="orders-btns" wx:if="{{order.pay_status==1&&order.order_status!=5}}">
           <view class="orders-btn" data-oid="{{order.oid}}" bindtap="cancelOrders">取消订单</view>
           <view class="orders-btn" data-oid="{{order.oid}}" bindtap="payOrders">付款</view>
         </view>
         <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">
-          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="remind">提醒发货</view>
+          <view class="orders-btn" data-oid="{{order.id}}" bindtap="remind">提醒发货</view>
         </view>
         <view class="orders-btns" wx:elif="{{order.order_status==5}}">
           <view class="orders-btn" data-oid="{{order.oid}}" bindtap="deleteOrderList">删除订单</view>
         </view>
         
         <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status!=3}}">
-          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="confirmOrders">确认收货</view>
-          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="viewLogistics">查看物流</view>
+          <view class="orders-btn" data-oid="{{order.id}}" bindtap="confirmOrders">确认收货</view>
+          <view class="orders-btn" data-oid="{{order.id}}" bindtap="viewLogistics">查看物流</view>
         </view>
-        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status==3}}">
-          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="rating">评价</view>
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==4}}">
+          <view class="orders-btn" data-oid="{{order.oid}}" bindtap="rating">我的评价</view>
         </view>
         <view class="orders-btns" wx:elif="">
           <view class="orders-btn" data-oid="{{order.oid}}" bindtap="buyAgain">再次购买</view>

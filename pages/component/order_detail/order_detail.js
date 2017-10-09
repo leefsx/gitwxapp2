@@ -42,6 +42,7 @@ Page({
             var order = res.data.order
             var product  = res.data.product
             var disass = res.data.disass
+            console.log(order)
             that.setData({
               order: order,
               product: product,
@@ -90,6 +91,59 @@ Page({
         })
       }
     })
+  },
+  confirmOrders(e) {
+    const order_id = e.currentTarget.dataset.oid;
+    // const order_index = e.currentTarget.dataset.index;
+    var order = this.data.order
+    let that = this
+    wx.showModal({
+      title: '温馨提示：',
+      content: '是否确认收货',
+      success: function (res) {
+        if (res.confirm) {
+          // 确认操作
+          app.request({
+            url: comm.parseToURL('order', 'orderToGet'),
+            method: 'GET',
+            data: { oid: order_id },
+            success: function (res) {
+              if (res.data.result == 'OK') {
+                wx.showToast({
+                  title: '确认成功'
+                })
+                order['delivery_status_no'] = 4
+                that.setData({
+                  order: order
+                })
+              } else {
+                var err = res.data.errmsg || '请求失败'
+                wx.showToast({
+                  title: err
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+          // 不做任何操作
+        }
+      }
+    })
+  },
+  rating(e) {
+    var oid = e.currentTarget.dataset.oid;
+    if (oid) {
+      wx.navigateTo({
+        url: '../ratings/ratings?oid=' + oid,
+      })
+    } else {
+      wx.showToast({
+        title: '请求失败',
+        icon: 'loading',
+        duration: 5000
+      })
+    }
   },
   payOrders(opt) {
     wx.showToast({
@@ -143,6 +197,29 @@ Page({
         } else if (res.cancel) {
           console.log('用户点击取消')
           // 不做任何操作
+        }
+      }
+    })
+  },
+  // 发货提醒
+  remind(e) {
+    const order_id = e.currentTarget.dataset.oid;
+    let that = this
+    // 提醒发货操作
+    app.request({
+      url: comm.parseToURL('order', 'order_notice'),
+      method: 'GET',
+      data: { oid: order_id },
+      success: function (res) {
+        if (res.data.result == 'OK') {
+          wx.showToast({
+            title: '已提醒卖家及时发货'
+          })
+        } else {
+          var err = res.data.errmsg || '请求失败'
+          wx.showToast({
+            title: err
+          })
         }
       }
     })
