@@ -74,22 +74,32 @@ Page({
     cancelAddress(e) {
       var id = e.currentTarget.dataset.id
       var that = this
-      if (id){
-        App.request({
-          url: comm.parseToURL('user','del_consignee'),
-          data: {id: id},
-          success: function(res){
-            if(res.data.result=='OK'){
-              wx.showToast({
-                title: '删除成功'
+      if (id) {
+        wx.showModal({
+          title: '温馨提示：',
+          content: '是否确认取消该订单',
+          success: function (res) {
+            if (res.confirm) {
+              App.request({
+                url: comm.parseToURL('user', 'del_consignee'),
+                data: { id: id },
+                success: function (res) {
+                  if (res.data.result == 'OK') {
+                    wx.showToast({
+                      title: '删除成功'
+                    })
+                    that.onLoad()
+                  } else {
+                    wx.showToast({
+                      title: '删除失败'
+                    })
+                  }
+                }
               })
-              that.onLoad()
-            }else{
-              wx.showToast({
-                title: '删除失败'
-              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+              // 不做任何操作
             }
-            
           }
         })
       }

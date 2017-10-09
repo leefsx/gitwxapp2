@@ -1,9 +1,12 @@
 <import src="../common/nav.wxml" />
 <import src="../common/bar.wxml" />
 <import src="../common/productList.wxml" />
+<import src="../common/contact.wxml" />
+
 <view class="main">
   <template is="bar" data="{{category_info}}" />
   <template is="nav" data="{{config}}" />
+  <template is="contact"/>
   <view class="index-top">
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
@@ -58,7 +61,4 @@
  <view class="help-port small_font" data-index="0" data-type="navarticle_url" bindtap="tocategory">{{config.navarticle_title}}</view>
  <view class="copyright small_font">
    @{{config.copyright}}
- </view>
- <view class="contact-btn">
-   <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
  </view>

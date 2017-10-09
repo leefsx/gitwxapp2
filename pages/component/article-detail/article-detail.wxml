@@ -1,11 +1,13 @@
 <import src="../../common/nav.wxml" />
 <import src="../../common/bar.wxml" />
 <import src="../../common/article_bar.wxml" />
+<import src="../../common/contact.wxml" />
 
 
 <view class="main">
     <template is="nav" data="{{config}}" />
     <template is="bar" data="{{category_info}}" />
+    <template is="contact"/>
     <view style="padding:0 10rpx;"><template is="article_bar" data="{{scrollLeft,activeIndex,articalUl,config}}" /></view>
     <view class="artical-detail">
         <view class="artical-detail-title">
@@ -19,8 +21,5 @@
             <import src="../../../common/wxParse.wxml" />
             <template is="wxParse" data="{{wxParseData:content.nodes}}" />
         </view>
-    </view>
-    <view class="contact-btn">
-      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
     </view>
 </view>

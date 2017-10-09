@@ -1,4 +1,7 @@
+<import src="../../common/contact.wxml" />
+
 <view class="main">
+    <template is="contact"/>
     <view class="header bg_color medium_font">
         <view class="header-top">
           <view class="header-title">
@@ -73,8 +76,5 @@
         <view class="address-manage">
             <navigator url="../address-list/address-list">地址管理</navigator>
         </view>
-    </view>
-    <view class="contact-btn">
-      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
     </view>
 </view>

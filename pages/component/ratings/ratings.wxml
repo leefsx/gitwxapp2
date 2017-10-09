@@ -1,4 +1,7 @@
+<import src="../../common/contact.wxml" />
+
 <view class="main">
+  <template is="contact"/>
   <view class="ratings-top confirm-box medium_font border_bottom2">
     <image src="/image/mb2-2.png"></image>
     <view>

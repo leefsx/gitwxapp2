@@ -213,6 +213,9 @@ Page({
               data: { oid: oid, otype:'remove' },
               success: function (res) {
                 if (res.data.result == 'OK') {
+                  wx.showToast({
+                    title: '操作成功'
+                  })
                   var orders = that.data.orders
                   orders.splice(index,1)
                   that.setData({
@@ -251,5 +254,4 @@ Page({
         })
       }
     }
-    
 })

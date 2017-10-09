@@ -161,6 +161,9 @@ Page({
             foods: foods
           });
           app.globalData.carts = foods
+          wx.showToast({
+            title: '删除成功'
+          })
           if (!foods.length) {
             that.setData({
               hasList: false,

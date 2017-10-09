@@ -165,50 +165,6 @@ Page({
     var currentState = this.data.currentState
     var food = that.data.food
     var num = parseInt(food.num)
-    
-    // if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0){
-    //   console.log('m')
-    //   that.setData({
-    //     currentState: (!that.data.currentState)
-    //   })
-    // }else{
-    //   console.log('n')
-    //   wx.showLoading({
-    //     title: '请求中',
-    //     mask: true
-    //   })
-    //   if (cart_index > 0) {
-    //     for (var i = 0; i < cart_index; i++) {
-
-    //       if (carts[i].cid == detail_data.id) {
-    //         carts[i].sum = detail_data.price;
-    //         carts[i].price = detail_data.price;
-    //         carts[i].num += that.data.food.num;
-    //         carts[i].skuid = detail_data.skuid || 0;
-    //         hadInCart = true
-    //       }
-    //     }
-
-    //   }
-    //   if (hadInCart == false) {
-    //     var send_data = {
-    //       cid: detail_data.id,
-    //       title: detail_data.name,
-    //       image: detail_data.feature_img[0],
-    //       num: that.data.food.num,
-    //       price: detail_data.price,
-    //       sum: detail_data.price,
-    //       selected: true,
-    //       max_kc: detail_data.num,
-    //       skuid: detail_data.skuid || 0
-    //     }
-    //     carts.push(send_data)
-    //   }
-    //   app.globalData.carts = carts
-    //   wx.switchTab({
-    //     url: '../cart/cart',
-    //   })
-    // }
     console.log(attr_data)
     if(attr_data.length == 0){
       isFull = false
@@ -222,10 +178,7 @@ Page({
         isFull = true
       }
     }
-    // if (skulist && Object.keys(skulist).length > 0 && attr_data.length < propertys.length ) {
     if (skulist && Object.keys(skulist).length > 0 && !isFull ) {
-    // if (skulist && Object.keys(skulist).length > 0 && !isFull ) {
-      // if (attr_data.length == 0 ){
         if (currentState) {
           wx.showToast({
             title: '请选择商品属性'
@@ -235,11 +188,6 @@ Page({
             currentState: (!that.data.currentState)
           })
         }
-      // } else {
-
-      // }
-     
-      
     } else {
       console.log('n')
       wx.showLoading({
@@ -247,7 +195,6 @@ Page({
         mask: true
       })
       if (cart_index > 0) {
-        // if ()
         for (var i = 0; i < cart_index; i++) {
           if (detail_data.skuid && carts[i].cid == detail_data.id && carts[i].skuid == detail_data.skuid) {
             console.log(carts[i].num)
@@ -259,16 +206,7 @@ Page({
             carts[i].num = cartNum += num;
             hadInCart = true
           }
-          // if (carts[i].cid == detail_data.id && carts[i].sum == detail_data.price && carts[i].price == detail_data.price && carts[i].skuid == detail_data.skuid) {
-          // if (carts[i].cid == detail_data.id) {
-          //   carts[i].sum = detail_data.price;
-          //   carts[i].price = detail_data.price;
-          //   carts[i].num += that.data.food.num;
-          //   carts[i].skuid = detail_data.skuid || 0;
-          //   hadInCart = true
-          // }
         }
-
       }
       if (hadInCart == false) {
         var send_data = {
@@ -296,10 +234,34 @@ Page({
     var detail_data = that.data.detail_data
     var skulist = that.data.skulist
     var attr_data = that.data.attr_data;
-    if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0) {
-      that.setData({
-        currentState: (!that.data.currentState)
-      })
+    var currentState = this.data.currentState
+    var isFull = true
+    var propertys = this.data.propertys;
+    var isFull = true
+    var food = that.data.food
+    var num = parseInt(food.num)
+    if (attr_data.length == 0) {
+      isFull = false
+    } else {
+      for (var i = 0; i < attr_data.length; i++) {
+        console.log(1)
+        if (attr_data[i] == '' || attr_data[i] == undefined || attr_data.length < propertys.length) {
+          isFull = false
+          break
+        }
+        isFull = true
+      }
+    }
+    if (skulist && Object.keys(skulist).length > 0 && !isFull) {
+      if (currentState) {
+        wx.showToast({
+          title: '请选择商品属性'
+        })
+      } else {
+        that.setData({
+          currentState: (!that.data.currentState)
+        })
+      }
     } else {
       wx.showLoading({
         title: '请求中',
@@ -352,12 +314,7 @@ Page({
           }
         }
       })
-      
-      //wx.switchTab({
-      //  url: '../cart/cart',
-      //})
     }
-    
   },
   onLoad(options){
     wx.showLoading({

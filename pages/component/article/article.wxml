@@ -2,6 +2,7 @@
 <import src="../../common/nav.wxml" />
 <import src="../../common/bar.wxml" />
 <import src="../../common/article_bar.wxml" />
+<import src="../../common/contact.wxml" />
 
 
 
@@ -9,6 +10,7 @@
     <template is="nav" data="{{config}}" />
     <template is="bar" data="{{category_info}}" />
     <template is="article_bar" data="{{scrollLeft,activeIndex,articalUl,config}}" />
+    <template is="contact"/>
     <view class="artical-ul">
         <navigator wx:for="{{article}}" url="../article-detail/article-detail?id={{item.id}}" class="artical-li">
             <view class="artical-li-title">
@@ -21,8 +23,5 @@
             <view class="color2 small_font tooLong" style="color:{{config.artlist_color}};">{{item.content}}</view>
         </navigator>
         <template is="prompt" data="{{prompt}}"></template>
-    </view>
-    <view class="contact-btn">
-      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
     </view>
 </view>
