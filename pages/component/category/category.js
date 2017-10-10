@@ -388,7 +388,8 @@ Page({
     var curIndex = e.currentTarget.dataset.index;
     that.setData({
       curIndex: curIndex,
-      category_name:category_name
+      category_name:category_name,
+      loading: false
     })
     app.request({
       url: app.domain + '/api/product/list',
