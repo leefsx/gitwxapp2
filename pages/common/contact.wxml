@@ -1,5 +1,5 @@
 <template name="contact">
-  <view class="contact-btn">
+  <view class="contact-btn" style="background-color:{{config.customer_service_bgcolor}}">
     <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
   </view>
 </template>

@@ -8,7 +8,7 @@
   <scroll-view scroll-y style="height: {{deviceHeight+'px'}};" bindscrolltolower="lower">
     <template is="bar" data="{{category_info}}" />
     <template is="nav" data="{{config}}" />
-    <template is="contact"/>
+    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
     
     <view class="product-display">
       <view class="product-display-title bg_color5">

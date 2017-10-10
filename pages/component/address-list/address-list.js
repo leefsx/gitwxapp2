@@ -1,4 +1,5 @@
 var comm = require('../../../common/common.js');
+var config = require('../../../common/config.js');
 const App = getApp()
 Page({
     data: {
@@ -11,7 +12,8 @@ Page({
         },
         items:[],
         areaname: [],
-        fr: ''
+        fr: '',
+        config: []
     },
     onLoad(opt) {
       var that = this
@@ -26,6 +28,9 @@ Page({
     },
     onShow(){
       var that = this
+      that.setData({
+        config: config
+      })
       wx.setStorage({
         key: 'address',
         data: ''

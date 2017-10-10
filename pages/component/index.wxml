@@ -6,7 +6,7 @@
 <view class="main">
   <template is="bar" data="{{category_info}}" />
   <template is="nav" data="{{config}}" />
-  <template is="contact"/>
+  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
   <view class="index-top">
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
@@ -62,3 +62,41 @@
  <view class="copyright small_font">
    @{{config.copyright}}
  </view>
+<view>
+  <view class="mask" wx-if="{{currentState}}"></view>
+  <view class="dig" wx-if="{{currentState}}">
+    <view class="detail-cart-box">
+      <view class="detail-cart-list">
+        <view class="detail-cart-list-top">
+          <image class="detail-cart-thumb" src="{{detail_data.feature_img[0]}}" mode="aspectFit" />
+          <view>
+            <text class="detail-cart-pro-name tooLong">{{detail_data.name}}</text>
+            <text class="detail-cart-pro-price color small_font">价格：<text>{{detail_data.price}}</text></text>
+          </view>
+          <icon class="digClose" size="23" type="cancel" color="#aaa" bindtap="changState"></icon>
+        </view>
+        <!-- 可选无class
+        选中class为active
+        不可选class为disable -->
+        <scroll-view scroll-y style="max-height: 200px;">
+            <view class="detail-cart-property">
+            <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id" wx:key="{{item}}">
+              <view class="property-list-name">{{item.name}}</view>
+              <view class="property-list-li">
+                <text wx:for="{{item.details}}" wx:key="{{item}}" data-pid="{{item.id}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" wx:for-item="detail" bindtap="switchDetState" class="{{detail.detail_state}}">{{detail.detail_name}}</text>
+              </view>
+            </view>
+          </view> 
+          <view class="detail-cart-count-box">
+            <text class="detail-cart-count-tex">数量:</text>
+            <text class="detail-cart-count-down" bindtap="minusCount">-</text>
+            <text class="detail-cart-count-num">{{food.num}}</text>
+            <text class="detail-cart-count-add" bindtap="addCount">+</text>
+            <text class="detail-cart-count-surplus">库存:<text>{{detail_data.num}}</text></text>
+          </view>
+        </scroll-view>
+        <view class="directTocart_Btn bg_color" bindtap="directAddCartOK">确定</view>
+      </view>
+    </view>
+  </view>
+</view>

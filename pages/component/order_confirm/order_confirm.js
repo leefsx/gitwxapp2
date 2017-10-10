@@ -72,7 +72,8 @@ Page({
     yhjprice: 0,
     MessageSwitch: '',
     TextModification: '',
-    dis_key: false
+    dis_key: false,
+    config: []
   },
   lastPay(){
     var openid = wx.getStorageSync('openid');
@@ -366,6 +367,9 @@ Page({
     var openid = wx.getStorageSync('openid');
     var now = comm.get_now()
     var that = this
+    that.setData({
+      config: config
+    })
     if (options.fr=='u'){
 	  if(options.t == 'detail'){
         carts = app.globalData.dcarts

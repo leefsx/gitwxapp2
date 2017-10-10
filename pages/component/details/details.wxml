@@ -5,7 +5,7 @@
 <view class="main">
   <template is="nav" data="{{config}}"/>
   <template is="bar" data="{{category_info}}" />
-  <template is="contact"/>
+  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
   <view class="food-detail-xq">
     <swiper indicator-dots="true" autoplay="true">
       <swiper-item wx:for="{{detail_data.feature_img}}" wx:key="{{item}}">

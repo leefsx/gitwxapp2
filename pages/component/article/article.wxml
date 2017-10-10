@@ -10,7 +10,7 @@
     <template is="nav" data="{{config}}" />
     <template is="bar" data="{{category_info}}" />
     <template is="article_bar" data="{{scrollLeft,activeIndex,articalUl,config}}" />
-    <template is="contact"/>
+    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
     <view class="artical-ul">
         <navigator wx:for="{{article}}" url="../article-detail/article-detail?id={{item.id}}" class="artical-li">
             <view class="artical-li-title">

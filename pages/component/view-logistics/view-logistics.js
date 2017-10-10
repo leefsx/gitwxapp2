@@ -14,7 +14,8 @@ Page({
     status:'',
     logisticname: '',
     logisticno: '',
-    product: []
+    product: [],
+    config: []
 
   },
   onLoad: function (options) {
@@ -22,6 +23,9 @@ Page({
     var carts = app.globalData.carts
     var openid = wx.getStorageSync('openid');
     var that = this
+    that.setData({
+      config: config
+    })
     if (oid) {
       app.request({
         url: comm.parseToURL('order', 'getorder'),
