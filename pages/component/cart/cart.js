@@ -9,6 +9,7 @@ Page({
     selectAllStatus:true,    // 全选状态，默认全选
     jsStatus: false,
     totleNum: 0,
+    config: [],
     prompt: {
       hidden: false,
       icon: '../../../image/asset-img/iconfont-cart-empty.png',
@@ -32,10 +33,9 @@ Page({
     var openid = wx.getStorageSync('openid');
     this.setData({
       foods: app.globalData.carts,
-      config:{
-        'website_name': config.website_name
-      }
+      config: config
     })
+    console.log(config)
     if (app.globalData.carts.length){
       var cart_num = app.globalData.carts.length
       if (cart_num > 0) {
@@ -161,6 +161,9 @@ Page({
             foods: foods
           });
           app.globalData.carts = foods
+          wx.showToast({
+            title: '删除成功'
+          })
           if (!foods.length) {
             that.setData({
               hasList: false,

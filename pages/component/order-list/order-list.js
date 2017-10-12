@@ -1,5 +1,6 @@
 var app = getApp()
 var comm = require('../../../common/common.js');
+var config = require('../../../common/config.js');
 
 Page({
     data: {
@@ -9,9 +10,13 @@ Page({
             hidden: !0,
         },
         orders: [],
-        order_pro_rel: []
+        order_pro_rel: [],
+        config: []
     },
     onLoad(options) {
+        this.setData({
+          config: config
+        })
         if (options.activeIndex) {
             var that = this;
             that.setData({
@@ -213,6 +218,9 @@ Page({
               data: { oid: oid, otype:'remove' },
               success: function (res) {
                 if (res.data.result == 'OK') {
+                  wx.showToast({
+                    title: '操作成功'
+                  })
                   var orders = that.data.orders
                   orders.splice(index,1)
                   that.setData({
@@ -251,5 +259,4 @@ Page({
         })
       }
     }
-    
 })

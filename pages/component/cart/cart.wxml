@@ -1,10 +1,13 @@
 <import src="../../common/prompt.wxml" />
+<import src="../../common/contact.wxml" />
+
 <view class="main">
+    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
     <view wx:if="{{foods.length}}">
         <view class="cart-top border_bottom">
             <icon wx:if="{{selectAllStatus}}" type="success" color="#c71f3b" class="total-select  cart-pro-select-top" bindtap="selectAll"/>
             <icon wx:else type="circle" class="total-select  cart-pro-select-top" bindtap="selectAll"/>
-            <text class="cart-top-tex" bindtap="selectAll">{{config.website_name}}</text>
+            <text class="cart-top-tex" bindtap="selectAll">{{config.logo_title}}</text>
         </view>
         <view class="cart-box">
             <view class="cart-list border_bottom" wx:for="{{foods}}" wx:key="{{index}}">
@@ -41,6 +44,3 @@
 
 </view>
 <template is="prompt" data="{{prompt}}"></template>
-<view class="contact-btn">
-  <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
-</view>

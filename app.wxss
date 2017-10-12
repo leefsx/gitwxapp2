@@ -355,6 +355,7 @@ page {
   right: 15px;
   padding-top: 8px;
   box-sizing: border-box;
+  z-index: 99999;
 }
 /* .directTocart_Btn{
   width: 100%;

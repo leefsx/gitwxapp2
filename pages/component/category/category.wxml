@@ -2,13 +2,14 @@
 <import src="../../common/productList2.wxml" />
 <import src="../../common/prompt.wxml" />
 <import src="../../common/bar.wxml" />
-
+<import src="../../common/contact.wxml" />
 
 <view class="main">
   <scroll-view scroll-y style="height: {{deviceHeight+'px'}};" bindscrolltolower="lower">
     <template is="bar" data="{{category_info}}" />
     <template is="nav" data="{{config}}" />
-
+    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+    
     <view class="product-display">
       <view class="product-display-title bg_color5">
           <view class="title"><text>{{category_name}}</text></view>
@@ -16,7 +17,7 @@
       <view class="product-display-ul">
         <template is="product_list2" data="{{products}}" />
         <template is="prompt" data="{{prompt}}"></template>
-        <view class="end font_small color2" wx-if="IsEnd">已达到最底部</view>
+        <view class="end font_small color2" wx-if="IsAllEnd">已到达最底部</view>
       </view>
     </view>
   </scroll-view>
@@ -42,12 +43,9 @@
           <scroll-view scroll-y style="max-height: 200px;">
              <view class="detail-cart-property">
               <view class="property-list border_bottom" wx:for="{{propertys}}" wx:for-index="id" wx:key="{{item}}">
-                
                 <view class="property-list-name">{{item.name}}</view>
                 <view class="property-list-li">
-                  
                   <text wx:for="{{item.details}}" wx:key="{{item}}" data-pid="{{item.id}}" data-did="{{detail.id}}" data-id="{{id}}" data-index="{{index}}" wx:for-item="detail" bindtap="switchDetState" class="{{detail.detail_state}}">{{detail.detail_name}}</text>
-                  
                 </view>
               </view>
             </view> 
@@ -63,8 +61,5 @@
         </view>
       </view>
     </view>
-  </view>
-  <view class="contact-btn">
-    <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
   </view>
 </view>

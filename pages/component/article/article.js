@@ -22,7 +22,7 @@ Page({
         scrollNum:0,
         li_width:0,
         articalUl:[],
-        article: []   
+        article: []  
     },
     onShow: function () {
           let li_width = this.data.li_width

@@ -1,8 +1,9 @@
 <import src="../../common/prompt.wxml"/>
-
+<import src="../../common/contact.wxml" />
 
 
 <view class="main">
+    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
     <view class="my-list">我的订单</view>
     <view class="my-list-nav medium_font">
         <view bindtap="changActive" data-id="all" class="{{activeIndex == 'all' ? 'active':''}}">全部</view>
@@ -63,8 +64,5 @@
                 </view>
             </view>
         </view>
-    </view>
-    <view class="contact-btn">
-      <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
     </view>
 </view>

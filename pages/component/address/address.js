@@ -19,21 +19,9 @@ Page({
     },
     isShow:false,
     areaname: [],
-    uid: 0
+    uid: 0,
+    config: []
   },
-
-  // onLoad(){
-  //   var self = this;
-    
-  //   wx.getStorage({
-  //     key: 'address',
-  //     success: function(res){
-  //       self.setData({
-  //         address : res.data
-  //       })
-  //     }
-  //   })
-  // },
   formSubmit(){
     var self = this;
     var uid = self.data.uid
@@ -139,6 +127,9 @@ Page({
     var that = this
     var pid = 1
     var uid = 0
+    that.setData({
+      config: config
+    })
     if(opt.id){
       uid = opt.id
     }

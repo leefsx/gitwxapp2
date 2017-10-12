@@ -14,6 +14,7 @@ Page({
     website_name: '',
     scrollTop: 0,
     IsEnd: false,
+    IsAllEnd: false,
     goods: [
       {
         "first_level_category": "坚果炒货2",
@@ -477,7 +478,8 @@ Page({
             title: '已加载到最后'
           })
           that.setData({
-            IsEnd: true
+            IsEnd: true,
+            IsAllEnd: true
           })
         }
       }

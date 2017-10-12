@@ -1,4 +1,7 @@
+<import src="../../common/contact.wxml" />
+<template is="contact"/>
 <view class="container">
+  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
   <view class="loginbox">
     <view class="usermotto">
       <view class="inline-block">
@@ -18,8 +21,5 @@
         <text>返回首页</text>
       </view>
     </view>
-  </view>
-  <view class="contact-btn">
-    <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
   </view>
 </view>

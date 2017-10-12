@@ -155,7 +155,6 @@ Page({
     var currentState = this.data.currentState
     var food = that.data.food
     var num = parseInt(food.num)
-    
     if(attr_data.length == 0){
       isFull = false
     } else {
@@ -178,8 +177,6 @@ Page({
             currentState: (!that.data.currentState)
           })
         }
-     
-      
     } else {
       wx.showLoading({
         title: '请求中',
@@ -198,7 +195,6 @@ Page({
             hadInCart = true
           }
         }
-
       }
       if (hadInCart == false) {
         var send_data = {
@@ -226,10 +222,34 @@ Page({
     var detail_data = that.data.detail_data
     var skulist = that.data.skulist
     var attr_data = that.data.attr_data;
-    if (skulist && Object.keys(skulist).length > 0 && attr_data.length == 0) {
-      that.setData({
-        currentState: (!that.data.currentState)
-      })
+    var currentState = this.data.currentState
+    var isFull = true
+    var propertys = this.data.propertys;
+    var isFull = true
+    var food = that.data.food
+    var num = parseInt(food.num)
+    if (attr_data.length == 0) {
+      isFull = false
+    } else {
+      for (var i = 0; i < attr_data.length; i++) {
+        console.log(1)
+        if (attr_data[i] == '' || attr_data[i] == undefined || attr_data.length < propertys.length) {
+          isFull = false
+          break
+        }
+        isFull = true
+      }
+    }
+    if (skulist && Object.keys(skulist).length > 0 && !isFull) {
+      if (currentState) {
+        wx.showToast({
+          title: '请选择商品属性'
+        })
+      } else {
+        that.setData({
+          currentState: (!that.data.currentState)
+        })
+      }
     } else {
       wx.showLoading({
         title: '请求中',
@@ -286,9 +306,7 @@ Page({
           }
         }
       })
-      
     }
-    
   },
   onLoad(options){
     wx.showLoading({

@@ -5,7 +5,6 @@
     "pages/component/article-detail/article-detail",
     "pages/component/category/category",
     "pages/component/cart/cart",
-    "pages/component/user/user",
     "pages/component/user_new/user_new",
     "pages/component/address/address",
     "pages/component/address-list/address-list",

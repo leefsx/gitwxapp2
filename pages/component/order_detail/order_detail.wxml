@@ -1,4 +1,7 @@
+<import src="../../common/contact.wxml" />
+
 <view class="main">
+  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
   <view class="order-status-content bg_color">
     <!-- <text wx:if="{{order.pay_status==1}}">待付款</text>
     <text wx:elif="{{order.order_status==5}}">已取消</text>
@@ -94,9 +97,6 @@
       <text class="fl">可用余额</text>
       <view class="picker fr small_font"><text class="color medium_font">-￥{{disass.yeprice || '0.00'}}</text></view>
     </view>
-  </view>
-  <view class="contact-btn">
-    <contact-button type="default-light" size="20" session-from="weapp" ></contact-button>
   </view>
 
 </view>

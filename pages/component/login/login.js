@@ -8,7 +8,8 @@ Page({
     userInfo: {},
     userName: '',
     userPassword: '',
-    boo: false
+    boo: false,
+    config: []
   },
   //事件处理函数
   bindViewTap: function () {
@@ -90,6 +91,9 @@ Page({
   },
   onLoad: function () {
     var that = this
+    that.setData({
+      config: config
+    })
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
       //更新数据
