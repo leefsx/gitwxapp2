@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <template name="product_list">
     <view class="products">
       <block wx:for="{{product1||product2||product3||product4||products}}" wx:key="{{index}}">
