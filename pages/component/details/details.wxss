@@ -412,7 +412,12 @@
 .property-list-li text.disable{
   color:#9a9a9a;
 }
-
+.wxParse-img{
+  margin-top: -13rpx;
+}
+.wxParse-img:first-child{
+  margin-top: 0rpx;
+}
 
 
 

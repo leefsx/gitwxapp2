@@ -25,7 +25,8 @@ Page({
   formSubmit(){
     var self = this;
     var uid = self.data.uid
-    if(self.data.address.name && self.data.address.phone && self.data.address.detail){
+    var adds = self.data.address
+    if (adds.name && adds.phone && adds.detail && adds.prov_id && adds.city_id && adds.dist_id) {
       app.request({
         url: comm.parseToURL('user','delivery_address'),
         data: { 
