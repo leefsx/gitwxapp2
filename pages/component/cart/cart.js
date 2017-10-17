@@ -6,10 +6,9 @@ Page({
     foods:[],               // 购物车列表
     hasList:false,          // 列表是否有数据
     totalPrice:0,           // 总价，初始为0
-    selectAllStatus:true,    // 全选状态，默认全选
+    selectAllStatus:'',    // 全选状态，默认全选
     jsStatus: false,
     totleNum: 0,
-    config: [],
     prompt: {
       hidden: false,
       icon: '../../../image/asset-img/iconfont-cart-empty.png',
@@ -29,13 +28,12 @@ Page({
     })
   },
   onShow() {
-    // page.refrash(); 
     var openid = wx.getStorageSync('openid');
+    console.log(app.globalData.carts)
     this.setData({
       foods: app.globalData.carts,
-      config: config
+      config:config
     })
-    console.log(config)
     if (app.globalData.carts.length){
       var cart_num = app.globalData.carts.length
       if (cart_num > 0) {
@@ -51,11 +49,21 @@ Page({
         'prompt.hidden': false
       });
     }
+    wx.hideLoading()
   },
 
   toConfirm() {
     var cartItems = this.data.foods
-    if (!cartItems || cartItems.length === 0) {
+    var selectItems = []
+    cartItems.forEach((item)=>{
+      if(item.selected){
+        selectItems.push(item)
+      }
+    })
+    app.globalData.selectCarts = selectItems
+    console.log(app.globalData.selectCarts)
+    // if (!cartItems || cartItems.length === 0) {
+    if (!selectItems || selectItems.length === 0) {
       wx.hideToast()
       wx.showModal({
         title: '未选购商品',
@@ -70,7 +78,7 @@ Page({
       mask: true
     })
     comm.get_cuser({
-      success:function(cuser){
+      success: function (cuser) {
         var that = this
         if (cuser == false) {
           wx.showToast({
@@ -82,34 +90,18 @@ Page({
         } else {
           app.request({
             url: comm.parseToURL('order', 'addcart'),
-            data: { data: JSON.stringify(cartItems) },
+            data: { data: JSON.stringify(selectItems),fr: 'cart' },
             method: 'GET',
             success: function (res) {
               if (res.data.result == 'OK') {
-                app.request({
-                  url: comm.parseToURL('order', 'createOrder'),
-                  data: [],
-                  method: 'GET',
-                  success: function (ress) {
-                    if (ress.data.result == 'OK') {
-                      var oid = ress.data.oid
-                      wx.navigateTo({
-                        url: '../order_confirm/order_confirm?fr=cart&oid=' + oid
-                      })
-                    } else {
-                      wx.hideLoading()
-                      wx.showToast({
-                        title: ress.data.errmsg
-                      })
-                    }
-                  }
+                wx.navigateTo({
+                  url: '../order_confirm/order_confirm?fr=cart'
                 })
-
-              } else if (res.data.errmsg=='2'){
+              } else if (res.data.errmsg == '2') {
                 wx.navigateTo({
                   url: '../login/login',
                 })
-                
+
               } else {
                 wx.hideLoading()
                 wx.showToast({
@@ -121,6 +113,7 @@ Page({
         }
       }
     })
+      
     
     
     
@@ -136,6 +129,7 @@ Page({
     let foods = this.data.foods;
     const selected = foods[index].selected;
     foods[index].selected = !selected;
+    app.globalData.carts = foods
     this.setData({
       foods: foods
     });
@@ -177,7 +171,7 @@ Page({
           console.log('用户点击取消')
         }
       }
-    }) 
+    })
   },
 
   /**
@@ -191,6 +185,7 @@ Page({
     for (let i = 0; i < foods.length; i++) {
       foods[i].selected = selectAllStatus;
     }
+    app.globalData.carts = foods
     this.setData({
       selectAllStatus: selectAllStatus,
       foods: foods
@@ -281,11 +276,6 @@ Page({
   onPullDownRefresh: function () {
     this.onShow()
     wx.stopPullDownRefresh()
-  },
-  onHide(){
-    wx.hideLoading({
-      title: '请求中',
-      mask: true
-    })
   }
+
 })

@@ -21,7 +21,11 @@
   margin-right: 10rpx;
 }
 .ratings-bottom{
-  min-height:200rpx;
+   min-height:400rpx; 
+}
+.ratings-bottom textarea{
+  width:100%;
+  min-height: 400rpx;  
 }
 .ratings-btn {
   padding: 20rpx 30rpx 0 30rpx;

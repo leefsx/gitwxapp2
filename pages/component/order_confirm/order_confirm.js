@@ -11,6 +11,7 @@ Page({
    */
   data: {
     carts:[],
+    selectCarts:[],
     total_price:0,//实付价格
     nowtime: '',
     oid: '',
@@ -75,7 +76,11 @@ Page({
     dis_key: false,
     config: []
   },
-  lastPay(){
+  submitOrder(){
+    wx.showLoading({
+      title: '请求中',
+      mask: true
+    })
     var openid = wx.getStorageSync('openid');
     var delivery_addr = this.data.delivery_addr
     var MessageSwitch = this.data.MessageSwitch
@@ -102,92 +107,131 @@ Page({
       return false
     }
     
-      var oid = this.data.oid 
-      //var body = config.website_name;
-      var total_fee = this.data.total_price;
-      var temdata = {
-        oid: oid,
-        total_fee: total_fee,
-        openid: openid
-      }
-      var index_time = this.data.index_time
-      var delivery_time = this.data.delivery_time
-      var order_data = {
-        delivery_date: this.data.date,
-        delivery_time: delivery_time[index_time],
-        address: this.data.address,
-        message: this.data.message,
-        invoice: this.data.invoice,
-        total_price: this.data.total_price,
-        lastPrice: this.data.lastPrice,
-        yeprice: this.data.balance,
-        jfnum: this.data.integral,
-        jfprice: this.data.integral_money,
-        yhjid: this.data.yhjid,
-        yhjprice: this.data.yhjprice,
-        dis_key: this.data.dis_key,
-        ifee: this.data.ifee
-      }
-      var that = this
-      app.request({
-        url: comm.parseToURL('order', 'dopayment'),
-        data: {
-          oid: oid,
-          order_data: JSON.stringify(order_data),
-          method: 'POST'
-        },
-        success: function (res) {
-          if (res.data.result == 'OK') {
-            if (!that.data.fr) {
-              app.request({
-                url: comm.parseToURL('order', 'createOrderNotice'),
-                data: { oid: oid },
-                success: function () { }
-              })
-            }
-          } else {
-            var err = res.data.errmsg || '支付失败'
-            wx.showToast({
-              title: err
+    var total_fee = this.data.total_price;
+    var temdata = {
+      //oid: oid,
+      total_fee: total_fee,
+      openid: openid
+    }
+    var index_time = this.data.index_time
+    var delivery_time = this.data.delivery_time
+    var selectCarts = this.data.selectCarts
+    var carts = this.data.carts
+    var fr = this.data.fr
+    var order_data = {
+      delivery_date: this.data.date,
+      delivery_time: delivery_time[index_time],
+      address: this.data.address,
+      message: this.data.message,
+      invoice: this.data.invoice,
+      total_price: this.data.total_price,
+      lastPrice: this.data.lastPrice,
+      yeprice: this.data.balance,
+      jfnum: this.data.integral,
+      jfprice: this.data.integral_money,
+      yhjid: this.data.yhjid,
+      yhjprice: this.data.yhjprice,
+      dis_key: this.data.dis_key,
+      ifee: this.data.ifee
+    }
+    var that = this
+    app.request({
+      url: comm.parseToURL('order', 'createOrder'),
+      data: {
+        cart: JSON.stringify(selectCarts),
+        order_data: JSON.stringify(order_data),
+        fr: that.data.fr
+      },
+      method: 'GET',
+      success: function (ress) {
+        
+        if (ress.data.result == 'OK') {
+          var oid = ress.data.oid
+          app.request({
+            url: comm.parseToURL('order', 'createOrderNotice'),
+            data: { oid: oid },
+            success: function () { }
+          })
+          if(fr == 'cart') {
+            var newCarts = []
+            carts.forEach((item) => {
+              if (!item.selected) {
+                newCarts.push(item)
+              }
             })
-            return false;
+            app.globalData.carts = newCarts
           }
-        }
-      })
-      if (total_fee > 0){
-        //wx pay
-        app.request({
-          url: comm.parseToURL('order', 'getprepay_id'),
-          data: {
-            data: JSON.stringify(temdata),
-            method: 'POST'
-          },
-          success: function (res) {
-            if (res.data.result == 'OK') {
-              app.globalData.carts = []
-              res.data.oid = oid
-              comm.pay(res.data)
-            } else {
-              var err = res.data.errmsg || '支付失败'
-              wx.showToast({
-                title: err
-              })
+          app.request({
+            url: comm.parseToURL('order', 'dopayment'),
+            data: {
+              oid: oid,
+              method: 'POST',
+              mark: 'new'
+            },
+            success: function (res) {
+
+              if (res.data.result == 'OK') {
+                wx.hideLoading()
+                if (res.data.wxPrice > 0) {
+                  var temdata = { 'oid': oid, 'openid': openid, 'mark': 'new' }
+                  //wx pay
+                  app.request({
+                    url: comm.parseToURL('order', 'getprepay_id'),
+                    data: {
+                      data: JSON.stringify(temdata),
+                      method: 'POST'
+                    },
+                    success: function (res) {
+                      
+                      if (res.data.result == 'OK') {
+                        // app.globalData.carts = []
+                        res.data.oid = oid
+                        comm.pay(res.data)
+                      } else {
+                        var err = res.data.errmsg || '支付失败'
+                        wx.showToast({
+                          title: err
+                        })
+                      }
+                    }
+                  })
+                } else {
+                  // app.globalData.carts = []
+                  wx.showToast({
+                    title: '支付成功！',
+                    icon: 'success',
+                    duration: 2500
+                  })
+                  wx.redirectTo({
+                    url: '../order_detail/order_detail?oid=' + oid,
+                  })
+                }
+              } else {
+                var err = res.data.errmsg || '支付失败'
+                wx.showToast({
+                  title: err
+                })
+                return false;
+              }
             }
-          }
-        })
-      } else {
-        app.globalData.carts = []
-        wx.showToast({
-          title: '支付成功！',
-          icon: 'success',
-          duration: 2500
-        })
-        wx.redirectTo({
-          url: '../order_detail/order_detail?oid=' + oid,
-        })
+          })
+          //wx.redirectTo({
+          //  url: '../order_detail/order_detail?oid=' + oid
+          //})
+        } else if (ress.data.errmsg == '2') {
+          wx.showToast({
+            title: '请先登录'
+          })
+          wx.navigateTo({
+            url: '../login/login'
+          })
+        } else {
+          wx.showToast({
+            title: ress.data.errmsg
+          })
+        }
       }
-      
-    
+    })
   },
   bindPickerChange(e){
     var index_mode = e.detail.value
@@ -196,6 +240,7 @@ Page({
     var curr_dis = disresult[index_mode]
     var ifee = this.data.ifee || 0
     var total_price = parseFloat(this.data.total_price) - ifee
+    var lastPrice = parseFloat(this.data.lastPrice) - ifee
     
     if (index_mode > 1){
       if (weight < curr_dis.fweight){
@@ -204,6 +249,7 @@ Page({
         ifee = parseFloat(curr_dis.f_fee) + ((weight - parseFloat(curr_dis.f_weight)) / parseFloat(curr_dis.r_weight)) * parseFloat(curr_dis.r_fee)
       }
       total_price += ifee
+      lastPrice += ifee
     }else{
       ifee = 0
     }
@@ -212,7 +258,8 @@ Page({
       total_price: total_price.toFixed(2),
       dis_key: curr_dis.key,
       delivery_title: curr_dis.title,
-      ifee: ifee.toFixed(2)
+      ifee: ifee.toFixed(2),
+      lastPrice: lastPrice.toFixed(2)
     })
   },
   bindDateChange(e) {
@@ -226,9 +273,11 @@ Page({
     })
   },
   addAddr(){
-    wx.navigateTo({
-      url: '../address-list/address-list',
-    })
+    if (!this.data.dis_key || this.data.dis_key > 1){
+      wx.navigateTo({
+        url: '../address-list/address-list',
+      })
+    }
   },
   bindInvoiceChange(e){
     this.setData({
@@ -314,13 +363,21 @@ Page({
     if (val > (lastPrice * proportion)){
       val = lastPrice * proportion
     }
-    
+
     if (val >= 1 || val == 0){
       integral_money = val / proportion
       lastPrice = lastPrice - balance - yhjprice
       if (lastPrice > 0){
         if (integral_money > lastPrice) {
           integral_money = lastPrice
+          val = integral_money * proportion
+          if (val % 1 != 0) {
+            wx.showModal({
+              title: '',
+              content: '使用积分数量只能为整数'
+            })
+            return false
+          }
           total_price = 0
         }else{
           total_price = lastPrice - integral_money
@@ -334,10 +391,9 @@ Page({
         integral: val
       })
     }else{
-      wx.showToast({
-        title: '使用积分数量不可小于1',
-        icon: 'loading',
-        duration: 2500
+      wx.showModal({
+        title: '',
+        content: '使用积分数量不可小于1'
       })
     }
   
@@ -349,13 +405,13 @@ Page({
     var balance = this.data.balance
     var yhjprice = this.data.yhjprice
     var lastPrice = this.data.lastPrice
-    var val = balance_mode[e.detail.value]
+    var val = Number(balance_mode[e.detail.value])
     lastPrice = lastPrice - integral_money - yhjprice
     if (val > lastPrice){
       val = lastPrice
     }
     total_price = lastPrice - val
-    
+
     this.setData({
       index_balance: val,
       total_price: total_price.toFixed(2),
@@ -364,67 +420,45 @@ Page({
   },
   onLoad: function (options) {
     var carts = app.globalData.carts
+    var selectCarts = app.globalData.selectCarts
     var openid = wx.getStorageSync('openid');
+    var total_price = 0
     var now = comm.get_now()
-    var that = this
-    that.setData({
-      config: config
+    
+    if (options.fr == 'buy') {
+      // carts = app.globalData.dcarts
+      selectCarts = app.globalData.dcarts
+    }
+    for (let i = 0; i < selectCarts.length; i++) {
+      total_price += selectCarts[i].num * selectCarts[i].price;
+    }
+    this.setData({
+      config: config,
+      carts: carts,
+      selectCarts: selectCarts,
+      fr: options.fr,
+      total_price: total_price
     })
-    if (options.fr=='u'){
-	  if(options.t == 'detail'){
-        carts = app.globalData.dcarts
-      }
-      app.request({
-        url: comm.parseToURL('order','getorder'),
-        data: { oid: options.oid},
-        success: function(res){
-          if(res.data.result=='OK'){
-            that.setData({
-              oid: options.oid,
-              total_price: res.data.order.total_amount,
-              openid: openid,
-              nowtime: now,
-              lastPrice: res.data.order.total_amount,
-              carts: res.data.product,
-              fr: 'u' //从订单列表付款
-            })
-          }else{
-            wx.showToast({
-              title: '参数错误！',
-            })
-          }
-        }
-      })
-    }
-    if(carts.length>0 && options.t != 'detail'){
-      var total_price = 0
-      for(var i=0;i<carts.length;i++){
-        total_price += carts[i].price * carts[i].num
-      }
-      that.setData({
-        carts: carts,
-        total_price: total_price.toFixed(2),
-        nowtime: now,
-        oid: options.oid,
-        openid: openid,
-        lastPrice: total_price.toFixed(2)
-      })
-    }
-    setTimeout(this.showOrderInterface,200)
+    
+    this.showOrderInterface(selectCarts)
     
   },
-  showOrderInterface() {
+  showOrderInterface(selectCarts) {
     var that = this 
     var total_amount = that.data.total_price
-    var oid = that.data.oid
+    var fr = that.data.fr
+    var cart = selectCarts
+    //var oid = that.data.oid
     app.request({
-      url: comm.parseToURL('order', 'showOrderInterface'),
-      data: { total_amount: total_amount, oid: oid },
-      method: 'GET',
+      url: comm.parseToURL('order', 'showOrderInterface2'),
+      data: {
+        total_amount: total_amount, 
+        cart: JSON.stringify(cart)
+      },
       success: function (res) {
         if (res.data.result == 'OK') {
           var usercinfo = res.data.usercinfo
-          var total_price = that.data.total_price;
+          var total_price = res.data.total_price;
           var delivery_mode = that.data.delivery_mode
           var couponnum = 0
           var coupon_mode = that.data.coupon_mode
@@ -445,14 +479,33 @@ Page({
               ujfdata.account_points = perdata.limit_val
             }
           }
+          if (ujfdata.account_points < 1) ujfdata.account_points = 0
           var integral_mode = that.data.integral_mode
-          for (var i = 10; i <= ujfdata.account_points; i += 10) {
-            integral_mode.push(i)
+          if (ujfdata.account_points < 1) {
+            integral_mode.push(ujfdata.account_points)
+          }else if (ujfdata.account_points < 10){
+            for (var i = 1; i <= ujfdata.account_points; i += 1) {
+              integral_mode.push(i)
+            }
+          }else{
+            for (var i = 10; i <= ujfdata.account_points; i += 10) {
+              integral_mode.push(i)
+            }
           }
+          
           var balance_mode = that.data.balance_mode
-          for (var i = 10; i <= ujfdata.account_money; i += 10) {
-            balance_mode.push(i)
+          if (ujfdata.account_money < 1) {
+            balance_mode.push(ujfdata.account_money)
+          }else if (ujfdata.account_money < 10){
+            for (var i = 1; i <= ujfdata.account_money; i += 1) {
+              balance_mode.push(i)
+            }
+          }else{
+            for (var i = 10; i <= ujfdata.account_money; i += 10) {
+              balance_mode.push(i)
+            }
           }
+          
           var delivery_addr = true
           if(res.data.delivery.length == 0){
             delivery_addr = false
@@ -471,6 +524,7 @@ Page({
             balance_mode: balance_mode,
             coupon_mode: coupon_mode,
             lastPrice: total_price,
+            total_price: total_price,
             MessageSwitch: res.data.MessageSwitch,
             TextModification: res.data.TextModification,
             address: res.data.delivery,
@@ -480,6 +534,8 @@ Page({
             weight: res.data.weight,
             pickupaddrs: res.data.pickupaddrs
           })
+        }else{
+          wx.navigateBack({})
         }
       }
     })
@@ -487,7 +543,7 @@ Page({
   onShow: function () {
     if (typeof (this.options.fr) =='undefined'){
       wx.switchTab({
-        url: '../user/user',
+        url: '../user_new/user_new',
       })
     }
     let start_date=util.formatTime2(new Date);

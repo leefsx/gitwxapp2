@@ -15,9 +15,9 @@
           <view class="title"><text>{{category_name}}</text></view>
       </view>
       <view class="product-display-ul">
-        <template is="product_list2" data="{{products}}" />
+        <template is="product_list2" data="{{products,config}}" />
         <template is="prompt" data="{{prompt}}"></template>
-        <view class="end font_small color2" wx-if="IsAllEnd">已到达最底部</view>
+        <!-- <view class="end font_small color2" wx-if="IsAllEnd">已到达最底部</view> -->
       </view>
     </view>
   </scroll-view>

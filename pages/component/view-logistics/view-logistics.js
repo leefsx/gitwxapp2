@@ -16,7 +16,6 @@ Page({
     logisticno: '',
     product: [],
     config: []
-
   },
   onLoad: function (options) {
     var oid = options.oid

@@ -24,10 +24,10 @@ Page({
   },
   onShow() {
     var self = this;
+    var openid = wx.getStorageSync('openid');
     self.setData({
       config: config
     })
-    var openid = wx.getStorageSync('openid');
     if (openid) {
       var url = comm.parseToURL('weixin', 'signin')
       var uinfo = self.data.userInfo
@@ -68,10 +68,6 @@ Page({
               }
               
 
-            })
-          } else if (app.globalData.hadInLoginPage == true) {
-            wx.switchTab({
-              url: '../index'
             })
           } else {
             wx.navigateTo({

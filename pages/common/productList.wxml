@@ -13,7 +13,7 @@
           <text class="product-name color">{{item.title}}</text>
           <text class="product-dec product-mark_price small_font">市场价：{{item.mark_price}}</text>
           <text class="product-price bg_color">￥{{item.price}}</text>
-          <view class="directAddCart" data-id="{{item.id}}" catchtap="directAddCart">
+          <view wx:if="{{config.shopping_cart == 1}}" style="background-color:{{config.shopping_cart_bgcolor}}" class="directAddCart" data-id="{{item.id}}" catchtap="directAddCart">
             <image src="/image/shop-cart.png"></image>
           </view>
         </navigator>

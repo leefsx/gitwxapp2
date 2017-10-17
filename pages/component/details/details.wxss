@@ -284,7 +284,7 @@
     animation-fill-mode: forwards; 
 }
   @keyframes action{
-  0%{bottom:-816rpx;}
+  0%{bottom:-100%;}
   100%{bottom:100rpx;}
 }
 .detail-cart-box{

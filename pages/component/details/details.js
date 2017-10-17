@@ -217,7 +217,98 @@ Page({
     }
     
   },
-  toConfirm(){
+  // toConfirm(){
+  //   var that = this
+  //   var detail_data = that.data.detail_data
+  //   var skulist = that.data.skulist
+  //   var attr_data = that.data.attr_data;
+  //   var currentState = this.data.currentState
+  //   var isFull = true
+  //   var propertys = this.data.propertys;
+  //   var isFull = true
+  //   var food = that.data.food
+  //   var num = parseInt(food.num)
+  //   if (attr_data.length == 0) {
+  //     isFull = false
+  //   } else {
+  //     for (var i = 0; i < attr_data.length; i++) {
+  //       console.log(1)
+  //       if (attr_data[i] == '' || attr_data[i] == undefined || attr_data.length < propertys.length) {
+  //         isFull = false
+  //         break
+  //       }
+  //       isFull = true
+  //     }
+  //   }
+  //   if (skulist && Object.keys(skulist).length > 0 && !isFull) {
+  //     if (currentState) {
+  //       wx.showToast({
+  //         title: '请选择商品属性'
+  //       })
+  //     } else {
+  //       that.setData({
+  //         currentState: (!that.data.currentState)
+  //       })
+  //     }
+  //   } else {
+  //     wx.showLoading({
+  //       title: '请求中',
+  //       mask: true
+  //     })
+  //     var carts = [{
+  //       cid: detail_data.id,
+  //       title: detail_data.name,
+  //       image: detail_data.feature_img,
+  //       num: that.data.food.num,
+  //       price: detail_data.price,
+  //       sum: detail_data.price,
+  //       selected: true,
+  //       max_kc: detail_data.num,
+  //       skuid: detail_data.skuid
+  //     }]
+  //     comm.get_cuser({
+  //       success: function (cuser) {
+  //         var that = this
+  //         if (cuser == false) {
+  //           wx.showToast({
+  //             title: '请先登录'
+  //           })
+  //           wx.navigateTo({
+  //             url: '../login/login'
+  //           })
+  //         } else {
+  //           app.request({
+  //             url: comm.parseToURL('order', 'createOrder'),
+  //             data: { 
+  //               fr: 'buy',
+  //               cart: JSON.stringify(carts) 
+  //             },
+  //             method: 'GET',
+  //             success: function (ress) {
+  //               wx.hideLoading()
+  //               if (ress.data.result == 'OK') {
+  //                 app.globalData.dcarts = carts
+  //                 var oid = ress.data.oid
+  //                 wx.navigateTo({
+  //                   url: '../order_confirm/order_confirm?t=detail&fr=u&oid=' + oid
+  //                 })
+  //               } else if (ress.data.errmsg == '2'){
+  //                 wx.navigateTo({
+  //                   url: '../login/login'
+  //                 })
+  //               } else {
+  //                 wx.showToast({
+  //                   title: ress.data.errmsg
+  //                 })
+  //               }
+  //             }
+  //           })
+  //         }
+  //       }
+  //     })
+  //   }
+  // },
+  toConfirm() {
     var that = this
     var detail_data = that.data.detail_data
     var skulist = that.data.skulist
@@ -261,7 +352,7 @@ Page({
         image: detail_data.feature_img,
         num: that.data.food.num,
         price: detail_data.price,
-        sum: detail_data.price,
+        sum: detail_data.price * that.data.food.num,
         selected: true,
         max_kc: detail_data.num,
         skuid: detail_data.skuid
@@ -270,6 +361,7 @@ Page({
         success: function (cuser) {
           var that = this
           if (cuser == false) {
+            wx.hideLoading()
             wx.showToast({
               title: '请先登录'
             })
@@ -277,11 +369,17 @@ Page({
               url: '../login/login'
             })
           } else {
+            app.globalData.dcarts = carts
+            wx.hideLoading()
+            wx.navigateTo({
+              url: '../order_confirm/order_confirm?fr=buy'
+            })
+            /*
             app.request({
               url: comm.parseToURL('order', 'createOrder'),
-              data: { 
+              data: {
                 fr: 'buy',
-                cart: JSON.stringify(carts) 
+                cart: JSON.stringify(carts)
               },
               method: 'GET',
               success: function (ress) {
@@ -292,7 +390,10 @@ Page({
                   wx.navigateTo({
                     url: '../order_confirm/order_confirm?t=detail&fr=u&oid=' + oid
                   })
-                } else if (ress.data.errmsg == '2'){
+                } else if (ress.data.errmsg == '2') {
+                  wx.showToast({
+                    title: '请先登录'
+                  })
                   wx.navigateTo({
                     url: '../login/login'
                   })
@@ -303,6 +404,7 @@ Page({
                 }
               }
             })
+            */
           }
         }
       })

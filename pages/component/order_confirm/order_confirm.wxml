@@ -1,10 +1,9 @@
 <import src="../../common/contact.wxml" />
-
 <view class="main">
   <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
   <view class="orders-list confirm-box border_bottom2">
-      <view class="orders-number color2 border_bottom">订单编号：{{oid}}</view>
-      <navigator wx:for="{{carts}}" url="../details/details?id={{item.cid||item.id}}" class="orders-detail border_bottom">
+      <!--<view class="orders-number color2 border_bottom">订单编号：{{oid}}</view>-->
+      <navigator wx:for="{{selectCarts}}" url="../details/details?id={{item.cid||item.id}}" class="orders-detail border_bottom">
           <image src="{{item.image||item.product_thumb}}"></image>
           <view class="">{{item.title||item.product_name}}</view>
           <view class="">{{item.num||item.amount}}</view>
@@ -20,11 +19,11 @@
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{delivery_mode}}">
       <view class="delivery-top border_bottom">
         <text class="fl">配送方式</text>
-        <view class="picker fr"><text>{{delivery_mode[index]}}</text><text wx:if="{{delivery_title}}" class="color">{{delivery_title}}+￥{{ifee||0}}</text></view>
+        <view class="picker fr"><text wx:if="{{!delivery_title}}">请选择</text><text>{{delivery_mode[index]}}</text><text wx:if="{{delivery_title}}" class="color">{{delivery_title}}+￥{{ifee||0}}</text></view>
       </view>
     </picker>
     <view class="delivery-middle border_bottom" wx:if="{{index_mode>0||!dis_key}}">
-      <view wx:if="{{delivery_addr}}" bindtap="addAddr" class="delivery_addr-no-content">
+      <view wx:if="{{delivery_addr || pickupaddrs}}" bindtap="addAddr" class="delivery_addr-no-content">
         <view class="delivery_addr-no-list">
             <image src="../../../image/local.jpg" style="width:50px; heigh:50px;"></image>
             <view wx:if="{{dis_key==1}}">
@@ -116,6 +115,9 @@
 
   <view class="confirm-footer">
       <text class="cart-toatl-price">实付款:<text class="color strong">￥{{total_price}}</text></text>
-      <text class="confirm-pay bg_color" bindtap="lastPay">确认支付</text>
+      <text class="confirm-pay bg_color" bindtap="submitOrder">提交订单</text>
   </view>
+
+
+
 </view>

@@ -43,16 +43,35 @@ Page({
         data: {oid: oid},
         success: function(res){
           if(res.data.result=='OK'){
+            console.log(res.data)
             var order = res.data.order
             var product  = res.data.product
             var disass = res.data.disass
-            console.log(order)
             that.setData({
               order: order,
               product: product,
               disass: disass,
-              oid: oid
+              oid: oid,
+              dis_title: res.data.dis_title,
+              trade_status: res.data.trade_status,
+              pickupaddrs: res.data.pickupaddrs
             })
+            if (res.data.address) {
+              that.setData({
+                delivery_addr: true,
+                address: res.data.address
+              })
+            } else {
+              wx.getStorage({
+                key: 'address',
+                success: function (ress) {
+                  that.setData({
+                    delivery_addr: true,
+                    address: ress.data
+                  })
+                }
+              })
+            }
           }else{
             wx.showToast({
               title: '参数错误！',
@@ -85,7 +104,7 @@ Page({
     var self = this;
     /**
      * 获取本地缓存 地址信息
-     */
+     
     wx.getStorage({
       key: 'address',
       success: function (res) {
@@ -94,7 +113,7 @@ Page({
           address: res.data
         })
       }
-    })
+    })*/
   },
   confirmOrders(e) {
     const order_id = e.currentTarget.dataset.oid;
@@ -150,17 +169,72 @@ Page({
     }
   },
   payOrders(opt) {
+    
     wx.showToast({
       title: '请求中...',
       icon: 'loading',
       duration: 5000
     })
     var oid = opt.target.dataset.oid
-    if (oid) {
+    var openid = wx.getStorageSync('openid')
+    if (oid && openid) {
+      app.request({
+        url: comm.parseToURL('order', 'dopayment'),
+        data: {
+          oid: oid,
+          method: 'POST',
+          mark: 'new'
+        },
+        success: function (res) {
+          if (res.data.result == 'OK') {
+            if(res.data.wxPrice > 0){
+              var temdata = {'oid':oid,'openid':openid,'mark':'new'}
+              //wx pay
+              app.request({
+                url: comm.parseToURL('order', 'getprepay_id'),
+                data: {
+                  data: JSON.stringify(temdata),
+                  method: 'POST'
+                },
+                success: function (res) {
+                  if (res.data.result == 'OK') {
+                    app.globalData.carts = []
+                    res.data.oid = oid
+                    comm.pay(res.data)
+                  } else {
+                    var err = res.data.errmsg || '支付失败'
+                    wx.showToast({
+                      title: err
+                    })
+                  }
+                }
+              })
+            } else {
+              app.globalData.carts = []
+              wx.showToast({
+                title: '支付成功！',
+                icon: 'success',
+                duration: 2500
+              })
+              wx.redirectTo({
+                url: '../order_detail/order_detail?oid=' + oid,
+              })
+            }
+          } else {
+            var err = res.data.errmsg || '支付失败'
+            wx.showToast({
+              title: err
+            })
+            return false;
+          }
+        }
+      })
+
+      /*
       wx.navigateTo({
         url: '../order_confirm/order_confirm?fr=u&oid=' + oid,
       })
-
+      */
     } else {
       wx.showToast({
         title: '请求失败',
@@ -221,8 +295,8 @@ Page({
           })
         } else {
           var err = res.data.errmsg || '请求失败'
-          wx.showToast({
-            title: err
+          wx.showModal({
+            content: err
           })
         }
       }

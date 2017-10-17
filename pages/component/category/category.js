@@ -475,7 +475,8 @@ Page({
         console.log('complete!');
         if (that.data.products.length>0 && that.data.loading){
           wx.showToast({
-            title: '已加载到最后'
+            title: '已加载到最后',
+            duration: 3000
           })
           that.setData({
             IsEnd: true,

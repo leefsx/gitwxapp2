@@ -1,5 +1,4 @@
 <import src="../../common/contact.wxml" />
-
 <view class="main">
     <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
     <view class="header bg_color medium_font">
@@ -74,7 +73,7 @@
     </view>
     <view class="address-box">
         <view class="address-manage">
-            <navigator url="/pages/component/address-list/address-list">地址管理</navigator>
+            <navigator url="../address-list/address-list">地址管理</navigator>
         </view>
     </view>
 </view>

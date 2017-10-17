@@ -1,5 +1,4 @@
 <import src="../../common/contact.wxml" />
-
 <view class="main">
   <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
   <view class="ratings-top confirm-box medium_font border_bottom2">
@@ -10,7 +9,7 @@
   </view>
 
   <view class="ratings-bottom confirm-box medium_font border_bottom2">
-    <textarea auto-height wx:if="{{submit}}" placeholder="宝贝满足你的期待吗？说说他的优点和美中不足的地方吧。" bindblur="binkContentConfirm" />
+    <textarea auto-height wx:if="{{submit}}" placeholder="宝贝满足你的期待吗？说说他的优点和缺点吧。" bindblur="binkContentConfirm" />
     <textarea auto-height wx:else value="{{content}}" disabled="true" />
   </view>
   <view class="ratings-btn">
