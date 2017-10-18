@@ -85,7 +85,8 @@ Page({
     that.setData({
         imgUrls: config.index_autoplay_img,
         config: config,
-        index_autoplay_imgurl: config.index_autoplay_imgurl
+        index_autoplay_imgurl: config.index_autoplay_imgurl,
+        carts: app.globalData.carts
       })
     bar.getCategory(this)
     setTimeout(function(){
