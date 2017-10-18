@@ -1,7 +1,7 @@
 <template name="nav">
     <view class="topbar">
       <view class="topbar-title">
-        <image mode="aspectFit" src="{{config.logo}}" data-index="0" data-type="logourl" bindtap="tocategory"></image>
+        <image mode="aspectFit" wx:if="{{config.logo}}" src="{{config.logo}}" data-index="0" data-type="logourl" bindtap="tocategory"></image>
         <view>
           <text class="tooLong" style="color:{{config.logo_title_color}};">{{config.logo_title}}</text>
           <text wx:if="{{config.logo_subtitle.length > 0}}" class="color2 small_font tooLong" style="color:{{config.logo_subtitle_color}};">{{config.logo_subtitle}}</text>
