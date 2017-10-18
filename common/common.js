@@ -84,9 +84,15 @@ function pay(param) {
     paySign: param.paySign,
     success: function (res) {
       // success  
-      // wx.navigateTo({
-      //   url: '../order_detail/order_detail?oid='+param.oid,
-      // })
+      app.request({
+        url: parseToURL('order', 'getPayStatus'),
+        method: 'GET',
+        data: { oid: param.oid },
+        success: function (res) {
+        },
+        fail: function () {
+        }
+      })
        
     },
     fail: function (res) {
