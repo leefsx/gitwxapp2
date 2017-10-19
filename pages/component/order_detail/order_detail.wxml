@@ -67,7 +67,7 @@
         
         <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status!=3}}">
           <view class="orders-btn" data-oid="{{order.id}}" bindtap="confirmOrders">确认收货</view>
-          <view class="orders-btn" data-oid="{{order.id}}" bindtap="viewLogistics">查看物流</view>
+          <view class="orders-btn" wx:if="{{dis_title.key!='0'}}" data-orderid="{{order.oid}}" data-oid="{{order.id}}" bindtap="viewLogistics">查看物流</view>
         </view>
         <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==4}}">
           <view class="orders-btn" data-oid="{{order.oid}}" bindtap="rating">我的评价</view>

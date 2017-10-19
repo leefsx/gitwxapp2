@@ -332,6 +332,21 @@ Page({
         }
       }
     })
+  },
+  viewLogistics(e) {
+    var oid = oid = e.currentTarget.dataset.oid;
+    var orderid = e.currentTarget.dataset.orderid;
+    if (oid) {
+      wx.navigateTo({
+        url: '../view-logistics/view-logistics?oid=' + oid + '&orderid=' + orderid,
+      })
+    } else {
+      wx.showToast({
+        title: '请求失败',
+        icon: 'loading',
+        duration: 5000
+      })
+    }
   }
 })
 

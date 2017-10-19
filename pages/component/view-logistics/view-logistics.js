@@ -19,16 +19,17 @@ Page({
   },
   onLoad: function (options) {
     var oid = options.oid
+    var orderid = options.orderid
     var carts = app.globalData.carts
     var openid = wx.getStorageSync('openid');
     var that = this
     that.setData({
       config: config
     })
-    if (oid) {
+    if (orderid) {
       app.request({
         url: comm.parseToURL('order', 'getorder'),
-        data: { oid: oid },
+        data: { oid: orderid },
         success: function (res) {
           if (res.data.result == 'OK') {
             var product = res.data.product
