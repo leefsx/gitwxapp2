@@ -242,7 +242,7 @@ Page({
     var total_price = parseFloat(this.data.total_price) - ifee
     var lastPrice = parseFloat(this.data.lastPrice) - ifee
     
-    if (index_mode > 1){
+    if (curr_dis.key > 1 && lastPrice < curr_dis.free_fee){
       if (weight < curr_dis.fweight){
         ifee = parseFloat(curr_dis.f_fee)
       }else{
