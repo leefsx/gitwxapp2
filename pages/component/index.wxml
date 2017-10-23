@@ -26,7 +26,7 @@
       <view class="title"><text>{{config.dailyoffice_title}}</text></view>
     </view>
     <view class="product-display-ul">
-      <template is="product_list" data="{{product1,config}},config" />
+      <template is="product_list" data="{{product1,config}}" />
     </view>
   </view>
 
