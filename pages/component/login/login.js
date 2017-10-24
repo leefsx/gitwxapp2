@@ -1,6 +1,7 @@
 
 //获取应用实例
 var comm = require('../../../common/common.js');
+var config = require('../../../common/config.js');
 var app = getApp()
 Page({
   data: {
