@@ -3,7 +3,7 @@
 
 <view class="address-list">
     <template is="prompt" data="{{ prompt }}"/>
-    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+    <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
     <view class="scroll-list">
         <view class="weui-panel" wx:if="{{ !!items.length }}">
             <view class="weui-panel__bd">

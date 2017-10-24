@@ -7,7 +7,7 @@
 <view class="main">
     <template is="nav" data="{{config}}" />
     <template is="bar" data="{{category_info}}" />
-    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+    <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
     <view style="padding:0 10rpx;"><template is="article_bar" data="{{scrollLeft,activeIndex,articalUl,config}}" /></view>
     <view class="artical-detail">
         <view class="artical-detail-title">

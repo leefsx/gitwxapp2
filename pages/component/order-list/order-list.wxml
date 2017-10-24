@@ -3,7 +3,7 @@
 
 
 <view class="main">
-    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+    <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
     <view class="my-list">我的订单</view>
     <view class="my-list-nav medium_font">
         <view bindtap="changActive" data-id="all" class="{{activeIndex == 'all' ? 'active':''}}">全部</view>

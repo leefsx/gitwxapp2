@@ -6,7 +6,7 @@
 <view class="main">
   <template is="bar" data="{{category_info}}" />
   <template is="nav" data="{{config}}" />
-  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+  <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
   <view class="index-top">
     <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">

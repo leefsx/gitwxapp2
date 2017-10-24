@@ -1,6 +1,6 @@
 <import src="../../common/contact.wxml" />
 <view class="main">
-  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+  <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
   <view class="logistics-top confirm-box medium_font border_bottom2">
     <image src="{{product[0].product_thumb}}"></image>
     <view>

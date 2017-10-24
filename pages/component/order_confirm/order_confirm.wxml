@@ -1,6 +1,6 @@
 <import src="../../common/contact.wxml" />
 <view class="main">
-  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+  <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
   <view class="orders-list confirm-box border_bottom2">
       <!--<view class="orders-number color2 border_bottom">订单编号：{{oid}}</view>-->
       <navigator wx:for="{{selectCarts}}" url="../details/details?id={{item.cid||item.id}}" class="orders-detail border_bottom">

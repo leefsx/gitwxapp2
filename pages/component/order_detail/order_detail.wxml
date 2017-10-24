@@ -1,6 +1,6 @@
 <import src="../../common/contact.wxml" />
 <view class="main">
-  <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+  <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
   <view class="order-status-content bg_color">
     <!-- <text wx:if="{{order.pay_status==1}}">待付款</text>
     <text wx:elif="{{order.order_status==5}}">已取消</text>

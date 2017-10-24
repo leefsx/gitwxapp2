@@ -1,6 +1,6 @@
 <import src="../../common/contact.wxml" />
 <view class="main">
-    <template wx:if="{{config.customer_service===1}}" is="contact" data="{{config}}"/>
+    <template wx:if="{{config.customer_service==='1'}}" is="contact" data="{{config}}"/>
     <view class="form-box">
         <form bindsubmit="formSubmit">
             <view class="border_bottom medium_font">
