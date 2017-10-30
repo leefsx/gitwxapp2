@@ -305,11 +305,13 @@ Page({
             address.province = this.data.proviceData[current_value[0]].fullName + ' - ' + this.data.cityData[current_value[1]].fullName + ' - ' + district.data.data[0].fullName
             address.prov_id = this.data.proviceData[current_value[0]].code
             address.city_id = this.data.cityData[current_value[1]].code
-            address.dist_id = this.data.districtData[current_value[2]].code
 
             this.setData({
               districtData: district.data.data,
-              value: [current_value[0], current_value[1], 0],
+              value: [current_value[0], current_value[1], 0]
+            })
+            address.dist_id = this.data.districtData[current_value[2]].code
+            this.setData({
               address: address
             })
           }
