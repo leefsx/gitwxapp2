@@ -118,7 +118,6 @@ Page({
           propertys: res.data.newsku,
           skulist: res.data.skulist
         })
-        console.log(res.data.data)
         var carts = that.data.carts
         var cart_index = carts.length
         var detail_data = res.data.data
@@ -142,7 +141,6 @@ Page({
             currentState: (!that.data.currentState)
           })
         } else {
-          console.log('n')
           wx.showLoading({
             title: '请求中',
             mask: true
@@ -409,7 +407,8 @@ Page({
           product_category: cateid,
           curIndex: curIndex,
           'prompt.hidden': resdata.length,
-          'category_info.isShowBar':false
+          'category_info.isShowBar':false,
+          list_page: 1
         })
       },
       fail: function () {
