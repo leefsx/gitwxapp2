@@ -22,7 +22,7 @@
         <view class="picker fr"><text wx:if="{{!delivery_title}}">请选择</text><text>{{delivery_mode[index]}}</text><text wx:if="{{delivery_title}}" class="color">{{delivery_title}}+￥{{ifee||0}}</text></view>
       </view>
     </picker>
-    <view class="delivery-middle border_bottom" wx:if="{{index_mode>0||!dis_key}}">
+    <view class="delivery-middle border_bottom" wx:if="{{dis_key>0}}">
       <view wx:if="{{delivery_addr || pickupaddrs}}" bindtap="addAddr" class="delivery_addr-no-content">
         <view class="delivery_addr-no-list">
             <image src="../../../image/local.jpg" style="width:50px; heigh:50px;"></image>
